@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{getLabel('CustomerList.Title')}}</ion-title>
+    <ion-buttons end>
+      <button>
+        <ion-icon name="add-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="card-background-page">
+  <ion-row>
+    <ion-col>
+      <strong>Product</strong>
+    </ion-col>
+    <ion-col>
+      <strong>Payment Date</strong>
+    </ion-col>
+    <ion-col>
+      <strong>Status</strong>
+    </ion-col>
+    <ion-col>
+      <strong>Status</strong>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngFor="let company of customerList">
+    <ion-col>
+      {{company.Id}}
+    </ion-col>
+    <ion-col>
+      {{company.Name}}
+    </ion-col>
+    <ion-col>
+      {{company.City}}
+    </ion-col>
+    <ion-col>
+      <button>
+         <ion-icon ios="ios-create" md="md-create"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-content>

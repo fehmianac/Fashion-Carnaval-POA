@@ -7,21 +7,30 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="card-background-page">
   <ion-card>
-  <ion-item>
-    <h1>This column will take 10% of space</h1>
-  </ion-item>
+    <img src="assets/card-saopaolo.png" />
+    <div class="card-title">{{getLabel('HomePage.CompanyName')}}</div>
+    <div class="card-subtitle">{{getLabel('HomePage.CompanySubTitle')}}</div>
   </ion-card>
-  <ion-grid padding>
-    <ion-row>
-      <ion-col width-33></ion-col>
-      <ion-col width-50><h1>This column will take 10% of space</h1></ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col width-33>MArka</ion-col>
-      <ion-col width-33>MArka</ion-col>
-      <ion-col width-33>MArka</ion-col>
+  <ion-card-content>
+    {{getLabel('HomePage.Description')}}
+  </ion-card-content>
+  <ion-list>
+    <ion-item>
+      <ion-label fixed>{{getLabel('HomePage.CurrentUser.TextBox')}}</ion-label>
+      <ion-input [(ngModel)]="currentUserName" type="text"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-grid>
+    <ion-row wrap>
+      <ion-col width-50 *ngFor="let brand of brandList">
+        <ion-card (click)="selectBrand(brand.id)"> 
+          <img src="{{brand.imageUrl}}" />
+          <div class="card-subtitle">{{brand.title}}
+          </div>
+        </ion-card>
+      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
