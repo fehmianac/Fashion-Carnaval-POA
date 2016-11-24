@@ -7,11 +7,6 @@ import { HomePage } from '../pages/home/home'
 import { BasePage } from '../pages/base-page'
 import { Providers } from '../providers/providers';
 
-let providers = [
-    // Keep this to enable Ionic's runtime error handling during development
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-].concat(Providers);
-
 
 @NgModule({
     declarations: [
@@ -30,7 +25,7 @@ let providers = [
         Page2,
         HomePage
     ],
-    providers: providers
+    providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Providers]
 })
 export class AppModule {
 }
