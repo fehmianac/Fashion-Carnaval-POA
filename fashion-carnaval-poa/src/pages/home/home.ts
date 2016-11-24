@@ -5,12 +5,12 @@ import { MultiLanguage } from '../../providers/multi-language'
 import { BasePage } from '../base-page'
 
 @Component({
-    selector: 'page-page1',
-    templateUrl: 'page1.html'
+    selector: 'page-home',
+    templateUrl: 'home.html'
 })
-export class Page1 extends BasePage {
+export class HomePage extends BasePage {
 
-    selectedLanguage = "?i?i";
+    selectedLanguage = "";
 
     constructor(public navCtrl:NavController, public multiLanguage:MultiLanguage) {
         super(multiLanguage);
