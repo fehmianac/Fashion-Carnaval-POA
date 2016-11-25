@@ -5,6 +5,8 @@ import { Page1 } from '../pages/page1/page1';
 import { Page2 } from '../pages/page2/page2';
 import { HomePage } from '../pages/home/home'
 import { CustomerListPage } from '../pages/customer/customer-list'
+import { CustomerFormPage } from '../pages/customer/customer-form'
+import { ProductDetailPage } from '../pages/product/product-detail'
 import { BasePage } from '../pages/base-page'
 import { Providers } from '../providers/providers';
 
@@ -15,7 +17,9 @@ import { Providers } from '../providers/providers';
         Page1,
         Page2,
         HomePage,
-        CustomerListPage
+        CustomerListPage,
+        CustomerFormPage,
+        ProductDetailPage
     ],
     imports: [
         IonicModule.forRoot(MyApp)
@@ -26,9 +30,11 @@ import { Providers } from '../providers/providers';
         Page1,
         Page2,
         HomePage,
-        CustomerListPage
+        CustomerListPage,
+        CustomerFormPage,
+        ProductDetailPage
     ],
-    providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Providers]
+    providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, Providers]
 })
 export class AppModule {
 }

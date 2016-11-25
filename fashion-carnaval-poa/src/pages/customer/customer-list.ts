@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { MultiLanguage } from '../../providers/multi-language'
 import { BasePage } from '../base-page'
+import { CustomerFormPage } from './customer-form'
+import { ProductDetailPage } from '../product/product-detail'
 
 @Component({
     selector: 'customer-list',
@@ -22,6 +24,19 @@ export class CustomerListPage extends BasePage {
         this.customerList.push({ "Id": "2", "Name": "Deneme4", "City": "İstanbul" });
         this.customerList.push({ "Id": "2", "Name": "Deneme5", "City": "İstanbul" });
         this.customerList.push({ "Id": "2", "Name": "Deneme6", "City": "İstanbul" });
+    }
+
+    openCustomerForm(companyId: any) {
+        this.navCtrl.push(CustomerFormPage);
+
+    }
+
+    searchInCompany(event: any) {
+
+    }
+
+    selecteCompany(companyId: any) {
+        this.navCtrl.setRoot(ProductDetailPage);
     }
 
 }

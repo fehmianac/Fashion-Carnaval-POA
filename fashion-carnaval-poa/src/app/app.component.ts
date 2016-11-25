@@ -12,23 +12,22 @@ import { BasePage } from '../pages/base-page';
     templateUrl: 'app.html'
 })
 export class MyApp extends BasePage {
-    @ViewChild(Nav) nav:Nav;
+    @ViewChild(Nav) nav: Nav;
 
-    rootPage:any = HomePage;
+    rootPage: any = HomePage;
 
-    pages:Array<{title: string, component: any}>;
+    pages: Array<{ title: string, component: any }>;
 
-    constructor(public platform:Platform, public multiLanguage:MultiLanguage) {
+    constructor(public platform: Platform, public multiLanguage: MultiLanguage) {
         super(multiLanguage);
         this.initializeApp();
 
         // used for an example of ngFor and navigation
         this.pages = [
-            {title: 'NavigationBar.HomePage.Link', component: HomePage},
-            {title: 'Page One', component: Page1},
-            {title: 'Page Two', component: Page2}
+            { title: 'NavigationBar.HomePage.Link', component: HomePage },
+            { title: 'Page One', component: Page1 },
+            { title: 'Page Two', component: Page2 }
         ];
-
     }
 
     initializeApp() {

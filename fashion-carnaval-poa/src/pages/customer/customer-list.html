@@ -5,7 +5,7 @@
     </button>
     <ion-title>{{getLabel('CustomerList.Title')}}</ion-title>
     <ion-buttons end>
-      <button>
+      <button (click)="openCustomerForm()">
         <ion-icon name="add-circle"></ion-icon>
       </button>
     </ion-buttons>
@@ -13,6 +13,7 @@
 </ion-header>
 
 <ion-content class="card-background-page">
+  <ion-searchbar (ionInput)="searchInCompany($event)"></ion-searchbar>
   <ion-row>
     <ion-col>
       <strong>Product</strong>
@@ -27,18 +28,19 @@
       <strong>Status</strong>
     </ion-col>
   </ion-row>
-  <ion-row *ngFor="let company of customerList">
-    <ion-col>
+  <ion-row *ngFor="let company of customerList" >
+    <ion-col (click)="selecteCompany(company.Id)">
       {{company.Id}}
     </ion-col>
-    <ion-col>
+    <ion-col (click)="selecteCompany(company.Id)">
       {{company.Name}}
     </ion-col>
-    <ion-col>
+    <ion-col (click)="selecteCompany(company.Id)">
       {{company.City}}
     </ion-col>
     <ion-col>
-      <button>
+      
+      <button (click)="openCustomerForm(company.Id)">
          <ion-icon ios="ios-create" md="md-create"></ion-icon>
       </button>
     </ion-col>

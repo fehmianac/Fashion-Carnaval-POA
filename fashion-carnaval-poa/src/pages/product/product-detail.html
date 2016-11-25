@@ -1,0 +1,98 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+        <ion-title>{{getLabel('ProductDetail.Title')}}</ion-title>
+        <ion-buttons end>
+
+            <ion-badge item-right>
+                <ion-icon name="add-circle"></ion-icon>260k</ion-badge>
+        </ion-buttons>
+    </ion-navbar>
+
+    <ion-searchbar (ionInput)="searchProduct($event)"></ion-searchbar>
+
+    <ion-toolbar no-border-top>
+        <ion-segment [(ngModel)]="pet" *ngIf="isShowProductDetail">
+            <ion-segment-button value="puppies">
+                Detail
+            </ion-segment-button>
+            <ion-segment-button value="kittens">
+                Size List
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="card-background-page">
+    <div [ngSwitch]="pet" *ngIf="isShowProductDetail">
+        <ion-list *ngSwitchCase="'puppies'">
+            <ion-card>
+                <ion-item>
+                    <h2>Marty McFly</h2>
+                    <p>November 5, 1955</p>
+                </ion-item>
+                <img src="assets/card-saopaolo.png">
+                <ion-card-content>
+                    <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of
+                        a DeLorean?! Whoa. This is heavy.</p>
+                </ion-card-content>
+            </ion-card>
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'kittens'">
+            <ion-item>
+                <ion-row wrap>
+                    <ion-col>
+                        <ion-card (tap)="tapEvent($event)">
+                            <ion-item>
+                                Tapped: times
+                            </ion-item>
+                        </ion-card>
+                    </ion-col>
+                    <ion-col>
+                        <ion-card (tap)="tapEvent($event)">
+                            <ion-item>
+                                Tapped: times
+                            </ion-item>
+                        </ion-card>
+                    </ion-col>
+                    <ion-col>
+                        <ion-card (tap)="tapEvent($event)">
+                            <ion-item>
+                                Tapped: times
+                            </ion-item>
+                        </ion-card>
+                    </ion-col>
+                    <ion-col>
+                        <ion-card (tap)="tapEvent($event)">
+                            <ion-item>
+                                Tapped: times
+                            </ion-item>
+                        </ion-card>
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+            <ion-item>
+                <ion-row wrap>
+                    <ion-col>
+                        <strong>Product</strong>
+                    </ion-col>
+                    <ion-col>
+                        <strong>Payment Date</strong>
+                    </ion-col>
+                    <ion-col>
+                        <strong>Status</strong>
+                    </ion-col>
+                    <ion-col>
+                        <strong>Status</strong>
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+        </ion-list>
+    </div>
+    <div *ngIf="!isShowProductDetail">
+        No selected product
+    </div>
+</ion-content>
