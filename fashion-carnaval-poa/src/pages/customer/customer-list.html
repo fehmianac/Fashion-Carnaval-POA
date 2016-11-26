@@ -5,7 +5,7 @@
     </button>
     <ion-title>{{getLabel('CustomerList.Title')}}</ion-title>
     <ion-buttons end>
-      <button (click)="openCustomerForm()">
+      <button ion-button icon-only color="secondary" (click)="openCustomerForm('0')">
         <ion-icon name="add-circle"></ion-icon>
       </button>
     </ion-buttons>
@@ -40,7 +40,7 @@
     </ion-col>
     <ion-col>
       
-      <button (click)="openCustomerForm(company.Id)">
+      <button ion-button clear icon-only color="secondary" (click)="openCustomerForm(company.Id)">
          <ion-icon ios="ios-create" md="md-create"></ion-icon>
       </button>
     </ion-col>

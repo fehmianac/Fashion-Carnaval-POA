@@ -2,11 +2,11 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { MultiLanguage } from '../providers/multi-language'
-import { Page1 } from '../pages/page1/page1';
-import { Page2 } from '../pages/page2/page2';
+import { GlobalVariables } from '../providers/global-variables'
 import { HomePage } from '../pages/home/home';
 import { BasePage } from '../pages/base-page';
-
+import { LastOrderPage } from '../pages/order/last-order'
+import { SettingPage } from '../pages/setting/setting'
 
 @Component({
     templateUrl: 'app.html'
@@ -16,17 +16,18 @@ export class MyApp extends BasePage {
 
     rootPage: any = HomePage;
 
-    pages: Array<{ title: string, component: any }>;
+    pages: Array<{ icon: string, title: string, component: any }>;
 
-    constructor(public platform: Platform, public multiLanguage: MultiLanguage) {
-        super(multiLanguage);
+    constructor(public platform: Platform, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables) {
+        super(multiLanguage, globalVariables);
         this.initializeApp();
+        this.multiLanguage.reloadLanguageKeys();
 
         // used for an example of ngFor and navigation
         this.pages = [
-            { title: 'NavigationBar.HomePage.Link', component: HomePage },
-            { title: 'Page One', component: Page1 },
-            { title: 'Page Two', component: Page2 }
+            { icon: "md-home", title: 'NavigationBar.HomePage.Link', component: HomePage },
+            { icon: "md-list", title: 'NavigationBar.LastOrder.Link', component: LastOrderPage },
+            { icon: "md-settings", title: 'NavigationBar.Setting.Link', component: SettingPage }
         ];
     }
 

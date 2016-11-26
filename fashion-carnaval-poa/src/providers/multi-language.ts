@@ -5,10 +5,10 @@ import { Storage } from './storage'
  */
 @Injectable()
 export class MultiLanguage {
-    constructor(public storage:Storage) {
+    constructor(public storage: Storage) {
     }
 
-    getLabel(key:string) {
+    getLabel(key: string) {
         let languageDict = this.storage.getAsJson("language");
         if (languageDict == null) {
             return key;
@@ -25,7 +25,7 @@ export class MultiLanguage {
     }
 
     getLanguageList() {
-        return [{"languageKey": "en", "DisplayText": "English"}];
+        return [{ "languageKey": "en", "DisplayText": "English" }, { "languageKey": "tr", "DisplayText": "Turkish" }];
     }
 
     getSelectedLanguage() {
@@ -39,17 +39,17 @@ export class MultiLanguage {
         return selectedLanguage.replace('"', '').replace('"', '');
     }
 
-    changeSelectedLanguage(languageKey:string) {
-        this.storage.set("selectedLanguage", languageKey);
+    changeSelectedLanguage(languageKey: string) {
+        this.storage.set("selectedLanguage", languageKey, false);
     }
 
     reloadLanguageKeys() {
         let languageDict = [];
         languageDict.push({
-                "key": "deneme",
-                "languageKey": "en",
-                "value": "label olarak ne yazaca??"
-            },
+            "key": "deneme",
+            "languageKey": "en",
+            "value": "label olarak ne yazaca??"
+        },
             {
                 "key": "NavigationBar.Title",
                 "languageKey": "en",
@@ -84,7 +84,50 @@ export class MultiLanguage {
                 "key": "HomePage.CompanySubTitle",
                 "languageKey": "en",
                 "value": "Fashion Carnaval POA"
-            });
+            },
+            {
+                "key": "NavigationBar.LastOrder.Link",
+                "languageKey": "en",
+                "value": "Order List"
+            },
+            {
+                "key": "NavigationBar.Setting.Link",
+                "languageKey": "en",
+                "value": "App Settings"
+            },
+            {
+                "key": "SettingPage.Title",
+                "languageKey": "en",
+                "value": "App Settings"
+            },
+            {
+                "key": "Setting.CurrentUser.Title",
+                "languageKey": "en",
+                "value": "Your username in application"
+            },
+            {
+                "key": "Setting.CurrentLanguage.Title",
+                "languageKey": "en",
+                "value": "Language Of Application"
+            },
+            {
+                "key": "Setting.CurrentLanguage.Title",
+                "languageKey": "en",
+                "value": "Selected Language"
+            },
+            {
+                "key": "Setting.CurrentLanguage.Label",
+                "languageKey": "en",
+                "value": "Selected Language"
+            },
+            {
+                "key": "Setting.SaveSettingButton.Label",
+                "languageKey": "en",
+                "value": "Selected Language"
+            }
+        );
+
+        //Setting.SaveSettingButton.Label
         //TODO call api reload
         this.storage.set("language", languageDict);
 

@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{getLabel('SettingPage.Title')}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-list-header>
+      {{getLabel('Setting.CurrentUser.Title')}}
+    </ion-list-header>
+    <ion-item>
+      <ion-label fixed>{{getLabel('HomePage.CurrentUser.TextBox')}}</ion-label>
+      <ion-input [(ngModel)]="currentUserName" type="text"></ion-input>
+    </ion-item>
+
+  </ion-list>
+  <ion-list>
+    <ion-list-header>
+      {{getLabel('Setting.CurrentLanguage.Title')}}
+    </ion-list-header>
+    <ion-item>
+      <ion-label>{{getLabel('Setting.CurrentLanguage.Label')}}</ion-label>
+      <ion-select [(ngModel)]="selectedLanguageSelectBox">
+        <ion-option value="{{language.languageKey}}" *ngFor="let language of languageList">{{language.DisplayText}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <button color="secondary" ion-button full (click)="saveSetting()">{{getLabel('Setting.SaveSettingButton.Label')}}</button>
+</ion-content>

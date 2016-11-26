@@ -2,11 +2,12 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { NavController } from 'ionic-angular';
 import { MultiLanguage } from '../providers/multi-language'
+import { GlobalVariables } from '../providers/global-variables'
 
 export class BasePage {
     @ViewChild(Nav) nav: Nav;
 
-    constructor(public multiLanguage: MultiLanguage) {
+    constructor(public multiLanguage: MultiLanguage, public globalVariables : GlobalVariables) {
 
     }
 

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { MultiLanguage } from '../../providers/multi-language'
+import { GlobalVariables } from '../../providers/global-variables'
 import { BasePage } from '../base-page'
 import { CustomerFormPage } from './customer-form'
 import { ProductDetailPage } from '../product/product-detail'
@@ -15,8 +16,8 @@ export class CustomerListPage extends BasePage {
 
     customerList = [];
 
-    constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage) {
-        super(multiLanguage);
+    constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables) {
+        super(multiLanguage, globalVariables);
 
         this.customerList.push({ "Id": "2", "Name": "Deneme1", "City": "İstanbul" });
         this.customerList.push({ "Id": "2", "Name": "Deneme2", "City": "İstanbul" });
@@ -26,16 +27,16 @@ export class CustomerListPage extends BasePage {
         this.customerList.push({ "Id": "2", "Name": "Deneme6", "City": "İstanbul" });
     }
 
-    openCustomerForm(companyId: any) {
+    openCustomerForm(companyId) {
         this.navCtrl.push(CustomerFormPage);
 
     }
 
-    searchInCompany(event: any) {
+    searchInCompany(event) {
 
     }
 
-    selecteCompany(companyId: any) {
+    selecteCompany(companyId) {
         this.navCtrl.setRoot(ProductDetailPage);
     }
 

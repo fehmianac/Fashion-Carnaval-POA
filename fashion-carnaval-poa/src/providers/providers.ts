@@ -1,15 +1,19 @@
 import { Api } from './api';
 import { Storage } from './storage'
 import { MultiLanguage } from './multi-language'
+import { GlobalVariables } from './global-variables'
+
 export {
     Api,
     Storage,
-    MultiLanguage
+    MultiLanguage,
+    GlobalVariables
 
 };
 
-export const Providers:any[] = [
+export const Providers: any[] = [
     Api,
     Storage,
-    MultiLanguage
+    MultiLanguage,
+    GlobalVariables
 ]

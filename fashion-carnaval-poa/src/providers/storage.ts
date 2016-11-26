@@ -5,26 +5,30 @@ import { Injectable } from '@angular/core';
  */
 @Injectable()
 export class Storage {
-    get(key:string) {
+    get(key: string) {
         var itemInLocalStrage = localStorage.getItem(key);
         if (itemInLocalStrage == null) {
             return null;
         }
         return itemInLocalStrage;
     }
-    getAsJson(key:string) {
+    getAsJson(key: string) {
         var itemInLocalStrage = localStorage.getItem(key);
         if (itemInLocalStrage == null) {
             return null;
         }
         return JSON.parse(itemInLocalStrage);
     }
-    set(key:string, value:any) {
+    set(key: string, value: any, isJson: boolean = true) {
+        if (isJson) {
+            localStorage.setItem(key, JSON.stringify(value));
+        } else {
+            localStorage.setItem(key, value);
+        }
 
-        localStorage.setItem(key, JSON.stringify(value));
     }
 
-    delete(key:string) {
+    delete(key: string) {
         localStorage.removeItem(key);
     }
 }
