@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { BasePage } from '../pages/base-page';
 import { LastOrderPage } from '../pages/order/last-order'
 import { SettingPage } from '../pages/setting/setting'
+import { BasketPage } from '../pages/basket/basket'
 
 @Component({
     templateUrl: 'app.html'
@@ -27,6 +28,7 @@ export class MyApp extends BasePage {
         this.pages = [
             { icon: "md-home", title: 'NavigationBar.HomePage.Link', component: HomePage },
             { icon: "md-list", title: 'NavigationBar.LastOrder.Link', component: LastOrderPage },
+             { icon: "md-cart", title: 'NavigationBar.Basket.Link', component: BasketPage },
             { icon: "md-settings", title: 'NavigationBar.Setting.Link', component: SettingPage }
         ];
     }

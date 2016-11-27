@@ -25,9 +25,10 @@
   <ion-grid>
     <ion-row wrap>
       <ion-col width-50 *ngFor="let brand of brandList">
-        <ion-card (click)="selectBrand(brand.id)"> 
+        <ion-card (click)="selectBrand(brand.id)">
           <img src="{{brand.imageUrl}}" />
-          <div class="card-subtitle">{{brand.title}}
+          <div class="card-subtitle">
+            {{brand.title}}
           </div>
         </ion-card>
       </ion-col>

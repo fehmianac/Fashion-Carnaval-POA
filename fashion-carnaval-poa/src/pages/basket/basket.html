@@ -1,0 +1,19 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+        <ion-title>{{getLabel('Basket.Title')}}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="card-background-page">
+    <ion-list>
+        <ion-item>
+           basket
+        </ion-item>
+    </ion-list>
+     <div padding>
+        <button ion-button color="primary" block (click)="completeOrder()">{{getLabel('Basket.CompleteOrder')}}</button>
+    </div>
+</ion-content>

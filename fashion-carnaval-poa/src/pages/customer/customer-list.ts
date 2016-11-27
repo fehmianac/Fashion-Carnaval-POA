@@ -15,16 +15,22 @@ import { ProductDetailPage } from '../product/product-detail'
 export class CustomerListPage extends BasePage {
 
     customerList = [];
+    filteredCustomerList = [];
 
     constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables) {
         super(multiLanguage, globalVariables);
 
-        this.customerList.push({ "Id": "2", "Name": "Deneme1", "City": "İstanbul" });
-        this.customerList.push({ "Id": "2", "Name": "Deneme2", "City": "İstanbul" });
-        this.customerList.push({ "Id": "2", "Name": "Deneme3", "City": "İstanbul" });
-        this.customerList.push({ "Id": "2", "Name": "Deneme4", "City": "İstanbul" });
-        this.customerList.push({ "Id": "2", "Name": "Deneme5", "City": "İstanbul" });
-        this.customerList.push({ "Id": "2", "Name": "Deneme6", "City": "İstanbul" });
+        this.customerList.push({ "Id": "1", "Name": "ABC", "City": "İstanbul" });
+        this.customerList.push({ "Id": "2", "Name": "CDE", "City": "İstanbul" });
+        this.customerList.push({ "Id": "3", "Name": "EFG", "City": "İstanbul" });
+        this.customerList.push({ "Id": "4", "Name": "HKL", "City": "İstanbul" });
+        this.customerList.push({ "Id": "5", "Name": "LMN", "City": "İstanbul" });
+        this.customerList.push({ "Id": "6", "Name": "ABC", "City": "İstanbul" });
+        this.customerList.push({ "Id": "7", "Name": "CDE", "City": "İstanbul" });
+        this.customerList.push({ "Id": "8", "Name": "EFG", "City": "İstanbul" });
+        this.customerList.push({ "Id": "9", "Name": "HKL", "City": "İstanbul" });
+        this.customerList.push({ "Id": "10", "Name": "LMN", "City": "İstanbul" }); 
+        this.filteredCustomerList = this.customerList;
     }
 
     openCustomerForm(companyId) {
@@ -33,10 +39,25 @@ export class CustomerListPage extends BasePage {
     }
 
     searchInCompany(event) {
-
+        let searchKey = event.target.value;
+        this.filteredCustomerList = this.searchCompanyInArray(searchKey);
     }
 
-    selecteCompany(companyId) {
+    private searchCompanyInArray(searchKey: string) {
+        if (searchKey == undefined) {
+            return this.customerList;
+        }
+        let result = [];
+        for (let i = 0; i < this.customerList.length; i++) {
+            let customer = this.customerList[i];
+            if (customer.Name.toLowerCase().indexOf(searchKey.toLowerCase()) > -1) {
+                result.push(customer);
+            }
+        }
+        return result;
+    }
+
+    selectCompany(companyId) {
         this.navCtrl.setRoot(ProductDetailPage);
     }
 

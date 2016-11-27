@@ -5,9 +5,10 @@
     </button>
         <ion-title>{{getLabel('ProductDetail.Title')}}</ion-title>
         <ion-buttons end>
-
-            <ion-badge item-right>
-                <ion-icon name="add-circle"></ion-icon>260k</ion-badge>
+            <button ion-button color="secondary" (click)="gotoBasket()">
+       <ion-badge item-right>
+                 <ion-icon ios="ios-cart" md="md-cart"></ion-icon> 260k</ion-badge>
+      </button>
         </ion-buttons>
     </ion-navbar>
 

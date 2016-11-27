@@ -23,9 +23,11 @@ export class SettingPage extends BasePage {
     }
 
     saveSetting() {
+
+        this.globalVariables.presentLoading();
         this.multiLanguage.changeSelectedLanguage(this.selectedLanguageSelectBox);
         this.globalVariables.setCurrentUserName(this.currentUserName);
-
+        this.globalVariables.dismissLoading();
         this.globalVariables.showAlert(this.getLabel('Alert.SettingSaved.Title'), this.getLabel('Alert.SettingSaved.Description'));
     }
 }

@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { MultiLanguage } from '../../providers/multi-language'
 import { GlobalVariables } from '../../providers/global-variables'
 import { BasePage } from '../base-page'
+import { BasketPage } from '../basket/basket'
 
 @Component({
     selector: 'product-detail',
@@ -19,13 +20,15 @@ export class ProductDetailPage extends BasePage {
         super(multiLanguage, globalVariables);
     }
 
-
-
     searchProduct(event: any) {
-        if(event.target.value == "fehmi"){
+        if (event.target.value == "fehmi") {
             this.isShowProductDetail = true;
-        }else{
+        } else {
             this.isShowProductDetail = false;
         }
+    }
+    
+    gotoBasket() {
+        this.navCtrl.push(BasketPage);
     }
 }

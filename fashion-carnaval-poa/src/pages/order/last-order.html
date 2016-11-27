@@ -5,38 +5,20 @@
     </button>
     <ion-title>{{getLabel('LastOrder.Title')}}</ion-title>
   </ion-navbar>
+    <ion-searchbar (ionInput)="searchLastOrder($event)"></ion-searchbar>
 </ion-header>
 
 <ion-content class="card-background-page">
-  <ion-searchbar (ionInput)="searchLastOrder($event)"></ion-searchbar>
-  <ion-row>
-    <ion-col>
-      <strong>Product</strong>
-    </ion-col>
-    <ion-col>
-      <strong>Payment Date</strong>
-    </ion-col>
-    <ion-col>
-      <strong>Status</strong>
-    </ion-col>
-    <ion-col>
-      <strong>Status</strong>
-    </ion-col>
-  </ion-row>
-  <ion-row *ngFor="let company of customerList" >
-    <ion-col>
-      {{company.Id}}
-    </ion-col>
-    <ion-col>
-      {{company.Name}}
-    </ion-col>
-    <ion-col>
-      {{company.City}}
-    </ion-col>
-    <ion-col>
-      <button ion-button clear icon-only color="secondary" (click)="openCustomerForm(company.Id)">
-         <ion-icon ios="ios-document" md="md-document"></ion-icon>
-      </button>
-    </ion-col>
-  </ion-row>
+<ion-card *ngFor="let order of filteredOrderList">
+    <ion-item>
+        <ion-icon ios="ios-clipboard" md="md-clipboard" item-left large></ion-icon>
+      <button ion-button icon-left clear item-right (click)="openOrderDetail(order.Id)">
+      <ion-icon ios="ios-create" md="md-create"></ion-icon> {{getLabel('Common.EditButton.Label')}}
+    </button>
+      <div>
+        <h2>{{order.Name}}</h2>
+        <p>{{order.City}}</p>
+      </div>
+    </ion-item>
+  </ion-card>
 </ion-content>

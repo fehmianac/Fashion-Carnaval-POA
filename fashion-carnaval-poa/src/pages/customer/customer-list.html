@@ -5,44 +5,25 @@
     </button>
     <ion-title>{{getLabel('CustomerList.Title')}}</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only color="secondary" (click)="openCustomerForm('0')">
-        <ion-icon name="add-circle"></ion-icon>
+      <button ion-button icon-only (click)="openCustomerForm('0')">
+        <ion-icon ios="ios-add" md="md-add"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
+  <ion-searchbar (ionInput)="searchInCompany($event)"></ion-searchbar>
 </ion-header>
 
 <ion-content class="card-background-page">
-  <ion-searchbar (ionInput)="searchInCompany($event)"></ion-searchbar>
-  <ion-row>
-    <ion-col>
-      <strong>Product</strong>
-    </ion-col>
-    <ion-col>
-      <strong>Payment Date</strong>
-    </ion-col>
-    <ion-col>
-      <strong>Status</strong>
-    </ion-col>
-    <ion-col>
-      <strong>Status</strong>
-    </ion-col>
-  </ion-row>
-  <ion-row *ngFor="let company of customerList" >
-    <ion-col (click)="selecteCompany(company.Id)">
-      {{company.Id}}
-    </ion-col>
-    <ion-col (click)="selecteCompany(company.Id)">
-      {{company.Name}}
-    </ion-col>
-    <ion-col (click)="selecteCompany(company.Id)">
-      {{company.City}}
-    </ion-col>
-    <ion-col>
-      
-      <button ion-button clear icon-only color="secondary" (click)="openCustomerForm(company.Id)">
-         <ion-icon ios="ios-create" md="md-create"></ion-icon>
-      </button>
-    </ion-col>
-  </ion-row>
+  <ion-card *ngFor="let company of filteredCustomerList">
+    <ion-item>
+       <ion-icon ios="ios-people" md="md-people" item-left large></ion-icon>
+      <button ion-button icon-left clear item-right (click)="openCustomerForm(company.Id)">
+      <ion-icon ios="ios-create" md="md-create"></ion-icon> {{getLabel('Common.EditButton.Label')}}
+    </button>
+      <div (click)="selectCompany(company.Id)">
+        <h2>{{company.Name}}</h2>
+        <p>{{company.City}}</p>
+      </div>
+    </ion-item>
+  </ion-card>
 </ion-content>
