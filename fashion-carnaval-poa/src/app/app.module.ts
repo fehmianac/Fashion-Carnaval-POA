@@ -12,6 +12,7 @@ import { SettingPage } from '../pages/setting/setting'
 import { OrderDetailPage } from '../pages/order/order-detail'
 import { BasketPage } from '../pages/basket/basket'
 import { OrderCompletedPage } from '../pages/order/order-completed'
+import { Snippets } from '../component/snippets/snippets'
 
 @NgModule({
     declarations: [
@@ -24,7 +25,8 @@ import { OrderCompletedPage } from '../pages/order/order-completed'
         LastOrderPage,
         OrderDetailPage,
         BasketPage, 
-        OrderCompletedPage
+        OrderCompletedPage,
+        Snippets
     ],
     imports: [
         IonicModule.forRoot(MyApp)
@@ -40,9 +42,10 @@ import { OrderCompletedPage } from '../pages/order/order-completed'
         LastOrderPage,
         OrderDetailPage,
         BasketPage,
-        OrderCompletedPage
+        OrderCompletedPage,
+        Snippets
     ],
-    providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, Providers]
+    providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, Providers,Snippets]
 })
 export class AppModule {
 }

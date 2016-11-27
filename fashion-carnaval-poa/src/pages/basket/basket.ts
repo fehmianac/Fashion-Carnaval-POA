@@ -17,7 +17,14 @@ export class BasketPage extends BasePage {
         super(multiLanguage, globalVariables);
     }
 
+    basketValue = 2;
     completeOrder() {
-        this.navCtrl.setRoot(OrderCompletedPage);
+        alert(this.basketValue);
+        return;
+        //this.navCtrl.setRoot(OrderCompletedPage);
+    }
+
+    changedValue(event){
+        this.basketValue = parseInt(event);
     }
 }

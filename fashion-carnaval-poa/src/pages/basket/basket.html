@@ -10,10 +10,11 @@
 <ion-content class="card-background-page">
     <ion-list>
         <ion-item>
-           basket
+            basket
         </ion-item>
     </ion-list>
-     <div padding>
+    <div padding>
         <button ion-button color="primary" block (click)="completeOrder()">{{getLabel('Basket.CompleteOrder')}}</button>
     </div>
+    <snippets [value]="basketValue" (callback)="changedValue($event)"> </snippets>
 </ion-content>
