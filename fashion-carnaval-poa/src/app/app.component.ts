@@ -8,6 +8,8 @@ import { BasePage } from '../pages/base-page';
 import { LastOrderPage } from '../pages/order/last-order'
 import { SettingPage } from '../pages/setting/setting'
 import { BasketPage } from '../pages/basket/basket'
+import { Api } from '../providers/api'
+import 'rxjs/add/operator/map';
 
 @Component({
     templateUrl: 'app.html'
@@ -19,7 +21,7 @@ export class MyApp extends BasePage {
 
     pages: Array<{ icon: string, title: string, component: any }>;
 
-    constructor(public platform: Platform, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables) {
+    constructor(public platform: Platform, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public api: Api) {
         super(multiLanguage, globalVariables);
         this.initializeApp();
         this.multiLanguage.reloadLanguageKeys();
@@ -28,9 +30,18 @@ export class MyApp extends BasePage {
         this.pages = [
             { icon: "md-home", title: 'NavigationBar.HomePage.Link', component: HomePage },
             { icon: "md-list", title: 'NavigationBar.LastOrder.Link', component: LastOrderPage },
-             { icon: "md-cart", title: 'NavigationBar.Basket.Link', component: BasketPage },
+            { icon: "md-cart", title: 'NavigationBar.Basket.Link', component: BasketPage },
             { icon: "md-settings", title: 'NavigationBar.Setting.Link', component: SettingPage }
         ];
+
+        let data = "";
+        api.get('/language?request.status=1').map(res => res.json())
+            .subscribe(data => {
+                // we've got back the raw data, now generate the core schedule data
+                // and save the data for later reference
+                var languageKey = data.Result[0].Title;
+                alert(languageKey);
+            });;
     }
 
     initializeApp() {

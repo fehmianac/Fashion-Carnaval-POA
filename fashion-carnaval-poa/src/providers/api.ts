@@ -7,7 +7,8 @@ import 'rxjs/add/operator/map';
  */
 @Injectable()
 export class Api {
-  url: string = 'https://example.com/api/v1';
+  //https://api.evarkadasi.com/api/v1/language?request.status=1
+  url: string = 'https://api.evarkadasi.com/api/v1';
 
   constructor(public http: Http) {
   }
@@ -20,15 +21,15 @@ export class Api {
     // Support easy query params for GET requests
     if (params) {
       let p = new URLSearchParams();
-      for(let k in params) {
+      for (let k in params) {
         p.set(k, params[k]);
       }
       // Set the search field if we have params and don't already have
       // a search field set in options.
       options.search = !options.search && p || options.search;
     }
-
-    return this.http.get(endpoint, options);
+    let finalUrl = this.url + endpoint;
+    return this.http.get(finalUrl, options);
   }
 
   post(endpoint: string, body: any, options?: RequestOptions) {

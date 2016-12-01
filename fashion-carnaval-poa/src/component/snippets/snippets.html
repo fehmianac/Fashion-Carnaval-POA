@@ -1,9 +1,9 @@
 <!-- Float the icon left -->
-<button ion-button icon-left small (click)="decrease()">
+<button ion-button icon-left small (click)="decrease()" color="danger">
   -
 </button>
 <input type="tel" [(ngModel)]="value" (ngModelChange)="onChanges($event)"  style="width: 40%; text-align: center;">
 <!-- Float the icon right -->
-<button ion-button icon-right small (click)="increase()">
+<button ion-button icon-right small (click)="increase()" color="secondary">
   +
 </button>
