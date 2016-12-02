@@ -13,6 +13,7 @@ import { OrderDetailPage } from '../pages/order/order-detail'
 import { BasketPage } from '../pages/basket/basket'
 import { OrderCompletedPage } from '../pages/order/order-completed'
 import { Snippets } from '../component/snippets/snippets'
+import { Services } from '../services/services'
 
 @NgModule({
     declarations: [
@@ -24,7 +25,7 @@ import { Snippets } from '../component/snippets/snippets'
         SettingPage,
         LastOrderPage,
         OrderDetailPage,
-        BasketPage, 
+        BasketPage,
         OrderCompletedPage,
         Snippets
     ],
@@ -45,7 +46,7 @@ import { Snippets } from '../component/snippets/snippets'
         OrderCompletedPage,
         Snippets
     ],
-    providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, Providers,Snippets]
+    providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, Providers, Services, Snippets]
 })
 export class AppModule {
 }

@@ -10,30 +10,56 @@
 <ion-content class="card-background-page">
     <ion-list>
         <ion-item>
-            <ion-label floating>Username</ion-label>
-            <ion-input type="text"></ion-input>
-        </ion-item>
-
-        <ion-item>
-            <ion-label floating>Password</ion-label>
-            <ion-input type="password"></ion-input>
+            <ion-label floating>{{getLabel('CustomerForm.Item.Name')}}</ion-label>
+            <ion-input type="text" [(ngModel)]="customerModel.Name"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label color="primary" fixed>Fixed Label</ion-label>
-            <ion-input type="tel" placeholder="Tel Input"></ion-input>
-        </ion-item>
-
-        <ion-item>
-            <ion-label floating>Floating Label</ion-label>
-            <ion-input></ion-input>
+            <ion-label floating>{{getLabel('CustomerForm.Item.Email')}}</ion-label>
+            <ion-input type="email" [(ngModel)]="customerModel.Email"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label floating>Description</ion-label>
-            <ion-textarea></ion-textarea>
+            <ion-label floating>{{getLabel('CustomerForm.Item.CC')}}</ion-label>
+            <ion-input type="text" [(ngModel)]="customerModel.CC"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>{{getLabel('CustomerForm.Item.Phone')}}</ion-label>
+            <ion-input type="tel" [(ngModel)]="customerModel.Phone"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>{{getLabel('CustomerForm.Item.Fax')}}</ion-label>
+            <ion-input type="tel" [(ngModel)]="customerModel.Fax"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>{{getLabel('CustomerForm.Item.Addresse')}}</ion-label>
+            <ion-textarea [(ngModel)]="customerModel.Addresse">></ion-textarea>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>{{getLabel('CustomerForm.Item.City')}}</ion-label>
+            <ion-input type="text" [(ngModel)]="customerModel.City"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>{{getLabel('CustomerForm.Item.State')}}</ion-label>
+            <ion-input type="text" [(ngModel)]="customerModel.State"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>{{getLabel('CustomerForm.Item.ZipCode')}}</ion-label>
+            <ion-input type="text" [(ngModel)]="customerModel.ZipCode"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>{{getLabel('CustomerForm.Item.BillToDetail')}}</ion-label>
+            <ion-textarea [(ngModel)]="customerModel.BillToDetail">></ion-textarea>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>{{getLabel('CustomerForm.Item.SpecialWants')}}</ion-label>
+            <ion-textarea [(ngModel)]="customerModel.SpecialWants">></ion-textarea>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>{{getLabel('CustomerForm.Item.Notes')}}</ion-label>
+            <ion-textarea [(ngModel)]="customerModel.Notes">></ion-textarea>
         </ion-item>
     </ion-list>
 
     <div padding>
-        <button ion-button color="primary" block>{{getLabel('CustomerForm.SaveButton')}}</button>
+        <button ion-button color="primary" (click)="saveCustomer()" block>{{getLabel('CustomerForm.SaveButton')}}</button>
     </div>
 </ion-content>

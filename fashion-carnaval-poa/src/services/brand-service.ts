@@ -1,0 +1,33 @@
+import { Injectable } from '@angular/core';
+import { Api } from '../providers/api'
+import { Storage } from '../providers/storage'
+import { Observable } from 'rxjs/Observable';
+import { GlobalVariables } from '../providers/global-variables'
+
+/**
+ * Storage is generic handler offline data.
+ */
+@Injectable()
+export class BrandServices {
+    constructor(public api: Api, public storage: Storage, public globalService: GlobalVariables) {
+
+    }
+
+    getBrandList() {
+        let brandDataFromLocal = this.storage.getAsJson("brand");
+        if (brandDataFromLocal == null) {
+            let result = this.api.get("Brand").map(res => res.json());
+            this.globalService.presentLoading();
+            result.subscribe(data => {
+                this.storage.set("brand", data);
+                this.globalService.dismissLoading();
+            });
+            return result;
+        } else {
+            return Observable.create(observer => {
+                observer.next(brandDataFromLocal);
+                observer.complete();
+            });
+        }
+    };
+}

@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { MultiLanguage } from '../../providers/multi-language'
 import { GlobalVariables } from '../../providers/global-variables'
 import { BasePage } from '../base-page'
+import { CompanyService } from '../../services/company-service'
 
 @Component({
     selector: 'customer-form',
@@ -12,10 +13,27 @@ import { BasePage } from '../base-page'
 
 export class CustomerFormPage extends BasePage {
 
-    customerList = {};
-
-    constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables) {
+    customerModel = {
+        Id: "",
+        ConfirmationId: "",
+        Name: "",
+        Email: "",
+        CC: "",
+        Phone: "",
+        Fax: "",
+        Addresse: "",
+        City: "",
+        State: "",
+        ZipCode: "",
+        BillToDetail: "",
+        SpecialWants: "",
+        Notes: "",
+    };
+    constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public companyService : CompanyService) {
         super(multiLanguage, globalVariables);
     }
 
+    saveCustomer() {
+        this.companyService.saveCompany(this.customerModel);
+    }
 }

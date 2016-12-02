@@ -25,7 +25,7 @@
     <ion-item>
       <ion-label>{{getLabel('Setting.CurrentLanguage.Label')}}</ion-label>
       <ion-select [(ngModel)]="selectedLanguageSelectBox">
-        <ion-option value="{{language.languageKey}}" *ngFor="let language of languageList">{{language.DisplayText}}</ion-option>
+        <ion-option value="{{language.LanguageKey}}" *ngFor="let language of languageList">{{language.DisplayName}}</ion-option>
       </ion-select>
     </ion-item>
   </ion-list>

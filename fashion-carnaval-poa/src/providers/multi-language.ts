@@ -9,7 +9,7 @@ export class MultiLanguage {
     }
 
     getLabel(key: string) {
-        let languageDict = this.storage.getAsJson("language");
+        let languageDict = this.storage.getAsJson("localization");
         if (languageDict == null) {
             return key;
         }
@@ -25,7 +25,9 @@ export class MultiLanguage {
     }
 
     getLanguageList() {
-        return [{ "languageKey": "en", "DisplayText": "English" }, { "languageKey": "tr", "DisplayText": "Turkish" }];
+        let result = this.storage.getAsJson("language");
+        return result;
+        //return [{ "languageKey": "en", "DisplayText": "English" }, { "languageKey": "tr", "DisplayText": "Turkish" }];
     }
 
     getSelectedLanguage() {
@@ -149,7 +151,7 @@ export class MultiLanguage {
 
         //Common.EditButton.Label
         //TODO call api reload
-        this.storage.set("language", languageDict);
+        this.storage.set("localization", languageDict);
 
     }
 }

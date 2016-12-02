@@ -7,8 +7,7 @@ import 'rxjs/add/operator/map';
  */
 @Injectable()
 export class Api {
-  //https://api.evarkadasi.com/api/v1/language?request.status=1
-  url: string = 'https://api.evarkadasi.com/api/v1';
+  url: string = 'http://harundeger.com/api/';
 
   constructor(public http: Http) {
   }
@@ -33,15 +32,18 @@ export class Api {
   }
 
   post(endpoint: string, body: any, options?: RequestOptions) {
-    return this.http.post(endpoint, body, options);
+    let finalUrl = this.url + endpoint;
+    return this.http.post(finalUrl, body, options);
   }
 
   put(endpoint: string, body: any, options?: RequestOptions) {
-    return this.http.put(endpoint, body, options);
+    let finalUrl = this.url + endpoint;
+    return this.http.put(finalUrl, body, options);
   }
 
   delete(endpoint: string, body: any, options?: RequestOptions) {
-    return this.http.post(endpoint, body, options);
+    let finalUrl = this.url + endpoint;
+    return this.http.post(finalUrl, body, options);
   }
 
   patch(endpoint: string, body: any, options?: RequestOptions) {

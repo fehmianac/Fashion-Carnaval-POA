@@ -21,6 +21,14 @@ export class GlobalVariables {
         return this.storage.get("currentUserName");
     }
 
+    setCurrentBrandId(brandId: number) {
+        this.storage.set("currentBrandId", brandId, false);
+    }
+
+    getCurrentBrandId() {
+        return this.storage.get("currentBrandId");
+    }
+
     showAlert(title: string, description: string) {
         let alert = this.alertCtrl.create({
             title: title,
@@ -30,6 +38,13 @@ export class GlobalVariables {
         alert.present();
     }
 
+    showErrorAlert() {
+        this.showAlert(this.multiLanguage.getLabel("Common.Alert.Error.Title"), this.multiLanguage.getLabel("Common.Alert.Error.Description"));
+    }
+
+    showSuccessAlert() {
+        this.showAlert(this.multiLanguage.getLabel("Common.Alert.Success.Title"), this.multiLanguage.getLabel("Common.Alert.Success.Description"));
+    }
     presentLoading() {
         this.loading = this.loadingCtrl.create({
             content: this.multiLanguage.getLabel("Common.LoadingLabel"),

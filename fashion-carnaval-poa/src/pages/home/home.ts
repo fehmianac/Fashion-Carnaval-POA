@@ -5,6 +5,8 @@ import { MultiLanguage } from '../../providers/multi-language'
 import { GlobalVariables } from '../../providers/global-variables'
 import { BasePage } from '../base-page'
 import { CustomerListPage } from '../customer/customer-list'
+import { BrandServices } from '../../services/brand-service'
+import { ApplicationService } from '../../services/application-service'
 
 @Component({
     selector: 'page-home',
@@ -12,17 +14,27 @@ import { CustomerListPage } from '../customer/customer-list'
 })
 export class HomePage extends BasePage {
 
-    @ViewChild(Nav) nav: Nav;
     selectedLanguage = "";
     brandList = [];
     currentUserName = "";
+    homeImage = "";
 
-    constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables) {
+    constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public brandService: BrandServices, public applicationService: ApplicationService) {
         super(multiLanguage, globalVariables);
+        this.applicationService.getApplicationSetting().subscribe(data => {
+            this.homeImage = data.HomePageImageUrl;
+        });
         this.selectedLanguage = multiLanguage.getSelectedLanguage();
         this.currentUserName = this.globalVariables.getCurrentUserName();
-        this.brandList.push({ id: "1", "imageUrl": "assets/card-saopaolo.png", "title": "41 Listings" });
-        this.brandList.push({ id: "1", "imageUrl": "assets/card-amsterdam.png", "title": "Deneme" });
+
+        this.brandService.getBrandList().subscribe(data => {
+            let length = data.length;
+            for (let i = 0; i < length; i++) {
+                let brand = data[i];
+                this.brandList.push({ id: brand.Id, "imageUrl": brand.ImageUrl, "title": brand.Name });
+            }
+        });
+
     }
 
     selectBrand(id: number) {
@@ -30,8 +42,8 @@ export class HomePage extends BasePage {
             this.globalVariables.showAlert(this.getLabel("Validation.UserName.MustNotBeNull.Title"), this.getLabel("Validation.UserName.MustNotBeNull.Description"));
             return;
         }
+        this.globalVariables.setCurrentBrandId(id);
         this.globalVariables.setCurrentUserName(this.currentUserName);
         this.navCtrl.setRoot(CustomerListPage);
-        //this.gotoPage(CustomerListPage);
     }
 }
