@@ -5,6 +5,7 @@ import { GlobalVariables } from '../../providers/global-variables'
 import { BasePage } from '../base-page'
 import { CustomerFormPage } from './customer-form'
 import { ProductDetailPage } from '../product/product-detail'
+import { CompanyService } from '../../services/company-service'
 
 @Component({
     selector: 'customer-list',
@@ -17,24 +18,28 @@ export class CustomerListPage extends BasePage {
     customerList = [];
     filteredCustomerList = [];
 
-    constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables) {
+    constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public companyService: CompanyService) {
         super(multiLanguage, globalVariables);
 
-        this.customerList.push({ "Id": "1", "Name": "ABC", "City": "İstanbul" });
-        this.customerList.push({ "Id": "2", "Name": "CDE", "City": "İstanbul" });
-        this.customerList.push({ "Id": "3", "Name": "EFG", "City": "İstanbul" });
-        this.customerList.push({ "Id": "4", "Name": "HKL", "City": "İstanbul" });
-        this.customerList.push({ "Id": "5", "Name": "LMN", "City": "İstanbul" });
-        this.customerList.push({ "Id": "6", "Name": "ABC", "City": "İstanbul" });
-        this.customerList.push({ "Id": "7", "Name": "CDE", "City": "İstanbul" });
-        this.customerList.push({ "Id": "8", "Name": "EFG", "City": "İstanbul" });
-        this.customerList.push({ "Id": "9", "Name": "HKL", "City": "İstanbul" });
-        this.customerList.push({ "Id": "10", "Name": "LMN", "City": "İstanbul" }); 
+        this.companyService.getCompanyList().subscribe(data => {
+            let length = data.length;
+            for (let i = 0; i < length; i++) {
+                let currentCustomer = data[i];
+                this.customerList.push({
+                    "Id": currentCustomer.Id,
+                    "Name": currentCustomer.Name,
+                    "City": currentCustomer.City,
+                    "State": currentCustomer.State,
+                    "Phone": currentCustomer.Phone,
+                    "Addresse": currentCustomer.Addresse
+                });
+            }
+        });
         this.filteredCustomerList = this.customerList;
     }
 
     openCustomerForm(companyId) {
-        this.navCtrl.push(CustomerFormPage);
+        this.navCtrl.push(CustomerFormPage, { customerId: companyId });
 
     }
 
@@ -48,12 +53,40 @@ export class CustomerListPage extends BasePage {
             return this.customerList;
         }
         let result = [];
+        var addedId = [];
         for (let i = 0; i < this.customerList.length; i++) {
             let customer = this.customerList[i];
             if (customer.Name.toLowerCase().indexOf(searchKey.toLowerCase()) > -1) {
                 result.push(customer);
+                addedId.push(customer.Id);
             }
         }
+
+        for (let i = 0; i < this.customerList.length; i++) {
+            let customer = this.customerList[i];
+            if (customer.Addresse.toLowerCase().indexOf(searchKey.toLowerCase()) > -1 && addedId.indexOf(customer.Id) == -1) {
+                result.push(customer);
+                addedId.push(customer.Id);
+            }
+        }
+
+        for (let i = 0; i < this.customerList.length; i++) {
+            let customer = this.customerList[i];
+            if (customer.City.toLowerCase().indexOf(searchKey.toLowerCase()) > -1 && addedId.indexOf(customer.Id) == -1) {
+                result.push(customer);
+                addedId.push(customer.Id);
+            }
+        }
+
+
+        for (let i = 0; i < this.customerList.length; i++) {
+            let customer = this.customerList[i];
+            if (customer.State.toLowerCase().indexOf(searchKey.toLowerCase()) > -1 && addedId.indexOf(customer.Id) == -1) {
+                result.push(customer);
+                addedId.push(customer.Id);
+            }
+        }
+
         return result;
     }
 
