@@ -7,6 +7,7 @@ import { BasePage } from '../base-page'
 import { CustomerListPage } from '../customer/customer-list'
 import { BrandServices } from '../../services/brand-service'
 import { ApplicationService } from '../../services/application-service'
+import { UserService } from '../../services/user-service'
 
 @Component({
     selector: 'page-home',
@@ -19,7 +20,13 @@ export class HomePage extends BasePage {
     currentUserName = "";
     homeImage = "";
 
-    constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public brandService: BrandServices, public applicationService: ApplicationService) {
+    constructor(public navCtrl: NavController,
+        public multiLanguage: MultiLanguage,
+        public globalVariables: GlobalVariables,
+        public brandService: BrandServices,
+        public applicationService: ApplicationService,
+        public userService: UserService) {
+
         super(multiLanguage, globalVariables);
         this.applicationService.getApplicationSetting().subscribe(data => {
             this.homeImage = data.HomePageImageUrl;
@@ -42,8 +49,17 @@ export class HomePage extends BasePage {
             this.globalVariables.showAlert(this.getLabel("Validation.UserName.MustNotBeNull.Title"), this.getLabel("Validation.UserName.MustNotBeNull.Description"));
             return;
         }
-        this.globalVariables.setCurrentBrandId(id);
-        this.globalVariables.setCurrentUserName(this.currentUserName);
-        this.navCtrl.setRoot(CustomerListPage);
+        this.userService.findUserInLocalData(this.currentUserName).subscribe(data => {
+            if (data != null) {
+                this.globalVariables.setCurrentBrandId(id);
+                this.globalVariables.setCurrentUserName(this.currentUserName);
+                this.globalVariables.setCurrentUserId(data.Id);
+                this.globalVariables.setCurrentUserPriceTypeId(data.PriceTypeId);
+                this.navCtrl.setRoot(CustomerListPage);
+            } else {
+                this.globalVariables.showAlert(this.getLabel("Validation.UserName.NotFound.Title"), this.getLabel("Validation.UserName.NotFound.Description"));
+            }
+        });
+
     }
 }

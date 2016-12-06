@@ -9,6 +9,7 @@ import { LastOrderPage } from '../pages/order/last-order'
 import { SettingPage } from '../pages/setting/setting'
 import { BasketPage } from '../pages/basket/basket'
 import { ApplicationService } from '../services/application-service'
+import { UserService } from '../services/user-service'
 import 'rxjs/add/operator/map';
 
 @Component({
@@ -21,7 +22,7 @@ export class MyApp extends BasePage {
 
     pages: Array<{ icon: string, title: string, component: any }>;
 
-    constructor(public platform: Platform, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public applicationService: ApplicationService) {
+    constructor(public platform: Platform, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public applicationService: ApplicationService, public userService: UserService) {
         super(multiLanguage, globalVariables);
         this.initializeApp();
         this.multiLanguage.reloadLanguageKeys();
@@ -33,8 +34,8 @@ export class MyApp extends BasePage {
             { icon: "md-cart", title: 'NavigationBar.Basket.Link', component: BasketPage },
             { icon: "md-settings", title: 'NavigationBar.Setting.Link', component: SettingPage }
         ];
+        this.userService.getAllUser();
 
-       
     }
 
     initializeApp() {

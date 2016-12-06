@@ -30,11 +30,12 @@
     <div [ngSwitch]="pet" *ngIf="isShowProductDetail">
         <ion-list *ngSwitchCase="'puppies'">
             <ion-card>
+                <img src="data:image/png;base64,{{productModel.ModelPicture1}}">
                 <ion-item>
-                    <h2>{{productModel.ManufactureCode}}</h2>
-                    <p>{{productModel.Price}} {{productModel.Currency}}</p>
+                    <h1><b>Code:</b>{{productModel.ManufactureCode}}</h1>
+                    <h1>Price: {{productModel.Price}} {{productModel.Currency}}</h1>
+                    <p>Price: {{productModel.Price}} {{productModel.Currency}}</p>
                 </ion-item>
-                <img src="assets/card-saopaolo.png">
                 <ion-card-content>
                     <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of
                         a DeLorean?! Whoa. This is heavy.</p>
@@ -47,7 +48,7 @@
                 <ion-list-header>
                     <ion-label>{{colorData.text}}</ion-label>
                 </ion-list-header>
-                <ion-item *ngFor="let index of [1,2,3,4,5,6,7,8]">
+                <ion-item *ngFor="let index of [1,2,3,4,5,6,7,8,9]">
                     <ion-label style="margin:0;">
                         <ion-grid>
                             <ion-row>

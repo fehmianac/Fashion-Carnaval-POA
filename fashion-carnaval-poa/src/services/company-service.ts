@@ -15,7 +15,8 @@ export class CompanyService {
 
     getCompanyList() {
         this.globalService.presentLoading();
-        let apiCall = this.api.get("Customer").map(res => res.json());
+        let currentUserId = this.globalService.getCurrentUserId();
+        let apiCall = this.api.get("Customer?UserId=" + currentUserId).map(res => res.json());
 
         apiCall.subscribe(data => {
             this.globalService.dismissLoading();
@@ -29,6 +30,7 @@ export class CompanyService {
 
     saveCompany(companyModel: any) {
         this.globalService.presentLoading();
+        companyModel.UserId = this.globalService.getCurrentUserId();
         let apiCall = this.api.post("Customer", companyModel);
         apiCall.subscribe(data => {
             this.globalService.showSuccessAlert();

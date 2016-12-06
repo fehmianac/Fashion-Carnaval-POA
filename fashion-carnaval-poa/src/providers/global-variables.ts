@@ -20,7 +20,18 @@ export class GlobalVariables {
     getCurrentUserName() {
         return this.storage.get("currentUserName");
     }
-
+    setCurrentUserId(userId: string) {
+        this.storage.set("currentUserId", userId, false);
+    }
+    getCurrentUserId() {
+        return this.storage.get("currentUserId");
+    }
+    setCurrentUserPriceTypeId(priceTypeId: string) {
+        this.storage.set("currentUserPriceTypeId", priceTypeId, false);
+    }
+    getCCurrentUserPriceTypeId() {
+        return this.storage.get("currentUserPriceTypeId");
+    }
     setCurrentBrandId(brandId: number) {
         this.storage.set("currentBrandId", brandId, false);
     }

@@ -15,7 +15,8 @@ export class ProductService {
 
     searchProduct(searchKey: string) {
         this.globalService.presentLoading();
-        let apiCall = this.api.get("/Product?manufactureCode=" + searchKey).map(res => res.json());
+        let currentPriceTypeId = this.globalService.getCCurrentUserPriceTypeId();
+        let apiCall = this.api.get("/Product?manufactureCode=" + searchKey + "&PriceTypeId=" + currentPriceTypeId).map(res => res.json());
 
         apiCall.subscribe(data => {
             this.globalService.dismissLoading();
