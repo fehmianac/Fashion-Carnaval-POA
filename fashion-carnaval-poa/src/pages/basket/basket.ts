@@ -4,6 +4,7 @@ import { MultiLanguage } from '../../providers/multi-language'
 import { GlobalVariables } from '../../providers/global-variables'
 import { BasePage } from '../base-page'
 import { OrderCompletedPage } from '../order/order-completed'
+import { BasketService } from '../../services/basket-service'
 
 @Component({
     selector: 'basket',
@@ -13,8 +14,11 @@ import { OrderCompletedPage } from '../order/order-completed'
 
 export class BasketPage extends BasePage {
 
-    constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables) {
+    basketData = null;
+    pet: string = "puppies";
+    constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public basketService: BasketService) {
         super(multiLanguage, globalVariables);
+        this.basketData = this.basketService.getBasketData();
     }
 
     basketValue = 2;
@@ -24,7 +28,16 @@ export class BasketPage extends BasePage {
         //this.navCtrl.setRoot(OrderCompletedPage);
     }
 
-    changedValue(event){
-        this.basketValue = parseInt(event);
+    removeFromBasket(product) {
+        let basketData = this.basketData;
+        let basketService = this.basketService;
+        this.globalVariables.showConfirm(function (aggree) {
+            if (aggree) {
+                let index = basketData.productList.indexOf(product);
+                basketData.productList.splice(index, 1);
+                basketService.saveBasketData(basketData);
+            }
+        });
+
     }
 }

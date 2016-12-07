@@ -5,7 +5,7 @@ import { GlobalVariables } from '../../providers/global-variables'
 import { BasePage } from '../base-page'
 import { BasketPage } from '../basket/basket'
 import { ProductService } from '../../services/product-service'
-
+import { BasketService } from '../../services/basket-service'
 @Component({
     selector: 'product-detail',
     templateUrl: 'product-detail.html'
@@ -18,39 +18,17 @@ export class ProductDetailPage extends BasePage {
     isShowProductDetail = false;
     productSearchKey = "";
     productModel = { ColorData: [], Fabric1: "", Fabric2: "", Fabric3: "" };
-    constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public productService: ProductService) {
+    basketCount = 0;
+    constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public productService: ProductService, public basketService: BasketService) {
         super(multiLanguage, globalVariables);
+        this.basketCount = this.basketService.getBasketProductCount();
     }
 
     getColorDataFromText(colorText: string) {
-        let basketData = {
-            productList: [{
-                manifactureCode: "",
-                color: "",
-                size1: 0,
-                size2: 0,
-                size3: 0,
-                size4: 0,
-                size5: 0,
-                size6: 0,
-                size7: 0,
-                size8: 0,
-                size9: 0
-            }],
-            orderKey: "",
-            shippingDateStart: "2016-12-06 12:00",
-            shippingDateEnd: "",
-            customerNote: "",
-            adminNote: "",
-            status: 0,
-            userId: 23,
-            customerId: 1,
-            createdDate: "",
-            lastModifedDate: "",
-        };
 
         let colorDataPattern = {
             text: colorText,
+            color: colorText,
             size1: 0,
             size2: 0,
             size3: 0,
@@ -98,17 +76,17 @@ export class ProductDetailPage extends BasePage {
                     let colorDataItem = this.getColorDataFromText(data.ColorText7);
                     colorData.push(colorDataItem);
                 }
+                this.productModel = data;
+                this.productModel.ColorData = colorData;
+
                 let fabricPatternPercent = "Fabric{0}_Percent{1}";
-                let fabricPatternModel = "Fabric{0}-_Model{1}";
+                let fabricPatternModel = "Fabric{0}_Model{1}";
                 let fabricPattern = "Fabric{0}";
                 for (let i = 1; i <= 3; i++) {
-                    debugger;
-                    let fabricPercent = fabricPatternPercent.replace("{0}", i.toString());
-                    let fabricModel = fabricPatternModel.replace("{0}", i.toString());
                     let fabric = fabricPattern.replace("{0}", i.toString());
                     for (let j = 1; j <= 4; j++) {
-                        fabricPercent = fabricPatternPercent.replace("{1}", j.toString());
-                        fabricModel = fabricPatternModel.replace("{1}", j.toString());
+                        let fabricPercent = fabricPatternPercent.replace("{0}", i.toString()).replace("{1}", j.toString());
+                        let fabricModel = fabricPatternModel.replace("{0}", i.toString()).replace("{1}", j.toString());
                         let value = data[fabricPercent];
                         if (value > 0) {
                             if (j == 1) {
@@ -119,8 +97,6 @@ export class ProductDetailPage extends BasePage {
                         }
                     }
                 }
-                this.productModel = data;
-                this.productModel.ColorData = colorData;
             });
         }
 
@@ -139,6 +115,10 @@ export class ProductDetailPage extends BasePage {
     }
 
     addToBasket() {
-        debugger;
+        //TODO Validation
+        //TODO convertProductData
+        this.basketService.addToBasket(this.productModel);
+        this.basketCount = this.basketService.getBasketProductCount();
+        this.globalVariables.showAlert(this.getLabel("Popup.AddToBasket.Title"), this.getLabel("Popup.AddToBasket.Description"));
     }
 }

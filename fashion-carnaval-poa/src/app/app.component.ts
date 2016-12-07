@@ -35,7 +35,6 @@ export class MyApp extends BasePage {
             { icon: "md-settings", title: 'NavigationBar.Setting.Link', component: SettingPage }
         ];
         this.userService.getAllUser();
-
     }
 
     initializeApp() {

@@ -146,10 +146,18 @@ export class MultiLanguage {
                 "key": "Common.EditButton.Label",
                 "languageKey": "en",
                 "value": "Edit"
+            },
+            {
+                "key": "ProductDetail.AddToBasket",
+                "languageKey": "en",
+                "value": "Add To Basket"
+            },
+            {
+                "key": "Common.DeleteButton.Label",
+                "languageKey": "en",
+                "value": "Delete"
             }
         );
-
-        //Common.EditButton.Label
         //TODO call api reload
         this.storage.set("localization", languageDict);
 

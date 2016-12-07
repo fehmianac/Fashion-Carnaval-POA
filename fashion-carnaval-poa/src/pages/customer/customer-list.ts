@@ -91,6 +91,7 @@ export class CustomerListPage extends BasePage {
     }
 
     selectCompany(companyId) {
+        this.globalVariables.setCurrentCustomerId(companyId);
         this.navCtrl.setRoot(ProductDetailPage);
     }
 

@@ -7,7 +7,7 @@
         <ion-buttons end>
             <button ion-button color="secondary" (click)="gotoBasket()">
        <ion-badge item-right>
-                 <ion-icon ios="ios-cart" md="md-cart"></ion-icon> 260k</ion-badge>
+                 <ion-icon ios="ios-cart" md="md-cart"></ion-icon> {{basketCount}}</ion-badge>
       </button>
         </ion-buttons>
     </ion-navbar>
@@ -32,14 +32,19 @@
             <ion-card>
                 <img src="data:image/png;base64,{{productModel.ModelPicture1}}">
                 <ion-item>
-                    <h1><b>Code:</b>{{productModel.ManufactureCode}}</h1>
-                    <h1>Price: {{productModel.Price}} {{productModel.Currency}}</h1>
-                    <p>Price: {{productModel.Price}} {{productModel.Currency}}</p>
+                    <h1><b>Group:</b> {{productModel.GroupName}}</h1>
+                    <h1><b>Code:</b> {{productModel.ManufactureCode}}</h1>
+                    <h2><b>Price:</b> {{productModel.Price}} {{productModel.Currency}}</h2>
+                    <p [hidden]="!productModel.Fabric1"><b>Fabric1:</b> {{productModel.Fabric1}}</p>
+                    <p [hidden]="!productModel.Fabric2"><b>Fabric2:</b> {{productModel.Fabric2}}</p>
+                    <p [hidden]="!productModel.Fabric3"><b>Fabric3:</b> {{productModel.Fabric3}}</p>
+                    <p>
+                        <b>Colors:</b>
+                        <span *ngFor="let color of this.productModel.ColorData">
+                        {{color.text}},
+                    </span>
+                    </p>
                 </ion-item>
-                <ion-card-content>
-                    <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of
-                        a DeLorean?! Whoa. This is heavy.</p>
-                </ion-card-content>
             </ion-card>
         </ion-list>
 
@@ -60,6 +65,11 @@
                         </ion-grid>
                     </ion-label>
                 </ion-item>
+            </div>
+            <div padding>
+                <button ion-button color="primary" block (click)="addToBasket()">
+                    <ion-icon ios="ios-cart" md="md-cart"></ion-icon> &nbsp;
+                     {{getLabel('ProductDetail.AddToBasket')}}</button>
             </div>
         </ion-list>
     </div>

@@ -3,13 +3,15 @@ import { ApplicationService } from './application-service'
 import { CompanyService } from './company-service'
 import { ProductService } from './product-service'
 import { UserService } from './user-service'
+import { BasketService } from './basket-service'
 
 export {
     BrandServices,
     ApplicationService,
     CompanyService,
     ProductService,
-    UserService
+    UserService,
+    BasketService
 };
 
 export const Services: any[] = [
@@ -17,5 +19,6 @@ export const Services: any[] = [
     ApplicationService,
     CompanyService,
     ProductService,
-    UserService
+    UserService,
+    BasketService
 ]

@@ -26,6 +26,12 @@ export class GlobalVariables {
     getCurrentUserId() {
         return this.storage.get("currentUserId");
     }
+    setCurrentCustomerId(customerId: string) {
+        this.storage.set("currentCustomerId", customerId, false);
+    }
+    getCurrentCustomerId() {
+        return this.storage.get("currentCustomerId");
+    }
     setCurrentUserPriceTypeId(priceTypeId: string) {
         this.storage.set("currentUserPriceTypeId", priceTypeId, false);
     }
@@ -40,6 +46,18 @@ export class GlobalVariables {
         return this.storage.get("currentBrandId");
     }
 
+    getGuid() {
+        function guid() {
+            function s4() {
+                return Math.floor((1 + Math.random()) * 0x10000)
+                    .toString(16)
+                    .substring(1);
+            }
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+                s4() + '-' + s4() + s4() + s4();
+        }
+        return guid();
+    }
     showAlert(title: string, description: string) {
         let alert = this.alertCtrl.create({
             title: title,
@@ -56,6 +74,30 @@ export class GlobalVariables {
     showSuccessAlert() {
         this.showAlert(this.multiLanguage.getLabel("Common.Alert.Success.Title"), this.multiLanguage.getLabel("Common.Alert.Success.Description"));
     }
+
+    showConfirm(callback) {
+        let confirm = this.alertCtrl.create({
+            title: 'Confirmation',
+            message: 'Do you agree to use this lightsaber to do good across the intergalactic galaxy?',
+            buttons: [
+                {
+                    text: 'Disagree',
+                    handler: () => {
+                        callback(false);
+                    }
+                },
+                {
+                    text: 'Agree',
+                    handler: () => {
+                        callback(true);
+                    }
+                }
+            ]
+        });
+        confirm.present();
+    }
+
+
     presentLoading() {
         this.loading = this.loadingCtrl.create({
             content: this.multiLanguage.getLabel("Common.LoadingLabel"),

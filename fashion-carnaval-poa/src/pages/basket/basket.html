@@ -5,16 +5,91 @@
     </button>
         <ion-title>{{getLabel('Basket.Title')}}</ion-title>
     </ion-navbar>
+    <ion-toolbar no-border-top>
+        <ion-segment [(ngModel)]="pet">
+            <ion-segment-button value="puppies">
+                Basket Info
+            </ion-segment-button>
+            <ion-segment-button value="kittens">
+                Product List
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content class="card-background-page">
-    <ion-list>
-        <ion-item>
-            basket
-        </ion-item>
-    </ion-list>
+    <div [ngSwitch]="pet">
+        <ion-list *ngSwitchCase="'puppies'">
+            <ion-item>
+                <ion-thumbnail item-left>
+                    <img src="assets/img/thumbnail-puppy-1.jpg">
+                </ion-thumbnail>
+                <h2>Ruby</h2>
+            </ion-item>
+            <ion-item>
+                <ion-thumbnail item-left>
+                    <img src="assets/img/thumbnail-puppy-2.jpg">
+                </ion-thumbnail>
+                <h2>Oscar</h2>
+            </ion-item>
+            <ion-item>
+                <ion-thumbnail item-left>
+                    <img src="assets/img/thumbnail-puppy-4.jpg">
+                </ion-thumbnail>
+                <h2>Zoey</h2>
+            </ion-item>
+            <ion-item>
+                <ion-thumbnail item-left>
+                    <img src="assets/img/thumbnail-puppy-3.jpg">
+                </ion-thumbnail>
+                <h2>Otto</h2>
+            </ion-item>
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'kittens'">
+            <ion-item *ngFor="let product of basketData.productList">
+                <h1> {{product.manufactureCode}} - {{product.color}}</h1>
+                <p> Size1: {{product.size1}}, Size2: {{product.size2}}, Size3: {{product.size3}}, Size4: {{product.size4}} Size5:
+                    {{product.size5}}, Size6: {{product.size6}}, Size7: {{product.size7}}, Size8: {{product.size8}} Size9:
+                    {{product.size9}}
+                </p>
+                <button ion-button icon-left clear item-right (click)="removeFromBasket(product)">
+                    <ion-icon ios="ios-remove" md="md-remove"></ion-icon> {{getLabel('Common.DeleteButton.Label')}}
+                 </button>
+                <button ion-button icon-left clear item-right (click)="edit(product)">
+                    <ion-icon ios="ios-create" md="md-create"></ion-icon> {{getLabel('Common.EditButton.Label')}}
+                </button>
+            </ion-item>
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'ducklings'">
+            <ion-item>
+                <ion-thumbnail item-left>
+                    <img src="assets/img/thumbnail-duckling-1.jpg">
+                </ion-thumbnail>
+                <h2>Daffy</h2>
+            </ion-item>
+            <ion-item>
+                <ion-thumbnail item-left>
+                    <img src="assets/img/thumbnail-duckling-2.jpg">
+                </ion-thumbnail>
+                <h2>Huey</h2>
+            </ion-item>
+            <ion-item>
+                <ion-thumbnail item-left>
+                    <img src="assets/img/thumbnail-duckling-3.jpg">
+                </ion-thumbnail>
+                <h2>Dewey</h2>
+            </ion-item>
+            <ion-item>
+                <ion-thumbnail item-left>
+                    <img src="assets/img/thumbnail-duckling-4.jpg">
+                </ion-thumbnail>
+                <h2>Louie</h2>
+            </ion-item>
+        </ion-list>
+    </div>
     <div padding>
         <button ion-button color="primary" block (click)="completeOrder()">{{getLabel('Basket.CompleteOrder')}}</button>
     </div>
-    <snippets [value]="basketValue" (callback)="changedValue($event)"> </snippets>
 </ion-content>
