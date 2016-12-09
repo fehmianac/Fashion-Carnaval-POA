@@ -35,7 +35,7 @@ export class BasketService {
         return this.basketData.productList.length;
     }
 
-    getBasketData(){
+    getBasketData() {
         return this.basketData;
     }
 
@@ -50,15 +50,21 @@ export class BasketService {
         return null;
     }
 
-    saveBasketData(basketData){
-         this.storage.set("basket", this.basketData);
+    saveBasketData(basketData) {
+        this.storage.set("basket", this.basketData);
     }
-     
+
     addToBasket(product: any) {
         if (product.ColorData != null && product.ColorData.length > 0) {
             let length = product.ColorData.length;
             for (let i = 0; i < length; i++) {
                 let colorData = product.ColorData[i];
+                let totalColorItemCount = colorData.size1 + colorData.size2 + colorData.size3 + colorData.size4 + colorData.size5 + colorData.size6 + colorData.size7 + colorData.size8 + colorData.size9;
+                if (totalColorItemCount == 0) {
+                    //eğer bir renkten hiç eklenmediyse sepete ekleme
+                    continue;
+                }
+
                 let productInBasket = this.findProductInBasket(colorData.color, product.ManufactureCode);
                 if (productInBasket != null) {
                     productInBasket.size1 += colorData.size1;
@@ -73,6 +79,8 @@ export class BasketService {
                 } else {
                     let productModel = {
                         manufactureCode: product.ManufactureCode,
+                        groupName: product.GroupName,
+                        id: product.Id,
                         color: colorData.color,
                         size1: colorData.size1,
                         size2: colorData.size2,
@@ -91,10 +99,44 @@ export class BasketService {
         this.storage.set("basket", this.basketData);
     }
 
-    basketToOrder(basketData){
-        return this.api.post("/Basket",basketData);
+    basketToOrder(basketData) {
+        let orderModel = {
+            "OrderKey": basketData.orderKey,
+            "ShipmentStartDate": basketData.shippingDateStart.replace("-", ".").replace("-", "."),
+            "ShipmentEndDate": basketData.shippingDateEnd.replace("-", ".").replace("-", "."),
+            "CustomerNote": basketData.customerNote,
+            "AdminNote": basketData.adminNote,
+            "StatuId": 1,
+            "UserId": basketData.userId,
+            "CustomerId": basketData.customerId,
+            "Products": [],
+            Id: basketData.orderKey,
+            CreatedDate: "2016.12.12",
+            LastModifiedDate: "2016.12.12"
+        }
+        let length = basketData.productList.length;
+        for (let i = 0; i < length; i++) {
+            let product = basketData.productList[i];
+            orderModel.Products.push({
+                "Id": product.id,
+                "GroupName": product.groupName,
+                "ManufactureName": product.manufactureCode,
+                "Color": product.color,
+                "Std": "1",
+                "Size1": product.size1,
+                "Size2": product.size2,
+                "Size3": product.size3,
+                "Size4": product.size4,
+                "Size5": product.size5,
+                "Size6": product.size6,
+                "Size7": product.size7,
+                "Size8": product.size8,
+                "OrderId": basketData.orderKey
+            });
+        }
+        return this.api.post("/Basket", orderModel);
     }
-    clearBasket(){
+    clearBasket() {
         this.storage.delete("basket");
     }
 }

@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { MultiLanguage } from '../../providers/multi-language'
 import { GlobalVariables } from '../../providers/global-variables'
 import { BasePage } from '../base-page'
+import { BasketPage } from './basket'
 import { OrderCompletedPage } from '../order/order-completed'
 import { BasketService } from '../../services/basket-service'
 
@@ -41,7 +42,10 @@ export class UpdateProductInBasket extends BasePage {
 
     update() {
         this.basketService.saveBasketData(this.basketData);
-        alert("ok");
-        
+        let navCtrl = this.navCtrl;
+        this.globalVariables.showAlert("UpdateProductInBasket.Update.Success.Title", "UpdateProductInBasket.Update.Success.Description").then(function () {
+            navCtrl.setRoot(BasketPage);
+        });
+
     }
 }

@@ -64,7 +64,7 @@ export class GlobalVariables {
             subTitle: description,
             buttons: ['OK']
         });
-        alert.present();
+        return alert.present();
     }
 
     showErrorAlert() {

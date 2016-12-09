@@ -92,7 +92,10 @@ export class CustomerListPage extends BasePage {
 
     selectCompany(companyId) {
         this.globalVariables.setCurrentCustomerId(companyId);
-        this.navCtrl.setRoot(ProductDetailPage);
+        let navCtrl = this.navCtrl;
+        setTimeout(function () {
+            navCtrl.setRoot(ProductDetailPage);
+        },11);
     }
 
 }

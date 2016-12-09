@@ -6,6 +6,7 @@ import { BasePage } from '../base-page'
 import { OrderCompletedPage } from '../order/order-completed'
 import { BasketService } from '../../services/basket-service'
 import { UpdateProductInBasket } from './update-product'
+import { HomePage } from '../home/home'
 
 @Component({
     selector: 'basket',
@@ -36,12 +37,35 @@ export class BasketPage extends BasePage {
 
     completeOrder() {
         this.basketService.saveBasketData(this.basketData);
-        debugger;
-        this.basketService.basketToOrder(this.basketData).subscribe(data => {
-            alert("Ok")
-        });;
+        this.globalVariables.presentLoading();
+        let call = this.basketService.basketToOrder(this.basketData);
+        call.subscribe(data => {
+            if (data.text() == "true") {
+                let orderKey = this.basketData.orderKey;
+                this.basketService.clearBasket();
+                let navCtrl = this.navCtrl;
+                this.globalVariables.showAlert("BasketPage.BasketToOrder.Success.Title", "BasketPage.BasketToOrder.Success.Description").then(function () {
+                    navCtrl.setRoot(OrderCompletedPage, { orderKey: orderKey })
+                });
+            } else {
+                this.globalVariables.showAlert("BasketPage.BasketToOrder.Error.Title", "BasketPage.BasketToOrder.Error.Description");
+            }
+            this.globalVariables.dismissLoading();
+        }, err => {
+            this.globalVariables.showAlert("BasketPage.BasketToOrder.Error.Title", "BasketPage.BasketToOrder.Error.Description");
+            this.globalVariables.dismissLoading();
+        });
     }
+
     edit(product) {
         this.navCtrl.push(UpdateProductInBasket, { manufactureCode: product.manufactureCode, color: product.color });
+    }
+
+    clearBasket() {
+        this.basketService.clearBasket();
+        let navCtrl = this.navCtrl;
+        this.globalVariables.showAlert("Basket.ClearData.PopUp.Title", "Basket.ClearData.PopUp.Description").then(function () {
+            navCtrl.setRoot(HomePage);
+        });
     }
 }
