@@ -90,4 +90,11 @@ export class BasketService {
         }
         this.storage.set("basket", this.basketData);
     }
+
+    basketToOrder(basketData){
+        return this.api.post("/Basket",basketData);
+    }
+    clearBasket(){
+        this.storage.delete("basket");
+    }
 }

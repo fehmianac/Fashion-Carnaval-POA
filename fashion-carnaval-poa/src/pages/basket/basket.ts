@@ -5,6 +5,7 @@ import { GlobalVariables } from '../../providers/global-variables'
 import { BasePage } from '../base-page'
 import { OrderCompletedPage } from '../order/order-completed'
 import { BasketService } from '../../services/basket-service'
+import { UpdateProductInBasket } from './update-product'
 
 @Component({
     selector: 'basket',
@@ -21,13 +22,6 @@ export class BasketPage extends BasePage {
         this.basketData = this.basketService.getBasketData();
     }
 
-    basketValue = 2;
-    completeOrder() {
-        alert(this.basketValue);
-        return;
-        //this.navCtrl.setRoot(OrderCompletedPage);
-    }
-
     removeFromBasket(product) {
         let basketData = this.basketData;
         let basketService = this.basketService;
@@ -38,6 +32,16 @@ export class BasketPage extends BasePage {
                 basketService.saveBasketData(basketData);
             }
         });
+    }
 
+    completeOrder() {
+        this.basketService.saveBasketData(this.basketData);
+        debugger;
+        this.basketService.basketToOrder(this.basketData).subscribe(data => {
+            alert("Ok")
+        });;
+    }
+    edit(product) {
+        this.navCtrl.push(UpdateProductInBasket, { manufactureCode: product.manufactureCode, color: product.color });
     }
 }
