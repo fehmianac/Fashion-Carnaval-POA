@@ -42,6 +42,7 @@ export class CustomerFormPage extends BasePage {
     }
 
     getCustomerDetail(customerId) {
+        this.globalVariables.presentLoading();
         this.companyService.getCompanyById(customerId).subscribe(data => {
             this.customerModel = data;
             this.globalVariables.dismissLoading();

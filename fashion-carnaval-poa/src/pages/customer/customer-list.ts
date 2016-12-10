@@ -21,7 +21,15 @@ export class CustomerListPage extends BasePage {
     constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public companyService: CompanyService) {
         super(multiLanguage, globalVariables);
 
+        this.doRefresh(null);
+    }
+
+    doRefresh(event) {
+        this.customerList = [];
+        this.filteredCustomerList = [];
+        this.globalVariables.presentLoading();
         this.companyService.getCompanyList().subscribe(data => {
+
             let length = data.length;
             for (let i = 0; i < length; i++) {
                 let currentCustomer = data[i];
@@ -34,8 +42,20 @@ export class CustomerListPage extends BasePage {
                     "Addresse": currentCustomer.Addresse
                 });
             }
-        });
+            this.globalVariables.dismissLoading();
+            if (event != null) {
+                event.complete();
+            }
+        },
+            err => {
+                this.globalVariables.dismissLoading();
+                if (event != null) {
+
+                    event.complete();
+                }
+            });
         this.filteredCustomerList = this.customerList;
+
     }
 
     openCustomerForm(companyId) {
@@ -44,6 +64,7 @@ export class CustomerListPage extends BasePage {
     }
 
     searchInCompany(event) {
+
         let searchKey = event.target.value;
         this.filteredCustomerList = this.searchCompanyInArray(searchKey);
     }
@@ -95,7 +116,7 @@ export class CustomerListPage extends BasePage {
         let navCtrl = this.navCtrl;
         setTimeout(function () {
             navCtrl.setRoot(ProductDetailPage);
-        },11);
+        }, 11);
     }
 
 }

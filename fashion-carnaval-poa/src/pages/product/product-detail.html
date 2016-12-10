@@ -17,10 +17,10 @@
     <ion-toolbar no-border-top>
         <ion-segment [(ngModel)]="pet" *ngIf="isShowProductDetail">
             <ion-segment-button value="puppies">
-                Detail
+                {{getLabel('ProductDetail.Segment.Detail')}}
             </ion-segment-button>
             <ion-segment-button value="kittens">
-                Size List
+                {{getLabel('ProductDetail.Segment.SizeList')}}
             </ion-segment-button>
         </ion-segment>
     </ion-toolbar>
@@ -32,14 +32,14 @@
             <ion-card>
                 <img src="data:image/png;base64,{{productModel.ModelPicture1}}">
                 <ion-item>
-                    <h1><b>Group:</b> {{productModel.GroupName}}</h1>
-                    <h1><b>Code:</b> {{productModel.ManufactureCode}}</h1>
-                    <h2><b>Price:</b> {{productModel.Price}} {{productModel.Currency}}</h2>
-                    <p [hidden]="!productModel.Fabric1"><b>Fabric1:</b> {{productModel.Fabric1}}</p>
-                    <p [hidden]="!productModel.Fabric2"><b>Fabric2:</b> {{productModel.Fabric2}}</p>
-                    <p [hidden]="!productModel.Fabric3"><b>Fabric3:</b> {{productModel.Fabric3}}</p>
+                    <h1><b>{{getLabel('ProductDetail.Group.Label')}}:</b> {{productModel.GroupName}}</h1>
+                    <h1><b>{{getLabel('ProductDetail.Code.Label')}}:</b> {{productModel.ManufactureCode}}</h1>
+                    <h2><b>{{getLabel('ProductDetail.Price.Label')}}:</b> {{productModel.Price}} {{productModel.Currency}}</h2>
+                    <p [hidden]="!productModel.Fabric1"><b>{{getLabel('ProductDetail.Fabric1.Label')}}:</b> {{productModel.Fabric1}}</p>
+                    <p [hidden]="!productModel.Fabric2"><b>{{getLabel('ProductDetail.Fabric2.Label')}}:</b> {{productModel.Fabric2}}</p>
+                    <p [hidden]="!productModel.Fabric3"><b>{{getLabel('ProductDetail.Fabric3.Label')}}:</b> {{productModel.Fabric3}}</p>
                     <p>
-                        <b>Colors:</b>
+                        <b>{{getLabel('ProductDetail.Colors.Label')}}:</b>
                         <span *ngFor="let color of this.productModel.ColorData">
                         {{color.text}},
                     </span>
@@ -74,6 +74,6 @@
         </ion-list>
     </div>
     <div *ngIf="!isShowProductDetail">
-        No selected product
+        {{getLabel('ProductDetail.No.Result')}}
     </div>
 </ion-content>

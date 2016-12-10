@@ -17,13 +17,6 @@ export class CompanyService {
         this.globalService.presentLoading();
         let currentUserId = this.globalService.getCurrentUserId();
         let apiCall = this.api.get("Customer?UserId=" + currentUserId).map(res => res.json());
-
-        apiCall.subscribe(data => {
-            this.globalService.dismissLoading();
-        },
-            err => {
-                this.globalService.dismissLoading();
-            });
         return apiCall;
     };
 
@@ -43,7 +36,7 @@ export class CompanyService {
     }
 
     getCompanyById(companyId) {
-        this.globalService.presentLoading();
+       
         let apiCall = this.api.get("Customer/" + companyId).map(res => res.json());
         return apiCall;
     }

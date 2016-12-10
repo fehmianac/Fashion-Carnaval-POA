@@ -14,9 +14,12 @@
 </ion-header>
 
 <ion-content class="card-background-page">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-card *ngFor="let company of filteredCustomerList">
     <ion-item>
-       <ion-icon ios="ios-people" md="md-people" item-left large></ion-icon>
+      <ion-icon ios="ios-people" md="md-people" item-left large></ion-icon>
       <button ion-button icon-left clear item-right (click)="openCustomerForm(company.Id)">
       <ion-icon ios="ios-create" md="md-create"></ion-icon> {{getLabel('Common.EditButton.Label')}}
     </button>
@@ -27,4 +30,7 @@
       </div>
     </ion-item>
   </ion-card>
+  <div padding [hidden]="filteredCustomerList.length > 0">
+    {{getLabel("CustomerList.No.Result")}}
+  </div>
 </ion-content>

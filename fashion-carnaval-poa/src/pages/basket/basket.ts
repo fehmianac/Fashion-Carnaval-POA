@@ -5,6 +5,7 @@ import { GlobalVariables } from '../../providers/global-variables'
 import { BasePage } from '../base-page'
 import { OrderCompletedPage } from '../order/order-completed'
 import { BasketService } from '../../services/basket-service'
+import { CompanyService } from '../../services/company-service'
 import { UpdateProductInBasket } from './update-product'
 import { HomePage } from '../home/home'
 
@@ -17,10 +18,33 @@ import { HomePage } from '../home/home'
 export class BasketPage extends BasePage {
 
     basketData = null;
+    today = null;
+    endDate = null;
+    currentCustomer = {};
     pet: string = "puppies";
-    constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public basketService: BasketService) {
+    constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public basketService: BasketService, public companyService: CompanyService) {
         super(multiLanguage, globalVariables);
         this.basketData = this.basketService.getBasketData();
+
+        let date = new Date();
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+        this.today = year + '-' + month + '-' + day;
+        if (this.basketData.shippingDateStart == "") {
+            this.basketData.shippingDateStart = this.today;
+        }
+
+        let year1 = date.getFullYear() + 2;
+        let month1 = date.getMonth() + 1;
+        let day1 = date.getDate();
+        this.endDate = year1 + '-' + month1 + '-' + day1;
+
+        this.companyService.getCompanyById(this.basketData.customerId).subscribe(data => {
+            this.currentCustomer = data;
+        }, error => {
+
+        });
     }
 
     removeFromBasket(product) {
@@ -45,6 +69,7 @@ export class BasketPage extends BasePage {
                 this.basketService.clearBasket();
                 let navCtrl = this.navCtrl;
                 this.globalVariables.showAlert("BasketPage.BasketToOrder.Success.Title", "BasketPage.BasketToOrder.Success.Description").then(function () {
+                    this.basketData = null;
                     navCtrl.setRoot(OrderCompletedPage, { orderKey: orderKey })
                 });
             } else {
@@ -63,6 +88,7 @@ export class BasketPage extends BasePage {
 
     clearBasket() {
         this.basketService.clearBasket();
+        this.basketData = null;
         let navCtrl = this.navCtrl;
         this.globalVariables.showAlert("Basket.ClearData.PopUp.Title", "Basket.ClearData.PopUp.Description").then(function () {
             navCtrl.setRoot(HomePage);

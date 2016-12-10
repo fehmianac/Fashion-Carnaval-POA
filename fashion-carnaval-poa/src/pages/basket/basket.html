@@ -8,10 +8,11 @@
     <ion-toolbar no-border-top>
         <ion-segment [(ngModel)]="pet">
             <ion-segment-button value="puppies">
-                Basket Info
+                {{getLabel('ProductDetail.Segment.BasketInfo')}}
             </ion-segment-button>
             <ion-segment-button value="kittens">
-                Product List
+                {{getLabel('ProductDetail.Segment.ProductList')}}
+                <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
             </ion-segment-button>
         </ion-segment>
     </ion-toolbar>
@@ -21,12 +22,25 @@
     <div [ngSwitch]="pet">
         <ion-list *ngSwitchCase="'puppies'">
             <ion-item>
+                <ion-card>
+                    <ion-item>
+                        <ion-icon ios="ios-people" md="md-people" item-left large></ion-icon>
+
+                        <div>
+                            <h2>{{currentCustomer.Name}}</h2>
+                            <p>{{currentCustomer.Addresse}}</p>
+                            <p>{{currentCustomer.City}} / {{currentCustomer.State}}</p>
+                        </div>
+                    </ion-item>
+                </ion-card>
+            </ion-item>
+            <ion-item>
                 <ion-label floating>{{getLabel('BasketPage.ShippingDateStart')}}</ion-label>
-                <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="basketData.shippingDateStart"></ion-datetime>
+                <ion-datetime displayFormat="DD/MM/YYYY" [min]="today" [max]="endDate" [(ngModel)]="basketData.shippingDateStart"></ion-datetime>
             </ion-item>
             <ion-item>
                 <ion-label floating>{{getLabel('BasketPage.ShippingDateEnd')}}</ion-label>
-                <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="basketData.shippingDateEnd"></ion-datetime>
+                <ion-datetime displayFormat="DD/MM/YYYY" [min]="basketData.shippingDateStart" [max]="endDate" [(ngModel)]="basketData.shippingDateEnd"></ion-datetime>
             </ion-item>
             <ion-item>
                 <ion-label floating>{{getLabel('BasketPage.CustomerNote')}}</ion-label>
@@ -45,6 +59,7 @@
                     {{product.size5}}, Size6: {{product.size6}}, Size7: {{product.size7}}, Size8: {{product.size8}} Size9:
                     {{product.size9}}
                 </p>
+
                 <button ion-button icon-left clear item-right (click)="removeFromBasket(product)">
                     <ion-icon ios="ios-remove" md="md-remove"></ion-icon> {{getLabel('Common.DeleteButton.Label')}}
                  </button>
@@ -53,38 +68,9 @@
                 </button>
             </ion-item>
         </ion-list>
-
-        <ion-list *ngSwitchCase="'ducklings'">
-            <ion-item>
-                <ion-thumbnail item-left>
-                    <img src="assets/img/thumbnail-duckling-1.jpg">
-                </ion-thumbnail>
-                <h2>Daffy</h2>
-            </ion-item>
-            <ion-item>
-                <ion-thumbnail item-left>
-                    <img src="assets/img/thumbnail-duckling-2.jpg">
-                </ion-thumbnail>
-                <h2>Huey</h2>
-            </ion-item>
-            <ion-item>
-                <ion-thumbnail item-left>
-                    <img src="assets/img/thumbnail-duckling-3.jpg">
-                </ion-thumbnail>
-                <h2>Dewey</h2>
-            </ion-item>
-            <ion-item>
-                <ion-thumbnail item-left>
-                    <img src="assets/img/thumbnail-duckling-4.jpg">
-                </ion-thumbnail>
-                <h2>Louie</h2>
-            </ion-item>
-        </ion-list>
     </div>
-    <div padding>
-        <button ion-button color="primary" block (click)="completeOrder()">{{getLabel('Basket.CompleteOrder')}}</button>
-    </div>
-    <div padding>
-        <button ion-button color="danger" block (click)="clearBasket()">{{getLabel('Basket.ClearBasker')}}</button>
-    </div>
+    <p padding>
+        <button ion-button color="primary" (click)="completeOrder()" icon-left><ion-icon ios="ios-cash" md="md-cash"></ion-icon> &nbsp; {{getLabel('Basket.CompleteOrder')}}</button>
+        <button ion-button color="danger" (click)="clearBasket()" icon-left><ion-icon ios="ios-trash" md="md-trash"></ion-icon> &nbsp; {{getLabel('Basket.ClearBasker')}}</button>
+    </p>
 </ion-content>

@@ -21,6 +21,14 @@ export class MultiLanguage {
                 return language.value;
             }
         }
+        languageDict.push(
+            {
+                "key": key,
+                "languageKey": "en",
+                "value": key
+            }
+        );
+        this.storage.set("localization", languageDict);
         return key;
     }
 

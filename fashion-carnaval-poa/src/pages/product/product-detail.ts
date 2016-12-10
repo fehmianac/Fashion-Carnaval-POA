@@ -43,7 +43,8 @@ export class ProductDetailPage extends BasePage {
     }
     searchProduct(event: any) {
         let searchKey = event.target.value;
-        if (searchKey.length >= 3) {
+        if (searchKey != null && searchKey.length >= 3) {
+            this.globalVariables.presentLoading();
             this.productService.searchProduct(searchKey).subscribe(data => {
                 this.isShowProductDetail = true;
                 let colorData = [];
@@ -97,7 +98,14 @@ export class ProductDetailPage extends BasePage {
                         }
                     }
                 }
-            });
+                this.globalVariables.dismissLoading();
+            },
+                err => {
+                    this.globalVariables.dismissLoading();
+                });
+        } else {
+            this.productModel = { ColorData: [], Fabric1: "", Fabric2: "", Fabric3: "" };
+            this.isShowProductDetail = false;
         }
 
     }

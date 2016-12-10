@@ -28,6 +28,10 @@ export class UpdateProductInBasket extends BasePage {
     }
 
     getSizeValue(index) {
+        if (index == null)
+            return 0;
+        if (this.currentProduct == null)
+            return 0;
         return this.currentProduct["size" + index];
     }
 

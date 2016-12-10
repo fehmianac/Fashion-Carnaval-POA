@@ -19,13 +19,6 @@ export class ProductService {
         this.globalService.presentLoading();
         let currentPriceTypeId = this.globalService.getCCurrentUserPriceTypeId();
         let apiCall = this.api.get("/Product?manufactureCode=" + searchKey + "&PriceTypeId=" + currentPriceTypeId).map(res => res.json());
-
-        apiCall.subscribe(data => {
-            this.globalService.dismissLoading();
-        },
-            err => {
-                this.globalService.dismissLoading();
-            });
         return apiCall;
     };
 }
