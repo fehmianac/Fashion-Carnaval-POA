@@ -4,6 +4,7 @@ import { CompanyService } from './company-service'
 import { ProductService } from './product-service'
 import { UserService } from './user-service'
 import { BasketService } from './basket-service'
+import { OrderService } from './order-service'
 
 export {
     BrandServices,
@@ -11,7 +12,8 @@ export {
     CompanyService,
     ProductService,
     UserService,
-    BasketService
+    BasketService,
+    OrderService
 };
 
 export const Services: any[] = [
@@ -20,5 +22,6 @@ export const Services: any[] = [
     CompanyService,
     ProductService,
     UserService,
-    BasketService
+    BasketService,
+    OrderService
 ]
