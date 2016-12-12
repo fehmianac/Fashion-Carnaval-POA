@@ -7,12 +7,14 @@
     </ion-navbar>
     <ion-toolbar no-border-top>
         <ion-segment [(ngModel)]="pet">
+            <ion-segment-button value="customerDetail">
+                {{getLabel('Basket.Segment.CustomerDetail')}}
+            </ion-segment-button>
             <ion-segment-button value="puppies">
                 {{getLabel('ProductDetail.Segment.BasketInfo')}}
             </ion-segment-button>
             <ion-segment-button value="kittens">
                 {{getLabel('ProductDetail.Segment.ProductList')}}
-                <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
             </ion-segment-button>
         </ion-segment>
     </ion-toolbar>
@@ -20,20 +22,20 @@
 
 <ion-content class="card-background-page">
     <div [ngSwitch]="pet">
+        <ion-list *ngSwitchCase="'customerDetail'">
+            <ion-card>
+                <ion-item>
+                    <ion-icon ios="ios-people" md="md-people" item-left large></ion-icon>
+                    <div>
+                        <h2>{{currentCustomer.Name}}</h2>
+                        <p>{{currentCustomer.Addresse}}</p>
+                        <p>{{currentCustomer.City}} / {{currentCustomer.State}}</p>
+                    </div>
+                </ion-item>
+            </ion-card>
+        </ion-list>
         <ion-list *ngSwitchCase="'puppies'">
-            <ion-item>
-                <ion-card>
-                    <ion-item>
-                        <ion-icon ios="ios-people" md="md-people" item-left large></ion-icon>
 
-                        <div>
-                            <h2>{{currentCustomer.Name}}</h2>
-                            <p>{{currentCustomer.Addresse}}</p>
-                            <p>{{currentCustomer.City}} / {{currentCustomer.State}}</p>
-                        </div>
-                    </ion-item>
-                </ion-card>
-            </ion-item>
             <ion-item>
                 <ion-label floating>{{getLabel('BasketPage.ShippingDateStart')}}</ion-label>
                 <ion-datetime displayFormat="DD/MM/YYYY" [min]="today" [max]="endDate" [(ngModel)]="basketData.shippingDateStart"></ion-datetime>
@@ -70,7 +72,7 @@
         </ion-list>
     </div>
     <p padding>
-        <button ion-button color="primary" (click)="completeOrder()" icon-left><ion-icon ios="ios-cash" md="md-cash"></ion-icon> &nbsp; {{getLabel('Basket.CompleteOrder')}}</button>
         <button ion-button color="danger" (click)="clearBasket()" icon-left><ion-icon ios="ios-trash" md="md-trash"></ion-icon> &nbsp; {{getLabel('Basket.ClearBasker')}}</button>
+        <button ion-button color="primary" (click)="completeOrder()" icon-left><ion-icon ios="ios-cash" md="md-cash"></ion-icon> &nbsp; {{getLabel('Basket.CompleteOrder')}}</button>
     </p>
 </ion-content>

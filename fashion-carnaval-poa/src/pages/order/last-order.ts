@@ -16,9 +16,9 @@ export class LastOrderPage extends BasePage {
     orderList = [];
     filteredOrderList = [];
     orderStatus = {
-        "0": "Waiting",
-        "1": "Approved",
-        "2": "Canceled"
+        "0": this.getLabel("OrderStatus.Waiting"),
+        "1": this.getLabel("OrderStatus.Approved"),
+        "2": this.getLabel("OrderStatus.Canceled")
     }
     constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public orderService: OrderService) {
         super(multiLanguage, globalVariables);
@@ -27,7 +27,8 @@ export class LastOrderPage extends BasePage {
             let length = data.length;
             for (let i = 0; i < length; i++) {
                 let currentOrder = data[i];
-                this.orderList.push({ "Id": currentOrder.Id, "Status": currentOrder.Status, "Name": "Deneme1", "City": "İstanbul", CreatedDate: currentOrder.CreatedDate });
+                currentOrder.StatusText = this.orderStatus[currentOrder.StatuId.toString()];
+                this.orderList.push(currentOrder);
             }
             this.globalVariables.dismissLoading();
         }, err => {
@@ -37,7 +38,28 @@ export class LastOrderPage extends BasePage {
     }
 
     searchLastOrder(event: any) {
+        let searchKey = event.target.value;
+        if (searchKey == null) {
+            this.filteredOrderList = this.orderList;
+            return;
+        }
 
+        let tempOrderList = [];
+        let length = this.orderList.length;
+        for (let i = 0; i < length; i++) {
+            let currentOrder = this.orderList[i];
+            if (currentOrder.CustomerBasicDto.Name.toLowerCase().indexOf(searchKey.toLowerCase()) > -1) {
+                tempOrderList.push(currentOrder);
+                continue;
+            }
+            let statusText = this.orderStatus[currentOrder.StatuId.toString()];
+            if (statusText.toLowerCase().indexOf(searchKey.toLowerCase()) > -1) {
+                tempOrderList.push(currentOrder);
+                continue;
+            }
+
+        }
+        this.filteredOrderList = tempOrderList;
     }
 
     getOrderDate(order) {
@@ -47,7 +69,7 @@ export class LastOrderPage extends BasePage {
         let day = date.getDate();
         return day + "-" + month + "-" + year;
     }
-    openOrderDetail(orderId: string) {
-        this.navCtrl.push(OrderDetailPage, { orderId: orderId });
+    openOrderDetail(order) {
+        this.navCtrl.push(OrderDetailPage, { order: order });
     }
 }

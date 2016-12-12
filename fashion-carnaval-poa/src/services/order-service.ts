@@ -17,12 +17,17 @@ export class OrderService {
 
     getOrderList() {
         let currentUserId = this.globalService.getCurrentUserId();
-        let apiCall = this.api.get("/Order?UserId=" + currentUserId).map(res => res.json());
+        let apiCall = this.api.get("Order?UserId=" + currentUserId).map(res => res.json());
         return apiCall;
     };
 
     getOrderDetailById(orderId) {
-        let apiCall = this.api.get("/Order?orderId=" + orderId).map(res => res.json());
+        let apiCall = this.api.get("Order?orderId=" + orderId).map(res => res.json());
+        return apiCall;
+    };
+
+    updateOrder(order) {
+        let apiCall = this.api.post("Order", order).map(res => res.json());
         return apiCall;
     };
 }

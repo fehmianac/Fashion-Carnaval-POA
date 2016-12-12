@@ -1,25 +1,77 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
+    <ion-navbar>
+        <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{getLabel('OrderDetail.Title')}}</ion-title>
-  </ion-navbar>
+        <ion-title>{{getLabel('OrderDetail.Title')}}</ion-title>
+    </ion-navbar>
+    <ion-toolbar no-border-top>
+        <ion-segment [(ngModel)]="pet">
+            <ion-segment-button value="customerDetail">
+                {{getLabel('OrderDetail.Segment.CustomerDetail')}}
+            </ion-segment-button>
+            <ion-segment-button value="puppies">
+                {{getLabel('OrderDetail.Segment.OrderInfo')}}
+            </ion-segment-button>
+            <ion-segment-button value="kittens">
+                {{getLabel('OrderDetail.Segment.ProductList')}}
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content class="card-background-page">
-  <ion-row>
-    <ion-col>
-      <strong>Product</strong>
-    </ion-col>
-    <ion-col>
-      <strong>Payment Date</strong>
-    </ion-col>
-    <ion-col>
-      <strong>Status</strong>
-    </ion-col>
-    <ion-col>
-      <strong>Status</strong>
-    </ion-col>
-  </ion-row>
+    <div [ngSwitch]="pet">
+        <ion-list *ngSwitchCase="'customerDetail'">
+            <ion-card>
+                <ion-item>
+                    <ion-icon ios="ios-people" md="md-people" item-left large></ion-icon>
+                    <div>
+                        <h2>{{currentCustomer.Name}}</h2>
+                        <p>{{currentCustomer.Addresse}}</p>
+                        <p>{{currentCustomer.City}} / {{currentCustomer.State}}</p>
+                    </div>
+                </ion-item>
+            </ion-card>
+        </ion-list>
+        <ion-list *ngSwitchCase="'puppies'">
+
+            <ion-item>
+                <ion-label floating>{{getLabel('BasketPage.ShippingDateStart')}}</ion-label>
+                <ion-datetime displayFormat="DD/MM/YYYY" [min]="today" [max]="endDate" [(ngModel)]="orderData.ShipmentStartDate"></ion-datetime>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>{{getLabel('BasketPage.ShippingDateEnd')}}</ion-label>
+                <ion-datetime displayFormat="DD/MM/YYYY" [min]="orderData.ShippingDateStart" [max]="endDate" [(ngModel)]="orderData.ShipmentEndDate"></ion-datetime>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>{{getLabel('BasketPage.CustomerNote')}}</ion-label>
+                <ion-textarea [(ngModel)]="orderData.CustomerNote">></ion-textarea>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>{{getLabel('BasketPage.AdminNote')}}</ion-label>
+                <ion-textarea [(ngModel)]="orderData.AdminNote">></ion-textarea>
+            </ion-item>
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'kittens'">
+            <ion-item *ngFor="let product of orderData.ProductList">
+                <h1> {{product.OriginalCode}} - {{product.Color}}</h1>
+                <p> Size1: {{product.Size1}}, Size2: {{product.Size2}}, Size3: {{product.Size3}}, Size4: {{product.Size4}} Size5:
+                    {{product.Size5}}, Size6: {{product.Size6}}, Size7: {{product.Size7}}, Size8: {{product.Size8}} Size9:
+                    {{product.Size9}}
+                </p>
+
+                <button ion-button icon-left clear item-right (click)="removeFromOrder(product)">
+                    <ion-icon ios="ios-remove" md="md-remove"></ion-icon> {{getLabel('Common.DeleteButton.Label')}}
+                 </button>
+                <button ion-button icon-left clear item-right (click)="edit(product)">
+                    <ion-icon ios="ios-create" md="md-create"></ion-icon> {{getLabel('Common.EditButton.Label')}}
+                </button>
+            </ion-item>
+        </ion-list>
+    </div>
+    <p padding>
+        <button ion-button color="primary" (click)="updateOrder()" icon-left><ion-icon ios="ios-cash" md="md-cash"></ion-icon> &nbsp; {{getLabel('OrderDetail.UpdateOrder')}}</button>
+    </p>
 </ion-content>

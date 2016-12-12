@@ -164,8 +164,40 @@ export class MultiLanguage {
                 "key": "Common.DeleteButton.Label",
                 "languageKey": "en",
                 "value": "Delete"
+            },
+            {
+                "key": "Common.DetailButton.Label",
+                "languageKey": "en",
+                "value": "Detail"
+            },
+            {
+                "key": "Basket.CompleteOrder",
+                "languageKey": "en",
+                "value": "Complete Order"
+            },
+            {
+                "key": "Basket.ClearBasker",
+                "languageKey": "en",
+                "value": "Clear Order"
+            },
+            {
+                "key": "OrderDetail.Segment.CustomerDetail",
+                "languageKey": "en",
+                "value": "Customer Info"
+            },
+            {
+                "key": "OrderDetail.Segment.OrderInfo",
+                "languageKey": "en",
+                "value": "Order Info"
+            },
+            {
+                "key": "OrderDetail.Segment.ProductList",
+                "languageKey": "en",
+                "value": "Product List"
             }
         );
+        //OrderDetail.Segment.CustomerDetail
+        //Common.DetailButton.Label
         //TODO call api reload
         this.storage.set("localization", languageDict);
 
