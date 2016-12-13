@@ -145,4 +145,12 @@ export class ProductDetailPage extends BasePage {
         this.basketCount = this.basketService.getBasketProductCount();
         this.globalVariables.showAlert(this.getLabel("Popup.AddToBasket.Title"), this.getLabel("Popup.AddToBasket.Description"));
     }
+
+    getSizeValue(colorData, index) {
+        if (index == null)
+            return 0;
+        if (colorData == null)
+            return 0;
+        return colorData["size" + index];
+    }
 }
