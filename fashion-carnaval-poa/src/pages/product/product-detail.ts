@@ -1,3 +1,4 @@
+import { UpdateProductInBasket } from '../basket/update-product';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { MultiLanguage } from '../../providers/multi-language'
@@ -19,13 +20,14 @@ export class ProductDetailPage extends BasePage {
     productSearchKey = "";
     productModel = { ColorData: [], Fabric1: "", Fabric2: "", Fabric3: "" };
     basketCount = 0;
+    sizeArray = [];
     constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public productService: ProductService, public basketService: BasketService) {
         super(multiLanguage, globalVariables);
         this.basketCount = this.basketService.getBasketProductCount();
+        this.sizeArray = [];
     }
 
-    getColorDataFromText(colorText: string) {
-
+    getColorDataFromText(colorText: string, product) {
         let colorDataPattern = {
             text: colorText,
             color: colorText,
@@ -39,6 +41,19 @@ export class ProductDetailPage extends BasePage {
             size8: 0,
             size9: 0
         };
+
+        for (let i = 1; i <= 9; i++) {
+            let size = "Size" + i;
+            let sizeSmall = "size" + i;
+            if (product[size] != null && product[size] != "") {
+                colorDataPattern[sizeSmall] = 0;
+                if (this.sizeArray.length < i) {
+                    this.sizeArray.push(i);
+                }
+            } else {
+                colorDataPattern[sizeSmall] = null;
+            }
+        }
         return colorDataPattern;
     }
     searchProduct(event: any) {
@@ -48,33 +63,34 @@ export class ProductDetailPage extends BasePage {
             this.productService.searchProduct(searchKey).subscribe(data => {
                 this.isShowProductDetail = true;
                 let colorData = [];
+                this.sizeArray = [];
                 //TODO color mapping 
                 if (data.ColorText1 != undefined && data.ColorText1 != "") {
-                    let colorDataItem = this.getColorDataFromText(data.ColorText1);
+                    let colorDataItem = this.getColorDataFromText(data.ColorText1, data);
                     colorData.push(colorDataItem);
                 }
                 if (data.ColorText2 != undefined && data.ColorText2 != "") {
-                    let colorDataItem = this.getColorDataFromText(data.ColorText2);
+                    let colorDataItem = this.getColorDataFromText(data.ColorText2, data);
                     colorData.push(colorDataItem);
                 }
                 if (data.ColorText3 != undefined && data.ColorText3 != "") {
-                    let colorDataItem = this.getColorDataFromText(data.ColorText3);
+                    let colorDataItem = this.getColorDataFromText(data.ColorText3, data);
                     colorData.push(colorDataItem);
                 }
                 if (data.ColorText4 != undefined && data.ColorText4 != "") {
-                    let colorDataItem = this.getColorDataFromText(data.ColorText4);
+                    let colorDataItem = this.getColorDataFromText(data.ColorText4, data);
                     colorData.push(colorDataItem);
                 }
                 if (data.ColorText5 != undefined && data.ColorText5 != "") {
-                    let colorDataItem = this.getColorDataFromText(data.ColorText5);
+                    let colorDataItem = this.getColorDataFromText(data.ColorText5, data);
                     colorData.push(colorDataItem);
                 }
                 if (data.ColorText6 != undefined && data.ColorText6 != "") {
-                    let colorDataItem = this.getColorDataFromText(data.ColorText6);
+                    let colorDataItem = this.getColorDataFromText(data.ColorText6, data);
                     colorData.push(colorDataItem);
                 }
                 if (data.ColorText7 != undefined && data.ColorText7 != "") {
-                    let colorDataItem = this.getColorDataFromText(data.ColorText7);
+                    let colorDataItem = this.getColorDataFromText(data.ColorText7, data);
                     colorData.push(colorDataItem);
                 }
                 this.productModel = data;
@@ -107,8 +123,8 @@ export class ProductDetailPage extends BasePage {
             this.productModel = { ColorData: [], Fabric1: "", Fabric2: "", Fabric3: "" };
             this.isShowProductDetail = false;
         }
-
     }
+
     changedValue(event, colorData, index) {
         let size = "size" + index;
         if (event != "") {

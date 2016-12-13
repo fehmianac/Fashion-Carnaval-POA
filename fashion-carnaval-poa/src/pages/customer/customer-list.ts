@@ -6,6 +6,7 @@ import { BasePage } from '../base-page'
 import { CustomerFormPage } from './customer-form'
 import { ProductDetailPage } from '../product/product-detail'
 import { CompanyService } from '../../services/company-service'
+import { BasketService } from '../../services/basket-service'
 
 @Component({
     selector: 'customer-list',
@@ -18,7 +19,7 @@ export class CustomerListPage extends BasePage {
     customerList = [];
     filteredCustomerList = [];
 
-    constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public companyService: CompanyService) {
+    constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public companyService: CompanyService, public basketService: BasketService) {
         super(multiLanguage, globalVariables);
 
         this.doRefresh(null);
@@ -112,7 +113,12 @@ export class CustomerListPage extends BasePage {
     }
 
     selectCompany(companyId) {
+        let lastCustomerId = this.globalVariables.getCurrentCustomerId();
+        let clearBasketData = lastCustomerId != companyId;
         this.globalVariables.setCurrentCustomerId(companyId);
+        if (clearBasketData) {
+            this.basketService.clearBasket();
+        }
         let navCtrl = this.navCtrl;
         setTimeout(function () {
             navCtrl.setRoot(ProductDetailPage);

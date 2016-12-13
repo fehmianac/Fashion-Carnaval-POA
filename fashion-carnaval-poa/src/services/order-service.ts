@@ -27,6 +27,7 @@ export class OrderService {
     };
 
     updateOrder(order) {
+        console.log(JSON.stringify(order));
         let apiCall = this.api.post("Order", order).map(res => res.json());
         return apiCall;
     };

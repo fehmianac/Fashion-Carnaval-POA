@@ -69,7 +69,7 @@ export class BasketPage extends BasePage {
                 this.basketService.clearBasket();
                 let navCtrl = this.navCtrl;
                 this.globalVariables.showAlert("BasketPage.BasketToOrder.Success.Title", "BasketPage.BasketToOrder.Success.Description").then(function () {
-                    this.basketData = null;
+
                     navCtrl.setRoot(OrderCompletedPage, { orderKey: orderKey })
                 });
             } else {
@@ -88,10 +88,29 @@ export class BasketPage extends BasePage {
 
     clearBasket() {
         this.basketService.clearBasket();
-        this.basketData = null;
+
         let navCtrl = this.navCtrl;
         this.globalVariables.showAlert("Basket.ClearData.PopUp.Title", "Basket.ClearData.PopUp.Description").then(function () {
             navCtrl.setRoot(HomePage);
+
         });
+    }
+
+    getSizeValueLabel(product) {
+        let result = "";
+        for (let i = 1; i <= 9; i++) {
+            let size = "size" + i;
+            let value = product[size];
+            if ((value != null && value != "") || value == 0) {
+                result += " Size " + i;
+                result += ": ";
+                result += value;
+                if (i < 9) {
+                    result += ", ";
+                }
+            }
+
+        }
+        return result;
     }
 }

@@ -19,12 +19,23 @@ export class UpdateProductInBasket extends BasePage {
     currentProduct = null;
     color = null;
     manufactureCode = null;
+    sizeArray = [];
+    
     constructor(public navCtrl: NavController, public params: NavParams, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public basketService: BasketService) {
         super(multiLanguage, globalVariables);
         this.basketData = this.basketService.getBasketData();
         this.manufactureCode = this.params.get("manufactureCode");
         this.color = this.params.get("color");
         this.currentProduct = this.basketService.findProductInBasket(this.color, this.manufactureCode);
+        for (let i = 1; i <= 9; i++) {
+            let size = "size" + i;
+            let value = this.currentProduct[size];
+            if ((value != null && value != "") || value == 0) {
+                if (this.sizeArray.length < i) {
+                    this.sizeArray.push(i);
+                }
+            }
+        }
     }
 
     getSizeValue(index) {

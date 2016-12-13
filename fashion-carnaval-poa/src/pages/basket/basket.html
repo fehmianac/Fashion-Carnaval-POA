@@ -57,9 +57,7 @@
         <ion-list *ngSwitchCase="'kittens'">
             <ion-item *ngFor="let product of basketData.productList">
                 <h1> {{product.manufactureCode}} - {{product.color}}</h1>
-                <p> Size1: {{product.size1}}, Size2: {{product.size2}}, Size3: {{product.size3}}, Size4: {{product.size4}} Size5:
-                    {{product.size5}}, Size6: {{product.size6}}, Size7: {{product.size7}}, Size8: {{product.size8}} Size9:
-                    {{product.size9}}
+                <p> {{getSizeValueLabel(product)}}
                 </p>
 
                 <button ion-button icon-left clear item-right (click)="removeFromBasket(product)">

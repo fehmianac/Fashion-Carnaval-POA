@@ -29,8 +29,6 @@ export class BasketService {
             this.basketData = basketData;
         }
     }
-
-
     getBasketProductCount() {
         return this.basketData.productList.length;
     }
@@ -134,9 +132,23 @@ export class BasketService {
                 "OrderId": basketData.orderKey
             });
         }
+        console.log(JSON.stringify(orderModel));
         return this.api.post("/Basket", orderModel);
     }
     clearBasket() {
         this.storage.delete("basket");
+        let basketData = {
+            productList: [],
+            orderKey: this.globalService.getGuid(),
+            shippingDateStart: "",
+            shippingDateEnd: "",
+            customerNote: "",
+            adminNote: "",
+            status: 0,
+            userId: this.globalService.getCurrentUserId(),
+            customerId: this.globalService.getCurrentCustomerId()
+        };
+        this.basketData = basketData;
+        this.saveBasketData(basketData);
     }
 }

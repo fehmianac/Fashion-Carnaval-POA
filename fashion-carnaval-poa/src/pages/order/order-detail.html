@@ -57,9 +57,7 @@
         <ion-list *ngSwitchCase="'kittens'">
             <ion-item *ngFor="let product of orderData.ProductList">
                 <h1> {{product.OriginalCode}} - {{product.Color}}</h1>
-                <p> Size1: {{product.Size1}}, Size2: {{product.Size2}}, Size3: {{product.Size3}}, Size4: {{product.Size4}} Size5:
-                    {{product.Size5}}, Size6: {{product.Size6}}, Size7: {{product.Size7}}, Size8: {{product.Size8}} Size9:
-                    {{product.Size9}}
+                <p>  {{getSizeValueLabel(product)}}
                 </p>
 
                 <button ion-button icon-left clear item-right (click)="removeFromOrder(product)">
