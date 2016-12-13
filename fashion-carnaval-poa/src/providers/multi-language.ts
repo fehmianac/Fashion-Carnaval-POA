@@ -54,12 +54,12 @@ export class MultiLanguage {
     }
 
     reloadLanguageKeys() {
-        let languageDict = [];
-        languageDict.push({
-            "key": "deneme",
-            "languageKey": "en",
-            "value": "label olarak ne yazaca??"
-        },
+        let languageDict = [
+            {
+                "key": "deneme",
+                "languageKey": "en",
+                "value": "label olarak ne yazaca??"
+            },
             {
                 "key": "NavigationBar.Title",
                 "languageKey": "en",
@@ -194,11 +194,218 @@ export class MultiLanguage {
                 "key": "OrderDetail.Segment.ProductList",
                 "languageKey": "en",
                 "value": "Product List"
+            },
+            {
+                "key": "Common.LoadingLabel",
+                "languageKey": "en",
+                "value": "Loading"
+            },
+            {
+                "key": "OrderStatus.Waiting",
+                "languageKey": "en",
+                "value": "Waiting"
+            },
+            {
+                "key": "OrderStatus.Approved",
+                "languageKey": "en",
+                "value": "Approved"
+            },
+            {
+                "key": "OrderStatus.Canceled",
+                "languageKey": "en",
+                "value": "Canceled"
+            },
+            {
+                "key": "LastOrder.Title",
+                "languageKey": "en",
+                "value": "Order List"
+            },
+            {
+                "key": "BasketPage.ShippingDateStart",
+                "languageKey": "en",
+                "value": "Shipping Date Start"
+            },
+            {
+                "key": "BasketPage.ShippingDateEnd",
+                "languageKey": "en",
+                "value": "Shipping Date Start"
+            },
+            {
+                "key": "BasketPage.CustomerNote",
+                "languageKey": "en",
+                "value": "Customer Note"
+            },
+            {
+                "key": "BasketPage.AdminNote",
+                "languageKey": "en",
+                "value": "Admin Note"
+            },
+            {
+                "key": "OrderDetail.UpdateOrder",
+                "languageKey": "en",
+                "value": "Update Order"
+            },
+            {
+                "key": "Common.Alert.Error.Title",
+                "languageKey": "en",
+                "value": "Error!!!"
+            },
+            {
+                "key": "Common.Alert.Error.Description",
+                "languageKey": "en",
+                "value": "Error. Please try later."
+            },
+            {
+                "key": "Basket.Title",
+                "languageKey": "en",
+                "value": "Shoping Cart"
+            },
+            {
+                "key": "Basket.Segment.CustomerDetail",
+                "languageKey": "en",
+                "value": "Customer Detail"
+            },
+            {
+                "key": "ProductDetail.Segment.BasketInfo",
+                "languageKey": "en",
+                "value": "Basker Info"
+            },
+            {
+                "key": "ProductDetail.Segment.ProductList",
+                "languageKey": "en",
+                "value": "Product List"
+            },
+            {
+                "key": "CustomerList.No.Result",
+                "languageKey": "en",
+                "value": "There is no customer"
+            },
+            {
+                "key": "CustomerForm.Title",
+                "languageKey": "en",
+                "value": "Customer Form"
+            },
+            {
+                "key": "CustomerForm.Item.Name",
+                "languageKey": "en",
+                "value": "Name"
+            },
+            {
+                "key": "CustomerForm.Item.Email",
+                "languageKey": "en",
+                "value": "Email"
+            },
+            {
+                "key": "CustomerForm.Item.CC",
+                "languageKey": "en",
+                "value": "CC"
+            },
+            {
+                "key": "CustomerForm.Item.Phone",
+                "languageKey": "en",
+                "value": "Phone"
+            },
+            {
+                "key": "CustomerForm.Item.Fax",
+                "languageKey": "en",
+                "value": "Fax"
+            },
+            {
+                "key": "CustomerForm.Item.Addresse",
+                "languageKey": "en",
+                "value": "Addresse"
+            },
+            {
+                "key": "CustomerForm.Item.City",
+                "languageKey": "en",
+                "value": "City"
+            },
+            {
+                "key": "CustomerForm.Item.State",
+                "languageKey": "en",
+                "value": "State"
+            },
+            {
+                "key": "CustomerForm.Item.ZipCode",
+                "languageKey": "en",
+                "value": "ZipCode"
+            },
+            {
+                "key": "CustomerForm.Item.BillToDetail",
+                "languageKey": "en",
+                "value": "Bill To Detail"
+            },
+            {
+                "key": "CustomerForm.Item.SpecialWants",
+                "languageKey": "en",
+                "value": "Special Wants"
+            },
+            {
+                "key": "CustomerForm.Item.Notes",
+                "languageKey": "en",
+                "value": "Notes"
+            },
+            {
+                "key": "CustomerForm.SaveButton",
+                "languageKey": "en",
+                "value": "Save"
+            },
+            {
+                "key": "ProductDetail.No.Result",
+                "languageKey": "en",
+                "value": "Product Not Found"
+            },
+            {
+                "key": "ProductDetail.Title",
+                "languageKey": "en",
+                "value": "Product Detail"
+            },
+            {
+                "key": "ProductDetail.Segment.Detail",
+                "languageKey": "en",
+                "value": "Detail"
+            },
+            {
+                "key": "ProductDetail.Segment.SizeList",
+                "languageKey": "en",
+                "value": "Size List"
+            },
+            {
+                "key": "ProductDetail.Group.Label",
+                "languageKey": "en",
+                "value": "Group"
+            },
+            {
+                "key": "ProductDetail.Code.Label",
+                "languageKey": "en",
+                "value": "Code"
+            },
+            {
+                "key": "ProductDetail.Price.Label",
+                "languageKey": "en",
+                "value": "Price"
+            },
+            {
+                "key": "ProductDetail.Fabric1.Label",
+                "languageKey": "en",
+                "value": "Fabric 1"
+            },
+            {
+                "key": "ProductDetail.Fabric2.Label",
+                "languageKey": "en",
+                "value": "Fabric 2"
+            },
+            {
+                "key": "ProductDetail.Fabric3.Label",
+                "languageKey": "en",
+                "value": "Fabric 3"
+            },
+            {
+                "key": "ProductDetail.Colors.Label",
+                "languageKey": "en",
+                "value": "Colors"
             }
-        );
-        //OrderDetail.Segment.CustomerDetail
-        //Common.DetailButton.Label
-        //TODO call api reload
+        ];
         this.storage.set("localization", languageDict);
 
     }
