@@ -26,11 +26,11 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content class="card-background-page">
+<ion-content class="card-background-page" scroll="false" >
     <div [ngSwitch]="pet" *ngIf="isShowProductDetail">
         <ion-list *ngSwitchCase="'puppies'">
             <ion-card>
-                <img src="data:image/png;base64,{{productModel.ModelPicture1}}">
+                <img src="data:image/png;base64,{{productModel.ModelPicture1}}" [style.height]="imgHeight+'px'">
                 <ion-item>
                     <h1><b>{{getLabel('ProductDetail.Group.Label')}}:</b> {{productModel.GroupName}}</h1>
                     <h1><b>{{getLabel('ProductDetail.Code.Label')}}:</b> {{productModel.ManufactureCode}}</h1>
@@ -51,7 +51,7 @@
         <ion-list *ngSwitchCase="'kittens'">
             <div *ngFor="let colorData of productModel.ColorData">
                 <ion-list-header>
-                    <ion-label>{{colorData.text}}</ion-label>
+                    <ion-label><h1>{{colorData.text}}</h1></ion-label>
                 </ion-list-header>
                 <ion-item *ngFor="let index of sizeArray">
                     <ion-label style="margin:0;">

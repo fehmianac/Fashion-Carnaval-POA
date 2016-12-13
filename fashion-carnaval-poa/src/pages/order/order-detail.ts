@@ -78,10 +78,10 @@ export class OrderDetailPage extends BasePage {
 
     getSizeValueLabel(product) {
         let result = "";
-        for (let i = 1; i <= 9; i++) {
+        for (let i = 1; i <= this.globalVariables.getMaxSizeCount(); i++) {
             let size = "Size" + i;
             let value = product[size];
-            if ((value != null && value != "") || value == 0) {
+            if ((value != null && value != "")) {
                 result += " Size " + i;
                 result += ": ";
                 result += value;

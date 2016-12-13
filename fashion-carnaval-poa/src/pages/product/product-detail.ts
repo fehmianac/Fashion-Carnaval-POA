@@ -1,3 +1,4 @@
+import { StartWithSignature } from 'rxjs/operator/startWith';
 import { UpdateProductInBasket } from '../basket/update-product';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
@@ -21,10 +22,15 @@ export class ProductDetailPage extends BasePage {
     productModel = { ColorData: [], Fabric1: "", Fabric2: "", Fabric3: "" };
     basketCount = 0;
     sizeArray = [];
+    height = 0;
+    imgHeight = -300;
+
     constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public productService: ProductService, public basketService: BasketService) {
         super(multiLanguage, globalVariables);
         this.basketCount = this.basketService.getBasketProductCount();
         this.sizeArray = [];
+        this.height = window.screen.height;
+        this.imgHeight = this.imgHeight + window.screen.height;
     }
 
     getColorDataFromText(colorText: string, product) {
@@ -42,7 +48,7 @@ export class ProductDetailPage extends BasePage {
             size9: 0
         };
 
-        for (let i = 1; i <= 9; i++) {
+        for (let i = 1; i <= this.globalVariables.getMaxSizeCount(); i++) {
             let size = "Size" + i;
             let sizeSmall = "size" + i;
             if (product[size] != null && product[size] != "") {
@@ -61,6 +67,7 @@ export class ProductDetailPage extends BasePage {
         if (searchKey != null && searchKey.length >= 3) {
             this.globalVariables.presentLoading();
             this.productService.searchProduct(searchKey).subscribe(data => {
+                this.pet = "puppies";
                 this.isShowProductDetail = true;
                 let colorData = [];
                 this.sizeArray = [];
@@ -144,5 +151,7 @@ export class ProductDetailPage extends BasePage {
         this.basketService.addToBasket(this.productModel);
         this.basketCount = this.basketService.getBasketProductCount();
         this.globalVariables.showAlert(this.getLabel("Popup.AddToBasket.Title"), this.getLabel("Popup.AddToBasket.Description"));
+        this.productModel = { ColorData: [], Fabric1: "", Fabric2: "", Fabric3: "" };
+        this.isShowProductDetail = false;
     }
 }

@@ -110,4 +110,8 @@ export class GlobalVariables {
     dismissLoading() {
         this.loading.dismiss();
     }
+    
+    getMaxSizeCount(){
+        return 8;
+    }
 }

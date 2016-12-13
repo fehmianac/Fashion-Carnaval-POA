@@ -30,7 +30,17 @@ export class BasketService {
         }
     }
     getBasketProductCount() {
-        return this.basketData.productList.length;
+        let count = 0;
+        for (let i = 0; i < this.basketData.productList.length; i++) {
+            for (let j = 1; j <= 9; j++) {
+                let size = "size" + j;
+                let value = this.basketData.productList[i][size];
+                if (value != null && value != "" && value != 0) {
+                    count += parseInt(value);
+                }
+            }
+        }
+        return count;
     }
 
     getBasketData() {
@@ -107,15 +117,15 @@ export class BasketService {
             "StatuId": 1,
             "UserId": basketData.userId,
             "CustomerId": basketData.customerId,
-            "Products": [],
-            Id: basketData.orderKey,
-            CreatedDate: "2016.12.12",
-            LastModifiedDate: "2016.12.12"
+            "ProductList": [],
+            "Id": basketData.orderKey,
+            "CreatedDate": "2016.12.12",
+            "LastModifiedDate": "2016.12.12"
         }
         let length = basketData.productList.length;
         for (let i = 0; i < length; i++) {
             let product = basketData.productList[i];
-            orderModel.Products.push({
+            orderModel.ProductList.push({
                 "Id": product.id,
                 "GroupName": product.groupName,
                 "ManufactureName": product.manufactureCode,
