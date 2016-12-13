@@ -154,4 +154,12 @@ export class ProductDetailPage extends BasePage {
         this.productModel = { ColorData: [], Fabric1: "", Fabric2: "", Fabric3: "" };
         this.isShowProductDetail = false;
     }
+
+    getSizeValue(colorData, index) {
+        if (index == null)
+            return 0;
+        if (colorData == null)
+            return 0;
+        return colorData["size" + index];
+    }
 }
