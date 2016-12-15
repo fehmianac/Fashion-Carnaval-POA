@@ -114,7 +114,7 @@ export class BasketService {
             "ShipmentEndDate": basketData.shippingDateEnd.replace("-", ".").replace("-", "."),
             "CustomerNote": basketData.customerNote,
             "AdminNote": basketData.adminNote,
-            "StatuId": 1,
+            "StatuId": 0,
             "UserId": basketData.userId,
             "CustomerId": basketData.customerId,
             "ProductList": [],

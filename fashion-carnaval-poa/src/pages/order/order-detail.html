@@ -4,6 +4,13 @@
       <ion-icon name="menu"></ion-icon>
     </button>
         <ion-title>{{getLabel('OrderDetail.Title')}}</ion-title>
+
+        <ion-buttons end>
+            <button ion-button (click)="presentActionSheet()">
+                   <ion-icon ios="ios-document" md="md-document"></ion-icon>
+            </button>
+        </ion-buttons>
+
     </ion-navbar>
     <ion-toolbar no-border-top>
         <ion-segment [(ngModel)]="pet">
@@ -57,19 +64,19 @@
         <ion-list *ngSwitchCase="'kittens'">
             <ion-item *ngFor="let product of orderData.ProductList">
                 <h1> {{product.OriginalCode}} - {{product.Color}}</h1>
-                <p>  {{getSizeValueLabel(product)}}
+                <p> {{getSizeValueLabel(product)}}
                 </p>
 
-                <button ion-button icon-left clear item-right (click)="removeFromOrder(product)">
+                <button ion-button icon-left clear item-right (click)="removeFromOrder(product)" [hidden]="orderData.StatuId != 0">
                     <ion-icon ios="ios-remove" md="md-remove"></ion-icon> {{getLabel('Common.DeleteButton.Label')}}
                  </button>
-                <button ion-button icon-left clear item-right (click)="edit(product)">
+                <button ion-button icon-left clear item-right (click)="edit(product)" [hidden]="orderData.StatuId != 0">
                     <ion-icon ios="ios-create" md="md-create"></ion-icon> {{getLabel('Common.EditButton.Label')}}
                 </button>
             </ion-item>
         </ion-list>
     </div>
-    <p padding>
+    <p padding [hidden]="orderData.StatuId != 0">
         <button ion-button color="primary" (click)="updateOrder()" icon-left><ion-icon ios="ios-cash" md="md-cash"></ion-icon> &nbsp; {{getLabel('OrderDetail.UpdateOrder')}}</button>
     </p>
 </ion-content>

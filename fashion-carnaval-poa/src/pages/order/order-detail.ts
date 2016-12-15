@@ -7,6 +7,7 @@ import { BasePage } from '../base-page'
 import { CustomerListPage } from '../customer/customer-list'
 import { OrderService } from '../../services/order-service'
 import { CompanyService } from '../../services/company-service'
+import { ActionSheetController } from 'ionic-angular';
 
 @Component({
     selector: 'order-detail',
@@ -18,10 +19,11 @@ export class OrderDetailPage extends BasePage {
     pet = "puppies";
     currentCustomer = {};
     orderData = {
-        ProductList: []
+        ProductList: [],
+        StatuId: ""
     };
 
-    constructor(public navCtrl: NavController, public params: NavParams, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public orderService: OrderService, public customerService: CompanyService) {
+    constructor(public navCtrl: NavController, public params: NavParams, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public actionSheetCtrl: ActionSheetController, public orderService: OrderService, public customerService: CompanyService) {
         super(multiLanguage, globalVariables);
         let order = params.get("order");
         this.orderData = order;
@@ -78,8 +80,28 @@ export class OrderDetailPage extends BasePage {
 
     getSizeValueLabel(product) {
         let result = "";
+        if (product["Size2"] == null || product["Size2"] == null) {
+            return "STD: " + product["Size1"];
+        }
+        if (product["Size5"] == null || product["Size5"] == "") {
+            let result = "";
+            if (product["Size1"] > 0)
+                result += " Size I: " + product["Size1"];
+
+            if (product["size2"] > 0)
+                result += " Size II: " + product["Size2"];
+
+            if (product["Size3"] > 0)
+                result += " Size III: " + product["Size3"];
+
+            if (product["Size4"] > 0)
+                result += " Size IV: " + product["Size4"];
+
+            return result;
+        }
+
         for (let i = 1; i <= this.globalVariables.getMaxSizeCount(); i++) {
-            let size = "Size" + i;
+            let size = "size" + i;
             let value = product[size];
             if ((value != null && value != "")) {
                 result += " Size " + i;
@@ -94,4 +116,57 @@ export class OrderDetailPage extends BasePage {
         return result;
     }
 
+    presentActionSheet() {
+        let buttons = [
+            {
+                text: 'Send Email',
+                handler: () => {
+                    console.log('Send Email');
+                }
+            }, {
+                text: 'Export PDF ',
+                handler: () => {
+                    console.log('Export PDF');
+                }
+            }, {
+                text: 'Cancel',
+                role: 'cancel',
+                handler: () => {
+                    console.log('Cancel clicked');
+                }
+            }
+        ];
+
+        if (this.orderData.StatuId == "0") {
+            buttons.push({
+                text: 'Send Order To Company',
+                handler: () => {
+                    console.log('Send Order To Company');
+                }
+            });
+
+            buttons.push({
+                text: 'Cancel Order',
+                role: 'destructive',
+                handler: () => {
+                    console.log('Cancel order');
+                }
+            });
+        }
+        if (this.orderData.StatuId == "1") {
+
+            buttons.push({
+                text: 'Cancel Order',
+                role: 'destructive',
+                handler: () => {
+                    console.log('Cancel order');
+                }
+            });
+        }
+        let actionSheet = this.actionSheetCtrl.create({
+            title: 'Select Your Action',
+            buttons: buttons
+        });
+        actionSheet.present();
+    }
 }

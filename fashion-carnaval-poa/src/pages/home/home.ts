@@ -19,7 +19,9 @@ export class HomePage extends BasePage {
     brandList = [];
     currentUserName = "";
     homeImage = "";
-
+    showRoomList = [];
+    currentShowRoom = "4";
+    
     constructor(public navCtrl: NavController,
         public multiLanguage: MultiLanguage,
         public globalVariables: GlobalVariables,
@@ -40,6 +42,11 @@ export class HomePage extends BasePage {
                 let brand = data[i];
                 this.brandList.push({ id: brand.Id, "imageUrl": brand.ImageUrl, "title": brand.Name });
             }
+        });
+
+        this.showRoomList.push({
+            Id: 4,
+            DisplayName: "Los Angeles"
         });
 
     }

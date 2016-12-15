@@ -162,4 +162,27 @@ export class ProductDetailPage extends BasePage {
             return 0;
         return colorData["size" + index];
     }
+
+    getSizeLabel(index) {
+        if (this.sizeArray.length == 4) {
+            switch (index) {
+                case 1: return "Size I";
+                case 2: return "Size II";
+                case 3: return "Size III";
+                case 4: return "Size IV";
+            }
+        }
+        if (this.sizeArray.length == 1) {
+            return "STD";
+        }
+        return "Size " + (index - 1);
+    }
+
+    getPriceLabel(productModel) {
+        if (productModel.Currency == "$") {
+            return "$"+ productModel.Price;
+        }
+
+        return productModel.Price + "" + productModel.Currency;
+    }
 }

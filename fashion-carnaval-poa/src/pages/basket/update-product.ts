@@ -20,14 +20,14 @@ export class UpdateProductInBasket extends BasePage {
     color = null;
     manufactureCode = null;
     sizeArray = [];
-    
+
     constructor(public navCtrl: NavController, public params: NavParams, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public basketService: BasketService) {
         super(multiLanguage, globalVariables);
         this.basketData = this.basketService.getBasketData();
         this.manufactureCode = this.params.get("manufactureCode");
         this.color = this.params.get("color");
         this.currentProduct = this.basketService.findProductInBasket(this.color, this.manufactureCode);
-        for (let i = 1; i <= 9; i++) {
+        for (let i = 1; i <= this.globalVariables.getMaxSizeCount(); i++) {
             let size = "size" + i;
             let value = this.currentProduct[size];
             if ((value != null && value != "") || value == 0) {
@@ -44,6 +44,21 @@ export class UpdateProductInBasket extends BasePage {
         if (this.currentProduct == null)
             return 0;
         return this.currentProduct["size" + index];
+    }
+
+    getSizeLabel(index) {
+        if (this.sizeArray.length == 4) {
+            switch (index) {
+                case 1: return "Size I";
+                case 2: return "Size II";
+                case 3: return "Size III";
+                case 4: return "Size IV";
+            }
+        }
+        if (this.sizeArray.length == 1) {
+            return "STD";
+        }
+        return "Size " + (index - 1);
     }
 
     changedValue(event, index) {

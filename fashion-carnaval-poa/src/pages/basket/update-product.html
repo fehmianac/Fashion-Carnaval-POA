@@ -16,7 +16,7 @@
             <ion-label style="margin:0;">
                 <ion-grid>
                     <ion-row>
-                        <ion-col width-50>Size {{index}}</ion-col>
+                        <ion-col width-50>{{getSizeLabel(index)}}</ion-col>
                         <ion-col width-50>
                             <snippets [value]="getSizeValue(index)" (callback)="changedValue($event,index)"> </snippets>
                         </ion-col>

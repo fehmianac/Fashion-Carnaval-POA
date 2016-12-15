@@ -98,6 +98,27 @@ export class BasketPage extends BasePage {
 
     getSizeValueLabel(product) {
         let result = "";
+
+        if (product["size2"] == null) {
+            return "STD: " + product["size1"];
+        }
+        if (product["size5"] == null) {
+            let result = "";
+            if (product["size1"] > 0)
+                result += " Size I: " + product["size1"];
+
+            if (product["size2"] > 0)
+                result += " Size II: " + product["size2"];
+
+            if (product["size3"] > 0)
+                result += " Size III: " + product["size3"];
+
+            if (product["size4"] > 0)
+                result += " Size IV: " + product["size4"];
+
+            return result;
+        }
+        
         for (let i = 1; i <= this.globalVariables.getMaxSizeCount(); i++) {
             let size = "size" + i;
             let value = product[size];

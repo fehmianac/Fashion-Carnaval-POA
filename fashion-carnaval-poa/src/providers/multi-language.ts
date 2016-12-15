@@ -404,8 +404,15 @@ export class MultiLanguage {
                 "key": "ProductDetail.Colors.Label",
                 "languageKey": "en",
                 "value": "Colors"
+            },
+            {
+                "key": "HomePage.CurrentShowRoom.DropDownList",
+                "languageKey": "en",
+                "value": "Showroom"
             }
         ];
+
+        //HomePage.CurrentShowRoom.DropDownList
         this.storage.set("localization", languageDict);
 
     }
