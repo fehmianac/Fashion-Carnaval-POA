@@ -3,6 +3,7 @@ import { Storage } from './storage'
 import { AlertController } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 import { MultiLanguage } from './multi-language'
+import { Toast } from 'ionic-native';
 /**
  * Storage is generic handler offline data.
  */
@@ -75,6 +76,24 @@ export class GlobalVariables {
         this.showAlert(this.multiLanguage.getLabel("Common.Alert.Success.Title"), this.multiLanguage.getLabel("Common.Alert.Success.Description"));
     }
 
+    showToast(message) {
+        try {
+            Toast.show(message, "short", "top").subscribe(
+                toast => {
+                }
+            ).unsubscribe();
+        } catch (ex) {
+            alert(message);
+        }
+
+    }
+    showErrorToast() {
+        this.showToast(this.multiLanguage.getLabel("Common.Alert.Error.Description"));
+    }
+
+    showSuccessToast() {
+        this.showToast(this.multiLanguage.getLabel("Common.Alert.Success.Description"));
+    }
     showConfirm(callback) {
         let confirm = this.alertCtrl.create({
             title: 'Confirmation',
@@ -110,8 +129,8 @@ export class GlobalVariables {
     dismissLoading() {
         this.loading.dismiss();
     }
-    
-    getMaxSizeCount(){
+
+    getMaxSizeCount() {
         return 8;
     }
 }

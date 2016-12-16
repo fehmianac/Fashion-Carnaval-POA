@@ -1,3 +1,4 @@
+import { ProductDetailPage } from '../product/product-detail';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { MultiLanguage } from '../../providers/multi-language'
@@ -8,6 +9,7 @@ import { BasketService } from '../../services/basket-service'
 import { CompanyService } from '../../services/company-service'
 import { UpdateProductInBasket } from './update-product'
 import { HomePage } from '../home/home'
+import { CustomerFormPage } from '../customer/customer-form'
 
 @Component({
     selector: 'basket',
@@ -23,13 +25,15 @@ export class BasketPage extends BasePage {
     currentCustomer = {};
     pet: string = "customerDetail";
     isBasketEmpty = false;
-    totalPriceInBaset = "0";
 
     constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public basketService: BasketService, public companyService: CompanyService) {
         super(multiLanguage, globalVariables);
+
+    }
+    
+    ionViewWillEnter() {
         this.basketData = this.basketService.getBasketData();
         this.isBasketEmpty = this.basketData.productList.length == 0;
-        this.totalPriceInBaset = this.basketService.getBasketPrice();
         let date = new Date();
         let year = date.getFullYear();
         let month = date.getMonth() + 1;
@@ -136,7 +140,7 @@ export class BasketPage extends BasePage {
             let size = "size" + i;
             let value = product[size];
             if ((value != null && value != "")) {
-                result += " Size " + i;
+                result += " Size " + (i - 1);
                 result += ": ";
                 result += value;
                 if (i < 9) {
@@ -146,5 +150,17 @@ export class BasketPage extends BasePage {
 
         }
         return result;
+    }
+
+    getTotalPriceInBasket() {
+        return this.basketService.getBasketPrice();
+    }
+
+    continueShopping() {
+        this.navCtrl.setRoot(ProductDetailPage);
+    }
+
+    openCustomerForm(customerId) {
+        this.navCtrl.push(CustomerFormPage, { customerId: customerId, fromBasket: true })
     }
 }

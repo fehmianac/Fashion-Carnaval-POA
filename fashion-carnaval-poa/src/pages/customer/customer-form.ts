@@ -4,6 +4,8 @@ import { MultiLanguage } from '../../providers/multi-language'
 import { GlobalVariables } from '../../providers/global-variables'
 import { BasePage } from '../base-page'
 import { CompanyService } from '../../services/company-service'
+import { CustomerListPage } from './customer-list'
+import { BasketPage } from '../basket/basket'
 
 @Component({
     selector: 'customer-form',
@@ -29,16 +31,29 @@ export class CustomerFormPage extends BasePage {
         SpecialWants: "",
         Notes: "",
     };
+    fromBasket = false;
     constructor(public navCtrl: NavController, public params: NavParams, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public companyService: CompanyService) {
         super(multiLanguage, globalVariables);
         let customerId = this.params.get("customerId");
+        this.fromBasket = this.params.get("fromBasket");
         if (customerId != "0" && customerId != undefined && customerId != null) {
             this.getCustomerDetail(customerId);
         }
     }
 
     saveCustomer() {
-        this.companyService.saveCompany(this.customerModel);
+        this.globalVariables.presentLoading();
+        let apiCall = this.companyService.saveCompany(this.customerModel);
+        apiCall.subscribe(data => {
+            this.globalVariables.showSuccessToast();
+            this.globalVariables.dismissLoading();
+            this.navCtrl.pop();
+
+        },
+            err => {
+                this.globalVariables.showErrorAlert();
+                this.globalVariables.dismissLoading();
+            });
     }
 
     getCustomerDetail(customerId) {

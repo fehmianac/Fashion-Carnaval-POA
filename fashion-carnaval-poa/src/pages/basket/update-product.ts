@@ -74,7 +74,7 @@ export class UpdateProductInBasket extends BasePage {
         this.basketService.saveBasketData(this.basketData);
         let navCtrl = this.navCtrl;
         this.globalVariables.showAlert("UpdateProductInBasket.Update.Success.Title", "UpdateProductInBasket.Update.Success.Description").then(function () {
-            navCtrl.setRoot(BasketPage);
+            navCtrl.pop();
         });
 
     }

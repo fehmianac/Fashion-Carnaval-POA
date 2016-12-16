@@ -59,9 +59,9 @@ export class BasketService {
             }
         }
         if (currency == "$") {
-            return '$ ' + price;
+            return '$ ' + price.toFixed(2);
         }
-        return price + " " + currency;
+        return price.toFixed(2) + " " + currency;
     };
 
     getBasketData() {

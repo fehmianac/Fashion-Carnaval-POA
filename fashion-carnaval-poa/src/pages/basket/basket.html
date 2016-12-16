@@ -32,6 +32,9 @@
             <ion-card>
                 <ion-item>
                     <ion-icon ios="ios-people" md="md-people" item-left large></ion-icon>
+                    <button ion-button icon-left clear item-right (click)="openCustomerForm(currentCustomer.Id)">
+      <ion-icon ios="ios-create" md="md-create"></ion-icon> {{getLabel('Common.EditButton.Label')}}
+    </button>
                     <div>
                         <h2>{{currentCustomer.Name}}</h2>
                         <p>{{currentCustomer.Addresse}}</p>
@@ -74,8 +77,13 @@
                 </button>
             </ion-item>
             <ion-item>
+                <p style="float: left;">
+                    <button ion-button icon-left clear item-right (click)="continueShopping()" style="margin:0">
+                    <ion-icon ios="ios-search" md="md-search"></ion-icon> {{getLabel('Basket.ContinueShopping.Label')}}
+                 </button>
+                </p>
                 <p rigth style="float: right;">
-                    <b>Total :</b> {{totalPriceInBaset}}
+                    <b>Total :</b> {{getTotalPriceInBasket()}}
                 </p>
             </ion-item>
             <p padding>

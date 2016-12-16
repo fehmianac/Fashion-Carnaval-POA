@@ -422,6 +422,12 @@ export class MultiLanguage {
                 "languageKey": "en",
                 "value": "Showroom"
             }
+            ,
+            {
+                "key": "Basket.ContinueShopping.Label",
+                "languageKey": "en",
+                "value": "Continue Shopping"
+            }
         ];
         this.storage.set("localization", languageDict);
 

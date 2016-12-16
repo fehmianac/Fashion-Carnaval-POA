@@ -22,17 +22,9 @@ export class CompanyService {
 
 
     saveCompany(companyModel: any) {
-        this.globalService.presentLoading();
         companyModel.UserId = this.globalService.getCurrentUserId();
         let apiCall = this.api.post("Customer", companyModel);
-        apiCall.subscribe(data => {
-            this.globalService.showSuccessAlert();
-            this.globalService.dismissLoading();
-        },
-            err => {
-                this.globalService.showErrorAlert();
-                this.globalService.dismissLoading();
-            });
+        return apiCall;
     }
 
     getCompanyById(companyId) {
