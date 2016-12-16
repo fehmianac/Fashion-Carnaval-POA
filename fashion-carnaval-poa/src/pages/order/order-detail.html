@@ -63,7 +63,7 @@
 
         <ion-list *ngSwitchCase="'kittens'">
             <ion-item *ngFor="let product of orderData.ProductList">
-                <h1> {{product.OriginalCode}} - {{product.Color}}</h1>
+                <h1> {{product.ManufactureName}} - {{product.Color}}</h1>
                 <p> {{getSizeValueLabel(product)}}
                 </p>
 

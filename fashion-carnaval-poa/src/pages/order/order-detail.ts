@@ -20,7 +20,7 @@ export class OrderDetailPage extends BasePage {
     currentCustomer = {};
     orderData = {
         ProductList: [],
-        StatuId: "",
+        StatuId: 0,
         Id: ""
     };
     isEditable = false;
@@ -44,7 +44,7 @@ export class OrderDetailPage extends BasePage {
 
         })
 
-        this.isEditable = this.orderData.StatuId == "0";
+        //this.isEditable = this.orderData.StatuId == "0";
     }
 
     formatDate(dateStr) {
@@ -84,10 +84,10 @@ export class OrderDetailPage extends BasePage {
 
     getSizeValueLabel(product) {
         let result = "";
-        if (product["Size2"] == null || product["Size2"] == null) {
+        if (product["Size2"] == null || product["Size2"].toString() == null) {
             return "STD: " + product["Size1"];
         }
-        if (product["Size5"] == null || product["Size5"] == "") {
+        if (product["Size5"] == null || product["Size5"].toString() == "") {
             let result = "";
             if (product["Size1"] > 0)
                 result += " Size I: " + product["Size1"];
@@ -107,7 +107,7 @@ export class OrderDetailPage extends BasePage {
         for (let i = 1; i <= this.globalVariables.getMaxSizeCount(); i++) {
             let size = "size" + i;
             let value = product[size];
-            if ((value != null && value != "")) {
+            if ((value != null && value.toString() != "")) {
                 result += " Size " + i;
                 result += ": ";
                 result += value;

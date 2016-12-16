@@ -14,7 +14,7 @@ export class CommonService {
     }
 
     getLanguageKeys(id) {
-        let apiCall = this.api.get("Language/" + id).map(res => res.json());
+        let apiCall = this.api.get("Language").map(res => res.json());
         return apiCall;
     }
 }
