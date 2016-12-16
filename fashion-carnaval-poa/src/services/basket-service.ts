@@ -43,6 +43,27 @@ export class BasketService {
         return count;
     }
 
+
+    getBasketPrice() {
+        let price = 0;
+        let currency = "";
+        for (let i = 0; i < this.basketData.productList.length; i++) {
+            for (let j = 1; j <= 9; j++) {
+                let size = "size" + j;
+                let product = this.basketData.productList[i];
+                let value = product[size];
+                if (value != null && value != "" && value != 0) {
+                    price += product.price * value;
+                    currency = product.currency;
+                }
+            }
+        }
+        if (currency == "$") {
+            return '$ ' + price;
+        }
+        return price + " " + currency;
+    };
+
     getBasketData() {
         return this.basketData;
     }
@@ -98,7 +119,9 @@ export class BasketService {
                         size6: colorData.size6,
                         size7: colorData.size7,
                         size8: colorData.size8,
-                        size9: colorData.size9
+                        size9: colorData.size9,
+                        price: colorData.price,
+                        currency: colorData.currency
                     };
                     this.basketData.productList.push(productModel);
                 }

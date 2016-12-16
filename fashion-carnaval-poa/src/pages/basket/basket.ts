@@ -21,11 +21,15 @@ export class BasketPage extends BasePage {
     today = null;
     endDate = null;
     currentCustomer = {};
-    pet: string = "puppies";
+    pet: string = "customerDetail";
+    isBasketEmpty = false;
+    totalPriceInBaset = "0";
+
     constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public basketService: BasketService, public companyService: CompanyService) {
         super(multiLanguage, globalVariables);
         this.basketData = this.basketService.getBasketData();
-
+        this.isBasketEmpty = this.basketData.productList.length == 0;
+        this.totalPriceInBaset = this.basketService.getBasketPrice();
         let date = new Date();
         let year = date.getFullYear();
         let month = date.getMonth() + 1;
@@ -48,13 +52,17 @@ export class BasketPage extends BasePage {
     }
 
     removeFromBasket(product) {
-        let basketData = this.basketData;
-        let basketService = this.basketService;
-        this.globalVariables.showConfirm(function (aggree) {
-            if (aggree) {
-                let index = basketData.productList.indexOf(product);
-                basketData.productList.splice(index, 1);
-                basketService.saveBasketData(basketData);
+        this.globalVariables.showConfirm(function(result) {
+            if (result) {
+                let basketData = this.basketData;
+                let basketService = this.basketService;
+                this.globalVariables.showConfirm(function(aggree) {
+                    if (aggree) {
+                        let index = basketData.productList.indexOf(product);
+                        basketData.productList.splice(index, 1);
+                        basketService.saveBasketData(basketData);
+                    }
+                });
             }
         });
     }
@@ -68,7 +76,7 @@ export class BasketPage extends BasePage {
                 let orderKey = this.basketData.orderKey;
                 this.basketService.clearBasket();
                 let navCtrl = this.navCtrl;
-                this.globalVariables.showAlert("BasketPage.BasketToOrder.Success.Title", "BasketPage.BasketToOrder.Success.Description").then(function () {
+                this.globalVariables.showAlert("BasketPage.BasketToOrder.Success.Title", "BasketPage.BasketToOrder.Success.Description").then(function() {
 
                     navCtrl.setRoot(OrderCompletedPage, { orderKey: orderKey })
                 });
@@ -87,12 +95,17 @@ export class BasketPage extends BasePage {
     }
 
     clearBasket() {
-        this.basketService.clearBasket();
-
+        let basketService = this.basketService;
         let navCtrl = this.navCtrl;
-        this.globalVariables.showAlert("Basket.ClearData.PopUp.Title", "Basket.ClearData.PopUp.Description").then(function () {
-            navCtrl.setRoot(HomePage);
+        let globalVariables = this.globalVariables;
+        this.globalVariables.showConfirm(function(result) {
+            if (result) {
+                basketService.clearBasket();
+                globalVariables.showAlert("Basket.ClearData.PopUp.Title", "Basket.ClearData.PopUp.Description").then(function() {
+                    navCtrl.setRoot(HomePage);
 
+                });
+            }
         });
     }
 
@@ -118,7 +131,7 @@ export class BasketPage extends BasePage {
 
             return result;
         }
-        
+
         for (let i = 1; i <= this.globalVariables.getMaxSizeCount(); i++) {
             let size = "size" + i;
             let value = product[size];

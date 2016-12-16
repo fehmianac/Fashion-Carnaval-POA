@@ -4,14 +4,14 @@
       <ion-icon name="menu"></ion-icon>
     </button>
         <ion-title>{{getLabel('Basket.Title')}}</ion-title>
-        <ion-buttons end>
+        <ion-buttons end [hidden]="isBasketEmpty">
             <button ion-button (click)="clearBasket()">
                   <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
       </button>
 
-    </ion-buttons>
+        </ion-buttons>
     </ion-navbar>
-    <ion-toolbar no-border-top>
+    <ion-toolbar no-border-top [hidden]="isBasketEmpty">
         <ion-segment [(ngModel)]="pet">
             <ion-segment-button value="customerDetail">
                 {{getLabel('Basket.Segment.CustomerDetail')}}
@@ -27,7 +27,7 @@
 </ion-header>
 
 <ion-content class="card-background-page">
-    <div [ngSwitch]="pet">
+    <div [ngSwitch]="pet" [hidden]="isBasketEmpty">
         <ion-list *ngSwitchCase="'customerDetail'">
             <ion-card>
                 <ion-item>
@@ -44,11 +44,11 @@
 
             <ion-item>
                 <ion-label floating>{{getLabel('BasketPage.ShippingDateStart')}}</ion-label>
-                <ion-datetime displayFormat="DD/MM/YYYY" [min]="today" [max]="endDate" [(ngModel)]="basketData.shippingDateStart"></ion-datetime>
+                <ion-datetime displayFormat="DD/MMMM/YYYY" [min]="today" [max]="endDate" [(ngModel)]="basketData.shippingDateStart"></ion-datetime>
             </ion-item>
             <ion-item>
                 <ion-label floating>{{getLabel('BasketPage.ShippingDateEnd')}}</ion-label>
-                <ion-datetime displayFormat="DD/MM/YYYY" [min]="basketData.shippingDateStart" [max]="endDate" [(ngModel)]="basketData.shippingDateEnd"></ion-datetime>
+                <ion-datetime displayFormat="DD/MMMM/YYYY" [min]="basketData.shippingDateStart" [max]="endDate" [(ngModel)]="basketData.shippingDateEnd"></ion-datetime>
             </ion-item>
             <ion-item>
                 <ion-label floating>{{getLabel('BasketPage.CustomerNote')}}</ion-label>
@@ -73,9 +73,21 @@
                     <ion-icon ios="ios-create" md="md-create"></ion-icon> {{getLabel('Common.EditButton.Label')}}
                 </button>
             </ion-item>
+            <ion-item>
+                <p rigth style="float: right;">
+                    <b>Total :</b> {{totalPriceInBaset}}
+                </p>
+            </ion-item>
+            <p padding>
+                <button ion-button color="primary" block (click)="completeOrder()" icon-left><ion-icon ios="ios-cash" md="md-cash"></ion-icon> &nbsp; {{getLabel('Basket.CompleteOrder')}}</button>
+            </p>
         </ion-list>
     </div>
-    <p padding>
-        <button ion-button color="primary" (click)="completeOrder()" icon-left><ion-icon ios="ios-cash" md="md-cash"></ion-icon> &nbsp; {{getLabel('Basket.CompleteOrder')}}</button>
-    </p>
+
+    <div padding [hidden]="!isBasketEmpty">
+        <p>
+            {{getLabel("BasketPage.IsEmpty")}}
+        </p>
+    </div>
+
 </ion-content>

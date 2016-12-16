@@ -40,3 +40,12 @@
   }
 
 }
+
+
+ion-input.ng-invalid{
+  border-bottom: red 1px solid;
+}
+
+ion-textarea.ng-invalid{
+  border-bottom: red 1px solid;
+}

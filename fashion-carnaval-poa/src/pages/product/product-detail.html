@@ -14,8 +14,8 @@
 
     <ion-searchbar type="tel" (ionInput)="searchProduct($event)"></ion-searchbar>
 
-    <ion-toolbar no-border-top>
-        <ion-segment [(ngModel)]="pet" *ngIf="isShowProductDetail">
+    <ion-toolbar no-border-top [hidden]="!isShowProductDetail">
+        <ion-segment [(ngModel)]="pet">
             <ion-segment-button value="puppies">
                 {{getLabel('ProductDetail.Segment.Detail')}}
             </ion-segment-button>
@@ -27,7 +27,7 @@
 </ion-header>
 
 <ion-content class="card-background-page" scroll="false">
-    <div [ngSwitch]="pet" *ngIf="isShowProductDetail">
+    <div [ngSwitch]="pet" [hidden]="!isShowProductDetail" style="margin-top: 48px;">
         <ion-list *ngSwitchCase="'puppies'">
             <ion-card>
                 <img src="data:image/png;base64,{{productModel.ModelPicture1}}" [style.height]="imgHeight+'px'">
@@ -77,7 +77,8 @@
             </div>
         </ion-list>
     </div>
-    <div *ngIf="!isShowProductDetail">
-        {{getLabel('ProductDetail.No.Result')}}
+    <div *ngIf="!isShowProductDetail" padding>
+        <p>{{getLabel('ProductDetail.No.Result')}}</p>
+        
     </div>
 </ion-content>

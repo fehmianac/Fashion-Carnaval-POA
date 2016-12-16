@@ -37,6 +37,8 @@ export class ProductDetailPage extends BasePage {
         let colorDataPattern = {
             text: colorText,
             color: colorText,
+            price: product.Price,
+            currency: product.Currency,
             size1: 0,
             size2: 0,
             size3: 0,
@@ -180,7 +182,7 @@ export class ProductDetailPage extends BasePage {
 
     getPriceLabel(productModel) {
         if (productModel.Currency == "$") {
-            return "$"+ productModel.Price;
+            return "$" + productModel.Price;
         }
 
         return productModel.Price + "" + productModel.Currency;

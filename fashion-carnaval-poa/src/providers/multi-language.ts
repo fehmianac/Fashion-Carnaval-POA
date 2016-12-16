@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Storage } from './storage'
+import { CommonService } from '../services/common-service'
 /**
  * Storage is generic handler offline data.
  */
 @Injectable()
 export class MultiLanguage {
-    constructor(public storage: Storage) {
+    constructor(public storage: Storage, public commonService: CommonService) {
     }
 
     getLabel(key: string) {
@@ -54,12 +55,23 @@ export class MultiLanguage {
     }
 
     reloadLanguageKeys() {
+        this.commonService.getLanguageKeys(1).subscribe(data => {
+            let length = data.length;
+            let languageDict = [];
+            for (let i = 0; i < length; i++) {
+                let currentData = data[i];
+                languageDict.push({
+                    "key": currentData.Key,
+                    "languageKey": currentData.LanguageKey,
+                    "value": currentData.Value
+                });
+
+            }
+            this.storage.set("localization", languageDict);
+        }, error => {
+
+        });
         let languageDict = [
-            {
-                "key": "deneme",
-                "languageKey": "en",
-                "value": "label olarak ne yazaca??"
-            },
             {
                 "key": "NavigationBar.Title",
                 "languageKey": "en",
@@ -411,8 +423,6 @@ export class MultiLanguage {
                 "value": "Showroom"
             }
         ];
-
-        //HomePage.CurrentShowRoom.DropDownList
         this.storage.set("localization", languageDict);
 
     }

@@ -20,8 +20,10 @@ export class OrderDetailPage extends BasePage {
     currentCustomer = {};
     orderData = {
         ProductList: [],
-        StatuId: ""
+        StatuId: "",
+        Id: ""
     };
+    isEditable = false;
 
     constructor(public navCtrl: NavController, public params: NavParams, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public actionSheetCtrl: ActionSheetController, public orderService: OrderService, public customerService: CompanyService) {
         super(multiLanguage, globalVariables);
@@ -41,6 +43,8 @@ export class OrderDetailPage extends BasePage {
         }, err => {
 
         })
+
+        this.isEditable = this.orderData.StatuId == "0";
     }
 
     formatDate(dateStr) {
@@ -115,6 +119,23 @@ export class OrderDetailPage extends BasePage {
         }
         return result;
     }
+    changeOrderStatus(statuId) {
+        let globalVariables = this.globalVariables;
+        let orderService = this.orderService;
+        let orderData = this.orderData;
+        this.globalVariables.showConfirm(function (result) {
+            if (result) {
+                globalVariables.presentLoading();
+                orderService.changeOrderStatu(orderData.Id, statuId).subscribe(data => {
+                    orderData.StatuId = statuId;
+                    globalVariables.dismissLoading();
+                }, error => {
+                    globalVariables.dismissLoading();
+                });
+            }
+        });
+    };
+
 
     presentActionSheet() {
         let buttons = [
@@ -137,32 +158,6 @@ export class OrderDetailPage extends BasePage {
             }
         ];
 
-        if (this.orderData.StatuId == "0") {
-            buttons.push({
-                text: 'Send Order To Company',
-                handler: () => {
-                    console.log('Send Order To Company');
-                }
-            });
-
-            buttons.push({
-                text: 'Cancel Order',
-                role: 'destructive',
-                handler: () => {
-                    console.log('Cancel order');
-                }
-            });
-        }
-        if (this.orderData.StatuId == "1") {
-
-            buttons.push({
-                text: 'Cancel Order',
-                role: 'destructive',
-                handler: () => {
-                    console.log('Cancel order');
-                }
-            });
-        }
         let actionSheet = this.actionSheetCtrl.create({
             title: 'Select Your Action',
             buttons: buttons
