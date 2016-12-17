@@ -21,7 +21,7 @@ export class HomePage extends BasePage {
     homeImage = "";
     showRoomList = [];
     currentShowRoom = "4";
-    
+
     constructor(public navCtrl: NavController,
         public multiLanguage: MultiLanguage,
         public globalVariables: GlobalVariables,
@@ -40,7 +40,7 @@ export class HomePage extends BasePage {
             let length = data.length;
             for (let i = 0; i < length; i++) {
                 let brand = data[i];
-                this.brandList.push({ id: brand.Id, "imageUrl": brand.ImageUrl, "title": brand.Name });
+                this.brandList.push({ id: brand.Id, "imageUrl": brand.ImageUrl, "title": brand.Name, "shipmentEndDate": brand.ShipmentEndDate,"shipmentStartDate": brand.ShipmentStartDate });
             }
         });
 

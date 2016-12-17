@@ -7,6 +7,7 @@ import { BasePage } from '../base-page'
 import { OrderCompletedPage } from '../order/order-completed'
 import { BasketService } from '../../services/basket-service'
 import { CompanyService } from '../../services/company-service'
+import { BrandServices } from '../../services/brand-service'
 import { UpdateProductInBasket } from './update-product'
 import { HomePage } from '../home/home'
 import { CustomerFormPage } from '../customer/customer-form'
@@ -26,15 +27,17 @@ export class BasketPage extends BasePage {
     pet: string = "customerDetail";
     isBasketEmpty = false;
 
-    constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public basketService: BasketService, public companyService: CompanyService) {
+    constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public basketService: BasketService, public companyService: CompanyService, public brandService: BrandServices) {
         super(multiLanguage, globalVariables);
 
     }
-    
+
     ionViewWillEnter() {
         this.basketData = this.basketService.getBasketData();
         this.isBasketEmpty = this.basketData.productList.length == 0;
-        let date = new Date();
+        let currentBrand = this.brandService.getSelectedBrand(this.basketData.brandId);
+
+        let date = new Date(currentBrand.ShipmentStartDate);
         let year = date.getFullYear();
         let month = date.getMonth() + 1;
         let day = date.getDate();
@@ -43,7 +46,8 @@ export class BasketPage extends BasePage {
             this.basketData.shippingDateStart = this.today;
         }
 
-        let year1 = date.getFullYear() + 2;
+        let date1 = new Date(currentBrand.ShipmentEndDate);
+        let year1 = date.getFullYear()
         let month1 = date.getMonth() + 1;
         let day1 = date.getDate();
         this.endDate = year1 + '-' + month1 + '-' + day1;
@@ -56,11 +60,11 @@ export class BasketPage extends BasePage {
     }
 
     removeFromBasket(product) {
-        this.globalVariables.showConfirm(function(result) {
+        this.globalVariables.showConfirm(function (result) {
             if (result) {
                 let basketData = this.basketData;
                 let basketService = this.basketService;
-                this.globalVariables.showConfirm(function(aggree) {
+                this.globalVariables.showConfirm(function (aggree) {
                     if (aggree) {
                         let index = basketData.productList.indexOf(product);
                         basketData.productList.splice(index, 1);
@@ -80,7 +84,7 @@ export class BasketPage extends BasePage {
                 let orderKey = this.basketData.orderKey;
                 this.basketService.clearBasket();
                 let navCtrl = this.navCtrl;
-                this.globalVariables.showAlert("BasketPage.BasketToOrder.Success.Title", "BasketPage.BasketToOrder.Success.Description").then(function() {
+                this.globalVariables.showAlert("BasketPage.BasketToOrder.Success.Title", "BasketPage.BasketToOrder.Success.Description").then(function () {
 
                     navCtrl.setRoot(OrderCompletedPage, { orderKey: orderKey })
                 });
@@ -102,10 +106,10 @@ export class BasketPage extends BasePage {
         let basketService = this.basketService;
         let navCtrl = this.navCtrl;
         let globalVariables = this.globalVariables;
-        this.globalVariables.showConfirm(function(result) {
+        this.globalVariables.showConfirm(function (result) {
             if (result) {
                 basketService.clearBasket();
-                globalVariables.showAlert("Basket.ClearData.PopUp.Title", "Basket.ClearData.PopUp.Description").then(function() {
+                globalVariables.showAlert("Basket.ClearData.PopUp.Title", "Basket.ClearData.PopUp.Description").then(function () {
                     navCtrl.setRoot(HomePage);
 
                 });

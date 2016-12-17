@@ -32,6 +32,7 @@ export class CustomerFormPage extends BasePage {
         Notes: "",
     };
     fromBasket = false;
+
     constructor(public navCtrl: NavController, public params: NavParams, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public companyService: CompanyService) {
         super(multiLanguage, globalVariables);
         let customerId = this.params.get("customerId");
@@ -45,7 +46,7 @@ export class CustomerFormPage extends BasePage {
         this.globalVariables.presentLoading();
         let apiCall = this.companyService.saveCompany(this.customerModel);
         apiCall.subscribe(data => {
-            this.globalVariables.showSuccessToast();
+            this.globalVariables.showSuccessAlert();
             this.globalVariables.dismissLoading();
             this.navCtrl.pop();
 

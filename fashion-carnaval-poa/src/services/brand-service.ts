@@ -30,4 +30,16 @@ export class BrandServices {
             });
         }
     };
+
+    getSelectedBrand(brandId) {
+        let brandDataFromLocal = this.storage.getAsJson("brand");
+        let length = brandDataFromLocal.length;
+        for (let i = 0; i < length; i++) {
+            let currentData = brandDataFromLocal[i];
+            if (currentData.Id == brandId) {
+                return currentData;
+            }
+        }
+        return null;
+    }
 }

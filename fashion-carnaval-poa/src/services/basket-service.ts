@@ -23,7 +23,8 @@ export class BasketService {
                 adminNote: "",
                 status: 0,
                 userId: this.globalService.getCurrentUserId(),
-                customerId: this.globalService.getCurrentCustomerId()
+                customerId: this.globalService.getCurrentCustomerId(),
+                brandId: this.globalService.getCurrentBrandId()
             };
         } else {
             this.basketData = basketData;
@@ -179,7 +180,8 @@ export class BasketService {
             adminNote: "",
             status: 0,
             userId: this.globalService.getCurrentUserId(),
-            customerId: this.globalService.getCurrentCustomerId()
+            customerId: this.globalService.getCurrentCustomerId(),
+            brandId: this.globalService.getCurrentBrandId()
         };
         this.basketData = basketData;
         this.saveBasketData(basketData);
