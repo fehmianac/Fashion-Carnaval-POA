@@ -47,6 +47,14 @@ export class GlobalVariables {
         return this.storage.get("currentBrandId");
     }
 
+    setCurrentShowroomId(showroomId) {
+        this.storage.set("showroomId", showroomId, false);
+    }
+
+    getCurrentShowroomId() {
+        return this.storage.get("showroomId");
+    }
+
     getGuid() {
         function guid() {
             function s4() {
@@ -132,5 +140,20 @@ export class GlobalVariables {
 
     getMaxSizeCount() {
         return 8;
+    }
+
+
+    getColorCode(name) {
+        var color = this.storage.getAsJson("colorList");
+        if (color != null) {
+            let length = color.length;
+            for (let i = 0; i < length; i++) {
+                let currentColor = color[i];
+                if (currentColor.Name.toLowerCase() == name.toLowerCase()) {
+                    return currentColor.Code;
+                }
+            }
+        }
+        return "";
     }
 }

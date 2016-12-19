@@ -8,6 +8,7 @@ import { CustomerListPage } from '../customer/customer-list'
 import { BrandServices } from '../../services/brand-service'
 import { ApplicationService } from '../../services/application-service'
 import { UserService } from '../../services/user-service'
+import { CommonService } from '../../services/common-service'
 
 @Component({
     selector: 'page-home',
@@ -20,19 +21,21 @@ export class HomePage extends BasePage {
     currentUserName = "";
     homeImage = "";
     showRoomList = [];
-    currentShowRoom = "4";
+    currentShowRoom = null;
 
     constructor(public navCtrl: NavController,
         public multiLanguage: MultiLanguage,
         public globalVariables: GlobalVariables,
         public brandService: BrandServices,
         public applicationService: ApplicationService,
-        public userService: UserService) {
+        public userService: UserService,
+        public commonService: CommonService) {
 
         super(multiLanguage, globalVariables);
         this.applicationService.getApplicationSetting().subscribe(data => {
             this.homeImage = data.HomePageImageUrl;
         });
+        
         this.selectedLanguage = multiLanguage.getSelectedLanguage();
         this.currentUserName = this.globalVariables.getCurrentUserName();
 
@@ -40,15 +43,30 @@ export class HomePage extends BasePage {
             let length = data.length;
             for (let i = 0; i < length; i++) {
                 let brand = data[i];
-                this.brandList.push({ id: brand.Id, "imageUrl": brand.ImageUrl, "title": brand.Name, "shipmentEndDate": brand.ShipmentEndDate,"shipmentStartDate": brand.ShipmentStartDate });
+                this.brandList.push({ id: brand.Id, "imageUrl": brand.ImageUrl, "title": brand.Name, "shipmentEndDate": brand.ShipmentEndDate, "shipmentStartDate": brand.ShipmentStartDate });
             }
         });
+        this.getShowList();
+    }
 
-        this.showRoomList.push({
-            Id: 4,
-            DisplayName: "Los Angeles"
+    getShowList() {
+        let userId = this.globalVariables.getCurrentUserId();
+        this.commonService.getShowList(userId).subscribe(data => {
+            this.showRoomList = [];
+            let length = data.length;
+            for (let i = 0; i < length; i++) {
+                let current = data[i];
+                if (userId == current.UserId && this.currentShowRoom == null) {
+                    this.currentShowRoom = current.Id;
+                }
+                this.showRoomList.push({
+                    Id: current.Id,
+                    DisplayName: current.Name
+                });
+            }
+        }, error => {
+
         });
-
     }
 
     selectBrand(id: number) {
@@ -62,6 +80,12 @@ export class HomePage extends BasePage {
                 this.globalVariables.setCurrentUserName(this.currentUserName);
                 this.globalVariables.setCurrentUserId(data.Id);
                 this.globalVariables.setCurrentUserPriceTypeId(data.PriceTypeId);
+                if (this.showRoomList.length == 0) {
+                    this.globalVariables.showAlert(this.getLabel("Validation.Showroom.MustNotBeNull.Title"), this.getLabel("Validation.UserName.Showroom.Description"));
+                    this.getShowList();
+                    return;
+                }
+                this.globalVariables.setCurrentShowroomId(this.currentShowRoom);
                 this.navCtrl.setRoot(CustomerListPage);
             } else {
                 this.globalVariables.showAlert(this.getLabel("Validation.UserName.NotFound.Title"), this.getLabel("Validation.UserName.NotFound.Description"));

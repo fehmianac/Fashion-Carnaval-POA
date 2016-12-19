@@ -36,4 +36,14 @@ export class ApplicationService {
             });
         }
     };
+
+    getColorList() {
+        let apiCall = this.api.get("Color").map(res => res.json());
+        apiCall.subscribe(data => {
+            this.storage.set("colorList", data); 
+        }, error => {
+
+        });
+        return apiCall;
+    }
 }

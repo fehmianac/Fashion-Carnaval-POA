@@ -10,14 +10,15 @@ import { BasketService } from './basket-service'
  */
 @Injectable()
 export class ProductService {
-   
+
     constructor(public api: Api, public storage: Storage, public globalService: GlobalVariables, public basketService: BasketService) {
-      
+
     }
 
     searchProduct(searchKey: string) {
         let currentPriceTypeId = this.globalService.getCCurrentUserPriceTypeId();
-        let apiCall = this.api.get("/Product?manufactureCode=" + searchKey + "&PriceTypeId=" + currentPriceTypeId).map(res => res.json());
+        let brandId = this.globalService.getCurrentBrandId();
+        let apiCall = this.api.get("/Product?manufactureCode=" + searchKey + "&PriceTypeId=" + currentPriceTypeId + "&brandId=" + brandId).map(res => res.json());
         return apiCall;
     };
 }

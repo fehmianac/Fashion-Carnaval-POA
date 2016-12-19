@@ -26,7 +26,7 @@ export class MyApp extends BasePage {
         super(multiLanguage, globalVariables);
         this.initializeApp();
         this.multiLanguage.reloadLanguageKeys();
-
+        this.applicationService.getColorList();
         // used for an example of ngFor and navigation
         this.pages = [
             { icon: "md-home", title: 'NavigationBar.HomePage.Link', component: HomePage },

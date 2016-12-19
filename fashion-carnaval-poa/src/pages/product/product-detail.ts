@@ -187,4 +187,8 @@ export class ProductDetailPage extends BasePage {
 
         return productModel.Price + "" + productModel.Currency;
     }
+
+    getColorCode(name) {
+        return this.globalVariables.getColorCode(name);
+    }
 }

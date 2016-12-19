@@ -52,7 +52,7 @@
             <div *ngFor="let colorData of productModel.ColorData">
                 <ion-list-header>
                     <ion-label>
-                        <h1>{{colorData.text}}</h1>
+                        <h1>{{colorData.text}} <span [ngStyle]="{'background-color': getColorCode(colorData.text)}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> </h1>
                     </ion-label>
                 </ion-list-header>
                 <ion-item *ngFor="let index of sizeArray">
