@@ -36,4 +36,13 @@ export class OrderService {
         let apiCall = this.api.get("Order/" + orderId + "?statuId=" + statuId).map(res => res.json());
         return apiCall;
     }
+
+
+    saveOrderProductDataToLocal(orderProductData) {
+        this.storage.set("orderProductData", orderProductData);
+    }
+
+    getOrderProcutDataFromLocal() {
+        return this.storage.getAsJson("orderProductData");
+    }
 }

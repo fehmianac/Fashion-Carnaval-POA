@@ -13,6 +13,7 @@ import { OrderDetailPage } from '../pages/order/order-detail'
 import { BasketPage } from '../pages/basket/basket'
 import { UpdateProductInBasket } from '../pages/basket/update-product'
 import { OrderCompletedPage } from '../pages/order/order-completed'
+import { UpdateProductInOrder } from '../pages/order/update-product-in-order'
 import { Snippets } from '../component/snippets/snippets'
 import { Services } from '../services/services'
 
@@ -29,7 +30,8 @@ import { Services } from '../services/services'
         BasketPage,
         OrderCompletedPage,
         Snippets,
-        UpdateProductInBasket
+        UpdateProductInBasket,
+        UpdateProductInOrder
     ],
     imports: [
         IonicModule.forRoot(MyApp)
@@ -47,7 +49,8 @@ import { Services } from '../services/services'
         BasketPage,
         OrderCompletedPage,
         Snippets,
-        UpdateProductInBasket
+        UpdateProductInBasket,
+        UpdateProductInOrder
     ],
     providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, Providers, Services, Snippets]
 })

@@ -8,6 +8,7 @@ import { CustomerListPage } from '../customer/customer-list'
 import { OrderService } from '../../services/order-service'
 import { CompanyService } from '../../services/company-service'
 import { ActionSheetController } from 'ionic-angular';
+import { UpdateProductInOrder } from './update-product-in-order'
 
 @Component({
     selector: 'order-detail',
@@ -27,12 +28,14 @@ export class OrderDetailPage extends BasePage {
 
     constructor(public navCtrl: NavController, public params: NavParams, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public actionSheetCtrl: ActionSheetController, public orderService: OrderService, public customerService: CompanyService) {
         super(multiLanguage, globalVariables);
+        this.pet = "customerDetail";
         let order = params.get("order");
         this.orderData = order;
 
         this.globalVariables.presentLoading();
         this.orderService.getOrderDetailById(order.Id).subscribe(data => {
             this.orderData.ProductList = data;
+            this.orderService.saveOrderProductDataToLocal(this.orderData.ProductList);
             this.globalVariables.dismissLoading();
         }, err => {
             this.globalVariables.dismissLoading();
@@ -44,7 +47,6 @@ export class OrderDetailPage extends BasePage {
 
         })
 
-        //this.isEditable = this.orderData.StatuId == "0";
     }
 
     formatDate(dateStr) {
@@ -136,6 +138,9 @@ export class OrderDetailPage extends BasePage {
         });
     };
 
+    edit(product) {
+        this.navCtrl.push(UpdateProductInOrder, { product: product });
+    }
 
     presentActionSheet() {
         let buttons = [
@@ -163,5 +168,24 @@ export class OrderDetailPage extends BasePage {
             buttons: buttons
         });
         actionSheet.present();
+    }
+
+    getTotalPriceInOrder() {
+        let currency = "";
+        let price = 0;
+        for (let i = 0; i < this.orderData.ProductList.length; i++) {
+            for (let j = 1; j <= this.globalVariables.getMaxSizeCount(); j++) {
+                let size = "Size" + j;
+                let product = this.orderData.ProductList[i];
+                let value = product[size];
+                if (value != null && value != "" && value != 0) {
+                    price += product.Price * value;
+                    currency = product.Symbol;
+                }
+            }
+        }
+        if (currency == "$") {
+            return '$ ' + price.toFixed(2);
+        }
     }
 }

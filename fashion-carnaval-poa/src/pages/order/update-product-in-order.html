@@ -1,0 +1,33 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+        <ion-title>{{getLabel('UpdateProductInOrder.Title')}}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="card-background-page">
+    <ion-list>
+        <ion-list-header>
+            <ion-label>{{currentProduct.Color}}</ion-label>
+        </ion-list-header>
+        <ion-item *ngFor="let index of sizeArray">
+            <ion-label style="margin:0;">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col width-50>{{getSizeLabel(index)}}</ion-col>
+                        <ion-col width-50>
+                            <snippets [value]="getSizeValue(index)" (callback)="changedValue($event,index)"> </snippets>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-label>
+        </ion-item>
+        <div padding>
+            <button ion-button color="primary" block (click)="update()">
+                    <ion-icon ios="ios-cart" md="md-cart"></ion-icon> &nbsp;
+                     {{getLabel('UpdateProductInBasket.Update')}}</button>
+        </div>
+    </ion-list>
+</ion-content>
