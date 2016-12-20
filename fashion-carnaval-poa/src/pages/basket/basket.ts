@@ -60,17 +60,14 @@ export class BasketPage extends BasePage {
     }
 
     removeFromBasket(product) {
+        let basketData = this.basketData;
+        let basketService = this.basketService;
+        let globalVariables = this.globalVariables;
         this.globalVariables.showConfirm(function (result) {
             if (result) {
-                let basketData = this.basketData;
-                let basketService = this.basketService;
-                this.globalVariables.showConfirm(function (aggree) {
-                    if (aggree) {
-                        let index = basketData.productList.indexOf(product);
-                        basketData.productList.splice(index, 1);
-                        basketService.saveBasketData(basketData);
-                    }
-                });
+                let index = basketData.productList.indexOf(product);
+                basketData.productList.splice(index, 1);
+                basketService.saveBasketData(basketData);
             }
         });
     }

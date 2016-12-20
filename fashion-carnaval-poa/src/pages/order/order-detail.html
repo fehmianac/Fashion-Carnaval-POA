@@ -45,19 +45,19 @@
 
             <ion-item>
                 <ion-label floating>{{getLabel('BasketPage.ShippingDateStart')}}</ion-label>
-                <ion-datetime displayFormat="DD/MM/YYYY" [min]="today" [max]="endDate" [(ngModel)]="orderData.ShipmentStartDate"></ion-datetime>
+                <ion-datetime [disabled]="orderData.StatuId != 0" displayFormat="DD/MM/YYYY" [min]="today" [max]="endDate" [(ngModel)]="orderData.ShipmentStartDate"></ion-datetime>
             </ion-item>
             <ion-item>
                 <ion-label floating>{{getLabel('BasketPage.ShippingDateEnd')}}</ion-label>
-                <ion-datetime displayFormat="DD/MM/YYYY" [min]="orderData.ShippingDateStart" [max]="endDate" [(ngModel)]="orderData.ShipmentEndDate"></ion-datetime>
+                <ion-datetime [disabled]="orderData.StatuId != 0" displayFormat="DD/MM/YYYY" [min]="orderData.ShippingDateStart" [max]="endDate" [(ngModel)]="orderData.ShipmentEndDate"></ion-datetime>
             </ion-item>
             <ion-item>
                 <ion-label floating>{{getLabel('BasketPage.CustomerNote')}}</ion-label>
-                <ion-textarea [(ngModel)]="orderData.CustomerNote">></ion-textarea>
+                <ion-textarea [disabled]="orderData.StatuId != 0" [(ngModel)]="orderData.CustomerNote">></ion-textarea>
             </ion-item>
             <ion-item>
                 <ion-label floating>{{getLabel('BasketPage.AdminNote')}}</ion-label>
-                <ion-textarea [(ngModel)]="orderData.AdminNote">></ion-textarea>
+                <ion-textarea [disabled]="orderData.StatuId != 0" [(ngModel)]="orderData.AdminNote">></ion-textarea>
             </ion-item>
         </ion-list>
 

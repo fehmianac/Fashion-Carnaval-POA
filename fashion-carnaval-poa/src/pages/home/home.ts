@@ -35,7 +35,7 @@ export class HomePage extends BasePage {
         this.applicationService.getApplicationSetting().subscribe(data => {
             this.homeImage = data.HomePageImageUrl;
         });
-        
+
         this.selectedLanguage = multiLanguage.getSelectedLanguage();
         this.currentUserName = this.globalVariables.getCurrentUserName();
 

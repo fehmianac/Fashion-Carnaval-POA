@@ -69,8 +69,8 @@ export class GlobalVariables {
     }
     showAlert(title: string, description: string) {
         let alert = this.alertCtrl.create({
-            title: title,
-            subTitle: description,
+            title: this.multiLanguage.getLabel(title),
+            subTitle: this.multiLanguage.getLabel(description),
             buttons: ['OK']
         });
         return alert.present();
@@ -104,17 +104,17 @@ export class GlobalVariables {
     }
     showConfirm(callback) {
         let confirm = this.alertCtrl.create({
-            title: 'Confirmation',
-            message: 'Do you agree to use this lightsaber to do good across the intergalactic galaxy?',
+            title: this.multiLanguage.getLabel("Common.Confirm.Title"),
+            message:  this.multiLanguage.getLabel("Common.Confirm.Description"),
             buttons: [
                 {
-                    text: 'Disagree',
+                    text: this.multiLanguage.getLabel("Common.Confirm.Button.Disagree"),
                     handler: () => {
                         callback(false);
                     }
                 },
                 {
-                    text: 'Agree',
+                    text: this.multiLanguage.getLabel("Common.Confirm.Button.Agree"),
                     handler: () => {
                         callback(true);
                     }

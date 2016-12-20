@@ -107,9 +107,9 @@ export class OrderDetailPage extends BasePage {
         }
 
         for (let i = 1; i <= this.globalVariables.getMaxSizeCount(); i++) {
-            let size = "size" + i;
+            let size = "Size" + i;
             let value = product[size];
-            if ((value != null && value.toString() != "")) {
+            if ((value != null && value.toString() != "" && value.toString() != "0" )) {
                 result += " Size " + i;
                 result += ": ";
                 result += value;

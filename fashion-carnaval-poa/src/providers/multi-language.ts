@@ -34,8 +34,13 @@ export class MultiLanguage {
     }
 
     getLanguageList() {
+        let result = [];
+        result.push({ LanguageKey: "en", DisplayName: "English" });
+        return result;
+        /*
         let result = this.storage.getAsJson("language");
         return result;
+        */
     }
 
     getSelectedLanguage() {
