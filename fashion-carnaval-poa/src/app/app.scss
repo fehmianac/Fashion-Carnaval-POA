@@ -41,7 +41,9 @@
 
 }
 
-
+.no-margin{
+  margin: 0 !important;
+}
 ion-input.ng-invalid{
   border-bottom: red 1px solid;
 }

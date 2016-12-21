@@ -173,6 +173,9 @@ export class OrderDetailPage extends BasePage {
     getTotalPriceInOrder() {
         let currency = "";
         let price = 0;
+        if(this.orderData.ProductList == undefined){
+            return 0;
+        }
         for (let i = 0; i < this.orderData.ProductList.length; i++) {
             for (let j = 1; j <= this.globalVariables.getMaxSizeCount(); j++) {
                 let size = "Size" + j;

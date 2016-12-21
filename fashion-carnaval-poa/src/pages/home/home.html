@@ -16,7 +16,7 @@
   <ion-card-content>
     {{getLabel('HomePage.Description')}}
   </ion-card-content>
-  <ion-list>
+  <ion-list class="no-margin">
     <ion-item>
       <ion-label fixed>{{getLabel('HomePage.CurrentUser.TextBox')}}</ion-label>
       <ion-input [(ngModel)]="currentUserName" type="text"></ion-input>
@@ -34,7 +34,7 @@
         <ion-card (click)="selectBrand(brand.id)">
           <img src="{{brand.imageUrl}}" />
           <div class="card-subtitle">
-            {{brand.title}}
+            <!--{{brand.title}}-->
           </div>
         </ion-card>
       </ion-col>
