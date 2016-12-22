@@ -172,7 +172,7 @@ export class OrderDetailPage extends BasePage {
 
     getTotalPriceInOrder() {
         let currency = "";
-        let price = 0;
+        let price = "0";
         if(this.orderData.ProductList == undefined){
             return 0;
         }
