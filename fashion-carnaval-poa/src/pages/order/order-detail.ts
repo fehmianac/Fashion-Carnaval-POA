@@ -147,7 +147,7 @@ export class OrderDetailPage extends BasePage {
         let orderData = this.orderData;
         let exportService = this.exportService;
         let buttons = [];
-        
+
         if (this.orderData.StatuId == 0) {
             let that = this;
             buttons.push(
@@ -161,6 +161,7 @@ export class OrderDetailPage extends BasePage {
             buttons.push(
                 {
                     text: that.getLabel('OrderDetail.CancelOrder'),
+                      role: "destructive",
                     handler: () => {
                         that.changeOrderStatus(2);
                     }
@@ -168,30 +169,31 @@ export class OrderDetailPage extends BasePage {
             );
         }
         buttons.push({
-            text: 'Send Email',
-                handler: () => {
-                    console.log('Send Email');
-                }
+            text: this.getLabel('OrderDetail.SendEmail'),
+            handler: () => {
+                console.log('Send Email');
+            }
         });
         buttons.push({
-            text: 'Export PDF ',
-                handler: () => {
-                    exportService.exportPdf(orderData.Id);
-                    console.log('Export PDF');
-                }
+            text: this.getLabel('OrderDetail.ExportPdf'),
+            handler: () => {
+                exportService.exportPdf(orderData.Id);
+                console.log('Export PDF');
+            }
         });
         buttons.push({
             text: 'Cancel',
-                role: 'cancel',
-                    handler: () => {
-                        console.log('Cancel clicked');
-                    }
+            role: 'cancel',
+            handler: () => {
+                console.log('Cancel clicked');
+            }
         });
         if (this.orderData.StatuId == 1) {
             let that = this;
             buttons.push(
                 {
                     text: that.getLabel('OrderDetail.CancelOrder'),
+                    role: "destructive",
                     handler: () => {
                         that.changeOrderStatus(2);
                     }
@@ -200,7 +202,7 @@ export class OrderDetailPage extends BasePage {
         }
 
         let actionSheet = this.actionSheetCtrl.create({
-            title: 'Select Your Action',
+            title: this.getLabel('OrderDetail.SelectYourAction'),
             buttons: buttons
         });
         actionSheet.present();

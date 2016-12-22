@@ -12,7 +12,7 @@
         </ion-buttons>
     </ion-navbar>
 
-    <ion-searchbar type="tel" (ionInput)="searchProduct($event)"></ion-searchbar>
+    <ion-searchbar type="tel" [(ngModel)]="searchText" (ionInput)="searchProduct($event)"></ion-searchbar>
 
     <ion-toolbar no-border-top [hidden]="!isShowProductDetail">
         <ion-segment [(ngModel)]="pet">

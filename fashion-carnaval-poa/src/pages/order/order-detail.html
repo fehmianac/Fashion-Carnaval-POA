@@ -105,11 +105,9 @@
 </p>
 
 </ion-item>
-<ion-item>
-    <p padding>
-        <button [hidden]="orderData.StatuId != 0" ion-button color="primary" block (click)="updateOrder()" icon-left><ion-icon ios="ios-cash" md="md-cash"></ion-icon> &nbsp; {{getLabel('OrderDetail.UpdateOrder')}}</button>
-    </p>
-</ion-item>
+<p padding>
+    <button [hidden]="orderData.StatuId != 0" ion-button color="primary" block (click)="updateOrder()" icon-left><ion-icon ios="ios-cash" md="md-cash"></ion-icon> &nbsp; {{getLabel('OrderDetail.UpdateOrder')}}</button>
+</p>
 </ion-list>
 </div>
 

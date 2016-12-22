@@ -24,6 +24,7 @@ export class ProductDetailPage extends BasePage {
     sizeArray = [];
     height = 0;
     imgHeight = -300;
+    searchText = "";
 
     constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public productService: ProductService, public basketService: BasketService) {
         super(multiLanguage, globalVariables);
@@ -155,6 +156,7 @@ export class ProductDetailPage extends BasePage {
         this.globalVariables.showAlert(this.getLabel("Popup.AddToBasket.Title"), this.getLabel("Popup.AddToBasket.Description"));
         this.productModel = { ColorData: [], Fabric1: "", Fabric2: "", Fabric3: "" };
         this.isShowProductDetail = false;
+        this.searchText = "";
     }
 
     getSizeValue(colorData, index) {
