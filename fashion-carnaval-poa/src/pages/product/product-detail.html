@@ -30,7 +30,7 @@
     <div [ngSwitch]="pet" [hidden]="!isShowProductDetail" style="margin-top: 48px;">
         <ion-list *ngSwitchCase="'puppies'">
             <ion-card>
-                <img src="data:image/png;base64,{{productModel.ModelPicture1}}" [style.height]="imgHeight+'px'">
+                <img src="data:image/png;base64,{{productModel.ModelPicture1}}">
                 <ion-item>
                     <h1><b>{{getLabel('ProductDetail.Group.Label')}}:</b> {{productModel.GroupName}}</h1>
                     <h1><b>{{getLabel('ProductDetail.Code.Label')}}:</b> {{productModel.ManufactureCode}}</h1>

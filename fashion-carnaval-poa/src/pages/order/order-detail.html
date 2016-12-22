@@ -49,7 +49,8 @@
             </ion-item>
             <ion-item>
                 <ion-label floating>{{getLabel('BasketPage.ShippingDateEnd')}}</ion-label>
-                <ion-datetime [disabled]="orderData.StatuId != 0" displayFormat="DD/MM/YYYY" [min]="orderData.ShippingDateStart" [max]="endDate" [(ngModel)]="orderData.ShipmentEndDate"></ion-datetime>
+                <ion-datetime [disabled]="orderData.StatuId != 0" displayFormat="DD/MM/YYYY" [min]="orderData.ShippingDateStart" [max]="endDate"
+                    [(ngModel)]="orderData.ShipmentEndDate"></ion-datetime>
             </ion-item>
             <ion-item>
                 <ion-label floating>{{getLabel('BasketPage.CustomerNote')}}</ion-label>
@@ -74,18 +75,18 @@
                     <ion-icon ios="ios-create" md="md-create"></ion-icon> {{getLabel('Common.EditButton.Label')}}
                 </button>
             </ion-item>
-             <ion-item>
+            <ion-item>
                 <p rigth style="float: right;">
-                    <b>Total :</b> {{getTotalPriceInOrder()}}
-                </p>
-            </ion-item>
-        </ion-list>
-    </div>
+<b>Total :</b> {{getTotalPriceInOrder()}}
+</p>
+
+</ion-item>
+<ion-item>
     <p padding>
         <button [hidden]="orderData.StatuId != 0" ion-button color="primary" block (click)="updateOrder()" icon-left><ion-icon ios="ios-cash" md="md-cash"></ion-icon> &nbsp; {{getLabel('OrderDetail.UpdateOrder')}}</button>
-        <button *ngIf="orderData.StatuId == 0" ion-button color="secondary" block (click)="changeOrderStatus(1)" icon-left>
-              <ion-icon ios="ios-checkmark" md="md-checkmark"></ion-icon>&nbsp;{{getLabel('OrderDetail.SendToCenter')}}</button>
-        <button *ngIf="orderData.StatuId != 2" ion-button color="danger" block (click)="changeOrderStatus(2)" icon-left>
-              <ion-icon ios="ios-close" md="md-close"></ion-icon>&nbsp;{{getLabel('OrderDetail.CancelOrder')}}</button>
     </p>
+</ion-item>
+</ion-list>
+</div>
+
 </ion-content>

@@ -146,26 +146,58 @@ export class OrderDetailPage extends BasePage {
     presentActionSheet() {
         let orderData = this.orderData;
         let exportService = this.exportService;
-        let buttons = [
-            {
-                text: 'Send Email',
+        let buttons = [];
+        
+        if (this.orderData.StatuId == 0) {
+            let that = this;
+            buttons.push(
+                {
+                    text: that.getLabel('OrderDetail.SendToCenter'),
+                    handler: () => {
+                        that.changeOrderStatus(1);
+                    }
+                }
+            );
+            buttons.push(
+                {
+                    text: that.getLabel('OrderDetail.CancelOrder'),
+                    handler: () => {
+                        that.changeOrderStatus(2);
+                    }
+                }
+            );
+        }
+        buttons.push({
+            text: 'Send Email',
                 handler: () => {
                     console.log('Send Email');
                 }
-            }, {
-                text: 'Export PDF ',
+        });
+        buttons.push({
+            text: 'Export PDF ',
                 handler: () => {
                     exportService.exportPdf(orderData.Id);
                     console.log('Export PDF');
                 }
-            }, {
-                text: 'Cancel',
+        });
+        buttons.push({
+            text: 'Cancel',
                 role: 'cancel',
-                handler: () => {
-                    console.log('Cancel clicked');
+                    handler: () => {
+                        console.log('Cancel clicked');
+                    }
+        });
+        if (this.orderData.StatuId == 1) {
+            let that = this;
+            buttons.push(
+                {
+                    text: that.getLabel('OrderDetail.CancelOrder'),
+                    handler: () => {
+                        that.changeOrderStatus(2);
+                    }
                 }
-            }
-        ];
+            );
+        }
 
         let actionSheet = this.actionSheetCtrl.create({
             title: 'Select Your Action',
