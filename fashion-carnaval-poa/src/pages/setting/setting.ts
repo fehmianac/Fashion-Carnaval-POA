@@ -30,4 +30,9 @@ export class SettingPage extends BasePage {
         this.globalVariables.dismissLoading();
         this.globalVariables.showAlert(this.getLabel('Alert.SettingSaved.Title'), this.getLabel('Alert.SettingSaved.Description'));
     }
+
+    removeLocalData(){
+        this.globalVariables.removeAllLocalData();
+        location.reload();
+    }
 }

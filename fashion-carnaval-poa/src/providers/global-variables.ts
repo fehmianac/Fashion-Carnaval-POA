@@ -156,4 +156,8 @@ export class GlobalVariables {
         }
         return "";
     }
+
+    removeAllLocalData(){
+        this.storage.clear();
+    }
 }

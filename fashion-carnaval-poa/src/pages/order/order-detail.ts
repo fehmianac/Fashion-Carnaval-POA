@@ -9,6 +9,7 @@ import { OrderService } from '../../services/order-service'
 import { CompanyService } from '../../services/company-service'
 import { ActionSheetController } from 'ionic-angular';
 import { UpdateProductInOrder } from './update-product-in-order'
+import { ExportService } from '../../services/export-service'
 
 @Component({
     selector: 'order-detail',
@@ -26,7 +27,7 @@ export class OrderDetailPage extends BasePage {
     };
     isEditable = false;
 
-    constructor(public navCtrl: NavController, public params: NavParams, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public actionSheetCtrl: ActionSheetController, public orderService: OrderService, public customerService: CompanyService) {
+    constructor(public navCtrl: NavController, public params: NavParams, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public actionSheetCtrl: ActionSheetController, public orderService: OrderService, public customerService: CompanyService, public exportService: ExportService) {
         super(multiLanguage, globalVariables);
         this.pet = "customerDetail";
         let order = params.get("order");
@@ -109,7 +110,7 @@ export class OrderDetailPage extends BasePage {
         for (let i = 1; i <= this.globalVariables.getMaxSizeCount(); i++) {
             let size = "Size" + i;
             let value = product[size];
-            if ((value != null && value.toString() != "" && value.toString() != "0" )) {
+            if ((value != null && value.toString() != "" && value.toString() != "0")) {
                 result += " Size " + i;
                 result += ": ";
                 result += value;
@@ -143,6 +144,8 @@ export class OrderDetailPage extends BasePage {
     }
 
     presentActionSheet() {
+        let orderData = this.orderData;
+        let exportService = this.exportService;
         let buttons = [
             {
                 text: 'Send Email',
@@ -152,6 +155,7 @@ export class OrderDetailPage extends BasePage {
             }, {
                 text: 'Export PDF ',
                 handler: () => {
+                    exportService.exportPdf(orderData.Id);
                     console.log('Export PDF');
                 }
             }, {
@@ -172,9 +176,9 @@ export class OrderDetailPage extends BasePage {
 
     getTotalPriceInOrder() {
         let currency = "";
-        let price = "0";
-        if(this.orderData.ProductList == undefined){
-            return 0;
+        let price = 0;
+        if (this.orderData.ProductList == undefined) {
+            return price.toFixed(2);
         }
         for (let i = 0; i < this.orderData.ProductList.length; i++) {
             for (let j = 1; j <= this.globalVariables.getMaxSizeCount(); j++) {
