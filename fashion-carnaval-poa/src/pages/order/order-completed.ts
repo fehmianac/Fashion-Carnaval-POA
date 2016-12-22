@@ -13,7 +13,7 @@ import { BasePage } from '../base-page'
 export class OrderCompletedPage extends BasePage {
 
     constructor(public navCtrl: NavController, public params: NavParams, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables) {
-        super(multiLanguage, globalVariables);
+       super(multiLanguage, globalVariables);
     }
 
 }

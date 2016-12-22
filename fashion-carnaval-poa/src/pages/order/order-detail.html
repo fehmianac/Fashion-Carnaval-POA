@@ -35,8 +35,32 @@
                     <ion-icon ios="ios-people" md="md-people" item-left large></ion-icon>
                     <div>
                         <h2>{{currentCustomer.Name}}</h2>
-                        <p>{{currentCustomer.Addresse}}</p>
-                        <p>{{currentCustomer.City}} / {{currentCustomer.State}}</p>
+                        <p> <b>{{getLabel('CustomerForm.Item.Addresse')}} :</b> {{currentCustomer.Addresse}}</p>
+                        <p><b>{{getLabel('CustomerForm.Item.City')}} :</b> {{currentCustomer.City}} / <b>{{getLabel('CustomerForm.Item.State')}} :</b>{{currentCustomer.State}}</p>
+                        <p>
+                            <b>{{getLabel('CustomerForm.Item.Email')}} :</b> {{currentCustomer.Email}}
+                        </p>
+                        <p>
+                            <b>{{getLabel('CustomerForm.Item.CC')}} :</b> {{currentCustomer.CC}}
+                        </p>
+                        <p>
+                            <b>{{getLabel('CustomerForm.Item.Phone')}} :</b> {{currentCustomer.Phone}}
+                        </p>
+                        <p>
+                            <b>{{getLabel('CustomerForm.Item.Fax')}} :</b> {{currentCustomer.Fax}}
+                        </p>
+                        <p>
+                            <b>{{getLabel('CustomerForm.Item.ZipCode')}} :</b> {{currentCustomer.ZipCode}}
+                        </p>
+                        <p>
+                            <b>{{getLabel('CustomerForm.Item.BillToDetail')}} :</b> {{currentCustomer.BillToDetail}}
+                        </p>
+                        <p>
+                            <b>{{getLabel('CustomerForm.Item.SpecialWants')}} :</b> {{currentCustomer.SpecialWants}}
+                        </p>
+                        <p>
+                            <b>{{getLabel('CustomerForm.Item.Notes')}} :</b> {{currentCustomer.Notes}}
+                        </p>
                     </div>
                 </ion-item>
             </ion-card>

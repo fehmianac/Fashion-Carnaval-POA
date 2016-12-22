@@ -35,6 +35,7 @@ export class MyApp extends BasePage {
             { icon: "md-settings", title: 'NavigationBar.Setting.Link', component: SettingPage }
         ];
         this.userService.getAllUser();
+
     }
 
     initializeApp() {
@@ -43,6 +44,9 @@ export class MyApp extends BasePage {
             // Here you can do any higher level native things you might need.
             StatusBar.styleDefault();
             Splashscreen.hide();
+            if (this.globalVariables.getCurrentUserId() == null) {
+                this.nav.setRoot(SettingPage, { hideMenu: true });
+            }
         });
     }
 

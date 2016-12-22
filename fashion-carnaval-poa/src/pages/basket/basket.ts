@@ -22,6 +22,7 @@ export class BasketPage extends BasePage {
 
     basketData = null;
     today = null;
+    totalQuantity = 0;
     endDate = null;
     currentCustomer = {};
     pet: string = "customerDetail";
@@ -58,7 +59,9 @@ export class BasketPage extends BasePage {
 
         });
     }
-
+    getTotalQuantity() {
+        return this.basketService.getBasketProductCount();
+    }
     removeFromBasket(product) {
         let basketData = this.basketData;
         let basketService = this.basketService;

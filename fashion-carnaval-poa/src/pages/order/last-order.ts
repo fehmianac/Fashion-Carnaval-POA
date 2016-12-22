@@ -17,11 +17,12 @@ export class LastOrderPage extends BasePage {
     filteredOrderList = [];
     orderStatus = {
         "0": this.getLabel("OrderStatus.Waiting"),
-        "1": this.getLabel("OrderStatus.Approved"),
-        "2": this.getLabel("OrderStatus.Canceled")
+        "1": this.getLabel("OrderStatus.Sent"),
+        "2": this.getLabel("OrderStatus.Canceled"),
+        "3": this.getLabel("OrderStatus.Approved")
     }
     constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public orderService: OrderService) {
-        super(multiLanguage, globalVariables);
+       super(multiLanguage, globalVariables);
         this.globalVariables.presentLoading();
         this.orderService.getOrderList().subscribe(data => {
             let length = data.length;

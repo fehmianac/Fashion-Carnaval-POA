@@ -37,8 +37,32 @@
     </button>
                     <div>
                         <h2>{{currentCustomer.Name}}</h2>
-                        <p>{{currentCustomer.Addresse}}</p>
-                        <p>{{currentCustomer.City}} / {{currentCustomer.State}}</p>
+                        <p> <b>{{getLabel('CustomerForm.Item.Addresse')}} :</b> {{currentCustomer.Addresse}}</p>
+                        <p><b>{{getLabel('CustomerForm.Item.City')}} :</b> {{currentCustomer.City}} / <b>{{getLabel('CustomerForm.Item.State')}} :</b>{{currentCustomer.State}}</p>
+                        <p>
+                            <b>{{getLabel('CustomerForm.Item.Email')}} :</b> {{currentCustomer.Email}}
+                        </p>
+                        <p>
+                            <b>{{getLabel('CustomerForm.Item.CC')}} :</b> {{currentCustomer.CC}}
+                        </p>
+                        <p>
+                            <b>{{getLabel('CustomerForm.Item.Phone')}} :</b> {{currentCustomer.Phone}}
+                        </p>
+                        <p>
+                            <b>{{getLabel('CustomerForm.Item.Fax')}} :</b> {{currentCustomer.Fax}}
+                        </p>
+                        <p>
+                            <b>{{getLabel('CustomerForm.Item.ZipCode')}} :</b> {{currentCustomer.ZipCode}}
+                        </p>
+                        <p>
+                            <b>{{getLabel('CustomerForm.Item.BillToDetail')}} :</b> {{currentCustomer.BillToDetail}}
+                        </p>
+                        <p>
+                            <b>{{getLabel('CustomerForm.Item.SpecialWants')}} :</b> {{currentCustomer.SpecialWants}}
+                        </p>
+                        <p>
+                            <b>{{getLabel('CustomerForm.Item.Notes')}} :</b> {{currentCustomer.Notes}}
+                        </p>
                     </div>
                 </ion-item>
             </ion-card>
@@ -78,24 +102,25 @@
             </ion-item>
             <ion-item>
                 <p style="float: left;">
-                    <button ion-button icon-left clear item-right (click)="continueShopping()" style="margin:0">
-                    <ion-icon ios="ios-search" md="md-search"></ion-icon> {{getLabel('Basket.ContinueShopping.Label')}}
-                 </button>
-                </p>
-                <p rigth style="float: right;">
-                    <b>Total :</b> {{getTotalPriceInBasket()}}
-                </p>
-            </ion-item>
-            <p padding>
-                <button ion-button color="primary" block (click)="completeOrder()" icon-left><ion-icon ios="ios-cash" md="md-cash"></ion-icon> &nbsp; {{getLabel('Basket.CompleteOrder')}}</button>
-            </p>
-        </ion-list>
-    </div>
+<button ion-button icon-left clear item-right (click)="continueShopping()" style="margin:0">
+<ion-icon ios="ios-search" md="md-search"></ion-icon> {{getLabel('Basket.ContinueShopping.Label')}}
+</button>
+</p>
+<p rigth style="float: right;">
+<b>{{getLabel("BasketPage.Total")}} :</b> {{getTotalPriceInBasket()}}<br>
+<b>{{getLabel("BasketPage.Quantity")}} :</b> {{getTotalQuantity()}}
+</p>
+</ion-item>
+<p padding>
+    <button ion-button color="primary" block (click)="completeOrder()" icon-left><ion-icon ios="ios-cash" md="md-cash"></ion-icon> &nbsp; {{getLabel('Basket.CompleteOrder')}}</button>
+</p>
+</ion-list>
+</div>
 
-    <div padding [hidden]="!isBasketEmpty">
-        <p>
-            {{getLabel("BasketPage.IsEmpty")}}
-        </p>
-    </div>
+<div padding [hidden]="!isBasketEmpty">
+    <p>
+        {{getLabel("BasketPage.IsEmpty")}}
+    </p>
+</div>
 
 </ion-content>

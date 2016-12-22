@@ -1,5 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home'
 import { ProductDetailPage } from '../pages/product/product-detail'
@@ -16,6 +17,12 @@ import { OrderCompletedPage } from '../pages/order/order-completed'
 import { UpdateProductInOrder } from '../pages/order/update-product-in-order'
 import { Snippets } from '../component/snippets/snippets'
 import { Services } from '../services/services'
+
+const cloudSettings: CloudSettings = {
+    'core': {
+        'app_id': '849cac73'
+    }
+};
 
 @NgModule({
     declarations: [
@@ -34,7 +41,8 @@ import { Services } from '../services/services'
         UpdateProductInOrder
     ],
     imports: [
-        IonicModule.forRoot(MyApp)
+        IonicModule.forRoot(MyApp),
+        CloudModule.forRoot(cloudSettings)
     ],
     bootstrap: [IonicApp],
     entryComponents: [

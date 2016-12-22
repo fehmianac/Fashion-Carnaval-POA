@@ -19,7 +19,7 @@
   <ion-list class="no-margin">
     <ion-item>
       <ion-label fixed>{{getLabel('HomePage.CurrentUser.TextBox')}}</ion-label>
-      <ion-input [(ngModel)]="currentUserName" type="text"></ion-input>
+      <ion-input [(ngModel)]="currentUserName" type="text" [disabled]="true"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label fixed>{{getLabel('HomePage.CurrentShowRoom.DropDownList')}}</ion-label>

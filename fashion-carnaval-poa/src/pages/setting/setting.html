@@ -1,9 +1,15 @@
 <ion-header>
   <ion-navbar>
     <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
+      <ion-icon name="menu" [hidden]="hideMenu"></ion-icon>
     </button>
     <ion-title>{{getLabel('SettingPage.Title')}}</ion-title>
+    <ion-buttons end [hidden]="hideMenu">
+      <button ion-button (click)="removeLocalData()">
+                 <ion-icon ios="ios-refresh" md="md-refresh"></ion-icon>
+      </button>
+
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -30,6 +36,4 @@
     </ion-item>
   </ion-list>
   <button color="secondary" ion-button full (click)="saveSetting()">{{getLabel('Setting.SaveSettingButton.Label')}}</button>
-  <button ion-button full (click)="removeLocalData()">{{getLabel('Setting.RemoveLocalData.Label')}}</button>
-  
 </ion-content>

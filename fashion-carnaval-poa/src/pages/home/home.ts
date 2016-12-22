@@ -9,6 +9,7 @@ import { BrandServices } from '../../services/brand-service'
 import { ApplicationService } from '../../services/application-service'
 import { UserService } from '../../services/user-service'
 import { CommonService } from '../../services/common-service'
+import { Deploy } from '@ionic/cloud-angular';
 
 @Component({
     selector: 'page-home',
@@ -29,9 +30,29 @@ export class HomePage extends BasePage {
         public brandService: BrandServices,
         public applicationService: ApplicationService,
         public userService: UserService,
-        public commonService: CommonService) {
+        public commonService: CommonService,
+        public deploy: Deploy) {
 
-        super(multiLanguage, globalVariables);
+       super(multiLanguage, globalVariables);
+
+        try {
+            this.deploy.check().then((hasUpdate: boolean) => {
+                console.log(hasUpdate);
+                if (hasUpdate) {
+                    this.globalVariables.showAlert("",this.getLabel("Common.ApplicationWillBeUpdate"))
+                    this.globalVariables.presentLoading();
+                    this.deploy.download().then(() => {
+                        this.deploy.extract().then(() => {
+                            this.deploy.load();
+                        });
+                    });
+                }
+            });
+        } catch (error) {
+
+        }
+
+
         this.applicationService.getApplicationSetting().subscribe(data => {
             this.homeImage = data.HomePageImageUrl;
         });

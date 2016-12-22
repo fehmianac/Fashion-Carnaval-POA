@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Storage } from './storage'
-import { AlertController } from 'ionic-angular';
+import { AlertController} from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 import { MultiLanguage } from './multi-language'
 import { Toast } from 'ionic-native';
@@ -11,7 +11,7 @@ import { Toast } from 'ionic-native';
 export class GlobalVariables {
 
     loading = null;
-    constructor(public storage: Storage, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public multiLanguage: MultiLanguage) {
+    constructor( public storage: Storage, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public multiLanguage: MultiLanguage) {
 
     }
     setCurrentUserName(userName: string) {
@@ -105,7 +105,7 @@ export class GlobalVariables {
     showConfirm(callback) {
         let confirm = this.alertCtrl.create({
             title: this.multiLanguage.getLabel("Common.Confirm.Title"),
-            message:  this.multiLanguage.getLabel("Common.Confirm.Description"),
+            message: this.multiLanguage.getLabel("Common.Confirm.Description"),
             buttons: [
                 {
                     text: this.multiLanguage.getLabel("Common.Confirm.Button.Disagree"),
@@ -157,7 +157,7 @@ export class GlobalVariables {
         return "";
     }
 
-    removeAllLocalData(){
+    removeAllLocalData() {
         this.storage.clear();
     }
 }

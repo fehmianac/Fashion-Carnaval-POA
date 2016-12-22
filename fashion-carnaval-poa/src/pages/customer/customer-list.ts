@@ -21,7 +21,6 @@ export class CustomerListPage extends BasePage {
 
     constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public companyService: CompanyService, public basketService: BasketService) {
         super(multiLanguage, globalVariables);
-
        
     }
 
