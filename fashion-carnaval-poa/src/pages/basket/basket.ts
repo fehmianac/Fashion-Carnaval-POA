@@ -76,6 +76,9 @@ export class BasketPage extends BasePage {
     }
 
     completeOrder() {
+        if (this.basketData.shippingDateEnd == "") {
+            this.globalVariables.showAlert("Basket.Validation.Error.shippingDateEnd.Title", "Basket.Validation.Error.shippingDateEnd.Description"); return;
+        }
         this.basketService.saveBasketData(this.basketData);
         this.globalVariables.presentLoading();
         let call = this.basketService.basketToOrder(this.basketData);

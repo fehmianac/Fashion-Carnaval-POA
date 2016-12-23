@@ -22,22 +22,30 @@ export class LastOrderPage extends BasePage {
         "3": this.getLabel("OrderStatus.Approved")
     }
     constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public orderService: OrderService) {
-       super(multiLanguage, globalVariables);
+        super(multiLanguage, globalVariables);
         this.globalVariables.presentLoading();
+        this.getOrderList();
+    }
+
+    ionViewWillEnter() {
+        this.getOrderList();
+    }
+    getOrderList() {
+            this.orderList =[];
         this.orderService.getOrderList().subscribe(data => {
+            this.globalVariables.dismissLoading();
             let length = data.length;
             for (let i = 0; i < length; i++) {
                 let currentOrder = data[i];
                 currentOrder.StatusText = this.orderStatus[currentOrder.StatuId.toString()];
                 this.orderList.push(currentOrder);
             }
-            this.globalVariables.dismissLoading();
+            
         }, err => {
             this.globalVariables.dismissLoading();
         });
         this.filteredOrderList = this.orderList;
     }
-
     searchLastOrder(event: any) {
         let searchKey = event.target.value;
         if (searchKey == null) {
