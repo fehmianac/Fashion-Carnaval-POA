@@ -161,7 +161,20 @@ export class OrderDetailPage extends BasePage {
             buttons.push(
                 {
                     text: that.getLabel('OrderDetail.CancelOrder'),
-                      role: "destructive",
+                    role: "destructive",
+                    handler: () => {
+                        that.changeOrderStatus(2);
+                    }
+                }
+            );
+        }
+
+        if (this.orderData.StatuId == 1) {
+            let that = this;
+            buttons.push(
+                {
+                    text: that.getLabel('OrderDetail.CancelOrder'),
+                    role: "destructive",
                     handler: () => {
                         that.changeOrderStatus(2);
                     }
@@ -171,6 +184,7 @@ export class OrderDetailPage extends BasePage {
         buttons.push({
             text: this.getLabel('OrderDetail.SendEmail'),
             handler: () => {
+                exportService.sendToEmail(orderData.Id);
                 console.log('Send Email');
             }
         });
@@ -188,19 +202,6 @@ export class OrderDetailPage extends BasePage {
                 console.log('Cancel clicked');
             }
         });
-        if (this.orderData.StatuId == 1) {
-            let that = this;
-            buttons.push(
-                {
-                    text: that.getLabel('OrderDetail.CancelOrder'),
-                    role: "destructive",
-                    handler: () => {
-                        that.changeOrderStatus(2);
-                    }
-                }
-            );
-        }
-
         let actionSheet = this.actionSheetCtrl.create({
             title: this.getLabel('OrderDetail.SelectYourAction'),
             buttons: buttons

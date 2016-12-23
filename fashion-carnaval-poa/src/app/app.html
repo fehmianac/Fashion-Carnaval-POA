@@ -10,6 +10,13 @@
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)" icon-left>
         <ion-icon name="{{p.icon}}" item-left></ion-icon> {{getLabel(p.title)}}
       </button>
+      <ion-item>
+        <p style="text-align: right;">
+          <img src="assets/menu-logo.png" style="width:50%" />
+          <br>
+          <b>{{getLabel("Common.CopyRightText")}}</b>
+        </p>
+      </ion-item>
     </ion-list>
   </ion-content>
 

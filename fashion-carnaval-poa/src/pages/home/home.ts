@@ -43,6 +43,7 @@ export class HomePage extends BasePage {
                     this.globalVariables.presentLoading();
                     this.deploy.download().then(() => {
                         this.deploy.extract().then(() => {
+                            this.multiLanguage.reloadLanguageKeys();
                             this.deploy.load();
                         });
                     });

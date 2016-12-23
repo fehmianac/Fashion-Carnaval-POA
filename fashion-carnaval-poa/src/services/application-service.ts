@@ -38,12 +38,20 @@ export class ApplicationService {
     };
 
     getColorList() {
-        let apiCall = this.api.get("Color").map(res => res.json());
-        apiCall.subscribe(data => {
-            this.storage.set("colorList", data); 
-        }, error => {
+        let colorData = this.storage.getAsJson("colorList");
+        if (colorData == null) {
+            let apiCall = this.api.get("Color").map(res => res.json());
+            apiCall.subscribe(data => {
+                this.storage.set("colorList", data);
+            }, error => {
 
+            });
+            return apiCall;
+        }
+        return Observable.create(observer => {
+            observer.next(colorData);
+            observer.next(colorData);
+            observer.complete();
         });
-        return apiCall;
     }
 }

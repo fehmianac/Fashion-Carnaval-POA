@@ -48,9 +48,9 @@ export class BasketPage extends BasePage {
         }
 
         let date1 = new Date(currentBrand.ShipmentEndDate);
-        let year1 = date.getFullYear()
-        let month1 = date.getMonth() + 1;
-        let day1 = date.getDate();
+        let year1 = date1.getFullYear()
+        let month1 = date1.getMonth() + 1;
+        let day1 = date1.getDate();
         this.endDate = year1 + '-' + month1 + '-' + day1;
 
         this.companyService.getCompanyById(this.basketData.customerId).subscribe(data => {

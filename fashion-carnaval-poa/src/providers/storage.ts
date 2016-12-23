@@ -14,7 +14,7 @@ export class Storage {
     }
     getAsJson(key: string) {
         var itemInLocalStrage = localStorage.getItem(key);
-        if (itemInLocalStrage == null) {
+        if (itemInLocalStrage == null || itemInLocalStrage == undefined || itemInLocalStrage == "undefined") {
             return null;
         }
         return JSON.parse(itemInLocalStrage);

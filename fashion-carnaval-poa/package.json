@@ -35,7 +35,8 @@
     "cordova-plugin-console",
     "cordova-plugin-device",
     "cordova-plugin-splashscreen",
-    "ionic-plugin-keyboard"
+    "ionic-plugin-keyboard",
+    "ionic-plugin-deploy"
   ],
   "cordovaPlatforms": [],
   "description": "fashion-carnaval-poa: An Ionic project"

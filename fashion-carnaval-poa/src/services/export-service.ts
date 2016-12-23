@@ -25,5 +25,16 @@ export class ExportService {
         return apiCall;
     }
 
+    sendToEmail(orderId) {
+        let apiCall = this.api.get("Util/" + orderId).map(res => res.json());
+        apiCall.subscribe(data => {
+            let url = data.Url;
+            location.href = url;
+        }, error => {
+
+        })
+        return apiCall;
+    }
+
 
 }

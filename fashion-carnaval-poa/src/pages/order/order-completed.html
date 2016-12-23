@@ -4,11 +4,15 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>{{getLabel('OrderCompleted.Title')}}</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="presentActionSheet()">
+                   <ion-icon ios="ios-document" md="md-document"></ion-icon>
+            </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
-  <ion-content class="card-background-page">
-    <p padding>
-       <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon>
-           {{getLabel('OrderCompleted.Description')}}
-    </p>
+<ion-content class="card-background-page">
+  <p padding>
+    <img src="assets/check.png" style="float:left;" /> {{getLabel('OrderCompleted.Description')}}
+  </p>
 </ion-content>
