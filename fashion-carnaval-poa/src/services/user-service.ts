@@ -43,4 +43,10 @@ export class UserService {
             observer.complete();
         });
     }
+
+    doLogin(userName, password) {
+        let apiCall = this.api.get("User?username=" + userName + "&password=" + password).map(res => res.json());
+        return apiCall;
+
+    }
 }

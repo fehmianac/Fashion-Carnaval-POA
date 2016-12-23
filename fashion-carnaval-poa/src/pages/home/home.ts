@@ -33,13 +33,13 @@ export class HomePage extends BasePage {
         public commonService: CommonService,
         public deploy: Deploy) {
 
-       super(multiLanguage, globalVariables);
+        super(multiLanguage, globalVariables);
 
         try {
             this.deploy.check().then((hasUpdate: boolean) => {
                 console.log(hasUpdate);
                 if (hasUpdate) {
-                    this.globalVariables.showAlert("",this.getLabel("Common.ApplicationWillBeUpdate"))
+                    this.globalVariables.showAlert("", this.getLabel("Common.ApplicationWillBeUpdate"))
                     this.globalVariables.presentLoading();
                     this.deploy.download().then(() => {
                         this.deploy.extract().then(() => {
@@ -92,27 +92,8 @@ export class HomePage extends BasePage {
     }
 
     selectBrand(id: number) {
-        if (this.currentUserName == "" || this.currentUserName == "null" || this.currentUserName == undefined) {
-            this.globalVariables.showAlert(this.getLabel("Validation.UserName.MustNotBeNull.Title"), this.getLabel("Validation.UserName.MustNotBeNull.Description"));
-            return;
-        }
-        this.userService.findUserInLocalData(this.currentUserName).subscribe(data => {
-            if (data != null) {
-                this.globalVariables.setCurrentBrandId(id);
-                this.globalVariables.setCurrentUserName(this.currentUserName);
-                this.globalVariables.setCurrentUserId(data.Id);
-                this.globalVariables.setCurrentUserPriceTypeId(data.PriceTypeId);
-                if (this.showRoomList.length == 0) {
-                    this.globalVariables.showAlert(this.getLabel("Validation.Showroom.MustNotBeNull.Title"), this.getLabel("Validation.UserName.Showroom.Description"));
-                    this.getShowList();
-                    return;
-                }
-                this.globalVariables.setCurrentShowroomId(this.currentShowRoom);
-                this.navCtrl.setRoot(CustomerListPage);
-            } else {
-                this.globalVariables.showAlert(this.getLabel("Validation.UserName.NotFound.Title"), this.getLabel("Validation.UserName.NotFound.Description"));
-            }
-        });
-
+        this.globalVariables.setCurrentBrandId(id);
+        this.globalVariables.setCurrentShowroomId(this.currentShowRoom);
+        this.navCtrl.setRoot(CustomerListPage);
     }
 }

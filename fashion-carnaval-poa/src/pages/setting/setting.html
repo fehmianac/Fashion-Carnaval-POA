@@ -8,11 +8,9 @@
       <button ion-button (click)="removeLocalData()">
                  <ion-icon ios="ios-refresh" md="md-refresh"></ion-icon>
       </button>
-
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-
 <ion-content>
   <ion-list>
     <ion-list-header>
@@ -20,7 +18,7 @@
     </ion-list-header>
     <ion-item>
       <ion-label fixed>{{getLabel('HomePage.CurrentUser.TextBox')}}</ion-label>
-      <ion-input [(ngModel)]="currentUserName" type="text"></ion-input>
+      <ion-input [(ngModel)]="currentUserName" type="text" [disabled]="true"></ion-input>
     </ion-item>
 
   </ion-list>
@@ -35,5 +33,9 @@
       </ion-select>
     </ion-item>
   </ion-list>
-  <button color="secondary" ion-button full (click)="saveSetting()">{{getLabel('Setting.SaveSettingButton.Label')}}</button>
+  <button color="secondary" ion-button full (click)="saveSetting()" icon-left>
+     <ion-icon ios="ios-bookmark" md="md-bookmark"></ion-icon> {{getLabel('Setting.SaveSettingButton.Label')}}</button>
+  <button color="danger" ion-button full (click)="logOut()" icon-left>
+     <ion-icon ios="ios-log-out" md="md-log-out"></ion-icon>
+    {{getLabel('Setting.LogOut.Label')}}</button>
 </ion-content>

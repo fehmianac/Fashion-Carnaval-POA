@@ -6,6 +6,7 @@ import { BasePage } from '../base-page'
 import { HomePage } from '../home/home'
 import { AlertController } from 'ionic-angular';
 import { UserService } from '../../services/user-service'
+import { LoginPage } from '../login/login'
 
 @Component({
     selector: 'setting-page',
@@ -50,6 +51,13 @@ export class SettingPage extends BasePage {
 
     removeLocalData() {
         this.globalVariables.removeAllLocalData();
-        location.reload();
+        setTimeout(function () {
+            location.reload();
+        }, 1000);
+    }
+
+    logOut() {
+        this.globalVariables.setCurrentUserId(null);
+        this.navCtrl.setRoot(LoginPage);
     }
 }

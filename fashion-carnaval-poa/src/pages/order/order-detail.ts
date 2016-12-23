@@ -95,7 +95,7 @@ export class OrderDetailPage extends BasePage {
             if (product["Size1"] > 0)
                 result += " Size I: " + product["Size1"];
 
-            if (product["size2"] > 0)
+            if (product["Size2"] > 0)
                 result += " Size II: " + product["Size2"];
 
             if (product["Size3"] > 0)

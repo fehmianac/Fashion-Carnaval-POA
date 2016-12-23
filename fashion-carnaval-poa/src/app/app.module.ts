@@ -12,6 +12,8 @@ import { LastOrderPage } from '../pages/order/last-order'
 import { SettingPage } from '../pages/setting/setting'
 import { OrderDetailPage } from '../pages/order/order-detail'
 import { BasketPage } from '../pages/basket/basket'
+import { LoginPage } from '../pages/login/login'
+
 import { UpdateProductInBasket } from '../pages/basket/update-product'
 import { OrderCompletedPage } from '../pages/order/order-completed'
 import { UpdateProductInOrder } from '../pages/order/update-product-in-order'
@@ -38,7 +40,8 @@ const cloudSettings: CloudSettings = {
         OrderCompletedPage,
         Snippets,
         UpdateProductInBasket,
-        UpdateProductInOrder
+        UpdateProductInOrder,
+        LoginPage
     ],
     imports: [
         IonicModule.forRoot(MyApp),
@@ -58,7 +61,8 @@ const cloudSettings: CloudSettings = {
         OrderCompletedPage,
         Snippets,
         UpdateProductInBasket,
-        UpdateProductInOrder
+        UpdateProductInOrder,
+        LoginPage
     ],
     providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, Providers, Services, Snippets]
 })

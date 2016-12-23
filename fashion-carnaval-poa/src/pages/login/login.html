@@ -1,0 +1,30 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{getLabel('LoginPage.Title')}}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="card-background-page">
+    <ion-card>
+        <img src="{{homeImage}}" />
+        <div class="card-title">{{getLabel('HomePage.CompanyName')}}</div>
+        <div class="card-subtitle">{{getLabel('HomePage.CompanySubTitle')}}</div>
+    </ion-card>
+    <ion-card-content>
+        {{getLabel('LoginPage.Description')}}
+    </ion-card-content>
+    <ion-list class="no-margin">
+        <ion-item>
+            <ion-label fixed>{{getLabel('LoginPage.CurrentUser.TextBox')}}</ion-label>
+            <ion-input [(ngModel)]="userName" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>{{getLabel('LoginPage.CurrentUser.Password')}}</ion-label>
+            <ion-input [(ngModel)]="password" type="password"></ion-input>
+        </ion-item>
+    </ion-list>
+    <p padding>
+        <button ion-button color="primary" block (click)="doLogin()" icon-left>
+             <ion-icon ios="ios-log-in" md="md-log-in"></ion-icon> &nbsp; {{getLabel('LoginPage.DoLogin')}}</button>
+    </p>
+</ion-content>

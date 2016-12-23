@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { BasePage } from '../pages/base-page';
 import { LastOrderPage } from '../pages/order/last-order'
 import { SettingPage } from '../pages/setting/setting'
+import { LoginPage } from '../pages/login/login'
 import { BasketPage } from '../pages/basket/basket'
 import { ApplicationService } from '../services/application-service'
 import { UserService } from '../services/user-service'
@@ -34,8 +35,7 @@ export class MyApp extends BasePage {
             { icon: "md-cart", title: 'NavigationBar.Basket.Link', component: BasketPage },
             { icon: "md-settings", title: 'NavigationBar.Setting.Link', component: SettingPage }
         ];
-        this.userService.getAllUser();
-
+        //this.userService.getAllUser();
     }
 
     initializeApp() {
@@ -44,8 +44,8 @@ export class MyApp extends BasePage {
             // Here you can do any higher level native things you might need.
             StatusBar.styleDefault();
             Splashscreen.hide();
-            if (this.globalVariables.getCurrentUserId() == null) {
-                this.nav.setRoot(SettingPage, { hideMenu: true });
+            if (this.globalVariables.getCurrentUserId() == null || this.globalVariables.getCurrentUserId() == "null") {
+                this.nav.setRoot(LoginPage);
             }
         });
     }
