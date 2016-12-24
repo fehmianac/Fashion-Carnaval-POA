@@ -21,13 +21,13 @@ export class CustomerListPage extends BasePage {
 
     constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public companyService: CompanyService, public basketService: BasketService) {
         super(multiLanguage, globalVariables);
-       
+
     }
 
     ionViewWillEnter() {
         this.doRefresh(null);
     }
-    
+
     doRefresh(event) {
         this.customerList = [];
         this.filteredCustomerList = [];
@@ -81,7 +81,7 @@ export class CustomerListPage extends BasePage {
         var addedId = [];
         for (let i = 0; i < this.customerList.length; i++) {
             let customer = this.customerList[i];
-            if (customer.Name.toLowerCase().indexOf(searchKey.toLowerCase()) > -1) {
+            if (customer.Name != null && customer.Name.toLowerCase().indexOf(searchKey.toLowerCase()) > -1) {
                 result.push(customer);
                 addedId.push(customer.Id);
             }
@@ -89,7 +89,7 @@ export class CustomerListPage extends BasePage {
 
         for (let i = 0; i < this.customerList.length; i++) {
             let customer = this.customerList[i];
-            if (customer.Addresse.toLowerCase().indexOf(searchKey.toLowerCase()) > -1 && addedId.indexOf(customer.Id) == -1) {
+            if (customer.Addresse != null && customer.Addresse.toLowerCase().indexOf(searchKey.toLowerCase()) > -1 && addedId.indexOf(customer.Id) == -1) {
                 result.push(customer);
                 addedId.push(customer.Id);
             }
@@ -97,7 +97,7 @@ export class CustomerListPage extends BasePage {
 
         for (let i = 0; i < this.customerList.length; i++) {
             let customer = this.customerList[i];
-            if (customer.City.toLowerCase().indexOf(searchKey.toLowerCase()) > -1 && addedId.indexOf(customer.Id) == -1) {
+            if (customer.City != null && customer.City.toLowerCase().indexOf(searchKey.toLowerCase()) > -1 && addedId.indexOf(customer.Id) == -1) {
                 result.push(customer);
                 addedId.push(customer.Id);
             }
@@ -106,7 +106,7 @@ export class CustomerListPage extends BasePage {
 
         for (let i = 0; i < this.customerList.length; i++) {
             let customer = this.customerList[i];
-            if (customer.State.toLowerCase().indexOf(searchKey.toLowerCase()) > -1 && addedId.indexOf(customer.Id) == -1) {
+            if (customer.State != null && customer.State.toLowerCase().indexOf(searchKey.toLowerCase()) > -1 && addedId.indexOf(customer.Id) == -1) {
                 result.push(customer);
                 addedId.push(customer.Id);
             }

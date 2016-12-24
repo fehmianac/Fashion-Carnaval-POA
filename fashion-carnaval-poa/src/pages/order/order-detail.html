@@ -78,11 +78,11 @@
             </ion-item>
             <ion-item>
                 <ion-label floating>{{getLabel('BasketPage.CustomerNote')}}</ion-label>
-                <ion-textarea [disabled]="orderData.StatuId != 0" [(ngModel)]="orderData.CustomerNote">></ion-textarea>
+                <ion-textarea [disabled]="orderData.StatuId != 0" [(ngModel)]="orderData.CustomerNote" rows="5"></ion-textarea>
             </ion-item>
             <ion-item>
                 <ion-label floating>{{getLabel('BasketPage.AdminNote')}}</ion-label>
-                <ion-textarea [disabled]="orderData.StatuId != 0" [(ngModel)]="orderData.AdminNote">></ion-textarea>
+                <ion-textarea [disabled]="orderData.StatuId != 0" [(ngModel)]="orderData.AdminNote" rows="5"></ion-textarea>
             </ion-item>
         </ion-list>
 

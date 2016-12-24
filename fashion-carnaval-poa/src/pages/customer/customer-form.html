@@ -20,7 +20,7 @@
             </ion-item>
             <ion-item>
                 <ion-label floating>{{getLabel('CustomerForm.Item.CC')}}</ion-label>
-                <ion-input type="text" [(ngModel)]="customerModel.CC" name="CC"></ion-input>
+                <ion-input type="email" [(ngModel)]="customerModel.CC" name="CC"></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label floating>{{getLabel('CustomerForm.Item.Phone')}}</ion-label>
@@ -44,7 +44,7 @@
             </ion-item>
             <ion-item>
                 <ion-label floating>{{getLabel('CustomerForm.Item.ZipCode')}}</ion-label>
-                <ion-input type="text" [(ngModel)]="customerModel.ZipCode" name="ZipCode"></ion-input>
+                <ion-input type="number" [(ngModel)]="customerModel.ZipCode" name="ZipCode"></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label floating>{{getLabel('CustomerForm.Item.BillToDetail')}}</ion-label>

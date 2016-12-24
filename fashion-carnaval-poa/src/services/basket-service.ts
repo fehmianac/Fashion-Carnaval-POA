@@ -144,7 +144,8 @@ export class BasketService {
             "ProductList": [],
             "Id": basketData.orderKey,
             "CreatedDate": "2016.12.12",
-            "LastModifiedDate": "2016.12.12"
+            "LastModifiedDate": "2016.12.12",
+            "Total": this.getBasketPrice()
         }
         let length = basketData.productList.length;
         for (let i = 0; i < length; i++) {

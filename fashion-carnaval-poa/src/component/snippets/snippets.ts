@@ -23,11 +23,21 @@ export class Snippets {
         }
     }
     increase() {
+        if (this.value == null) {
+            this.value = 0;
+        }
+        if (this.value + 1 > 99) {
+            return;
+        }
         this.value = parseInt(this.value.toString()) + 1;
         this.callback.emit(this.value.toString());
     }
 
     decrease() {
+
+        if (this.value == null) {
+            this.value = 0;
+        }
         if (this.value <= 0) {
             return;
         }
@@ -36,6 +46,25 @@ export class Snippets {
     }
 
     onChanges(event) {
+
+        if (this.value == null) {
+            this.value = 0;
+        }
         this.callback.emit(this.value.toString());
+    }
+
+    onFocus() {
+        if (this.value == 0) {
+            this.value = null;
+        }
+    }
+
+    onBlur() {
+        if (this.value == null) {
+            this.value = 0;
+        }
+        if (this.value > 99) {
+            this.value = 99;
+        }
     }
 }
