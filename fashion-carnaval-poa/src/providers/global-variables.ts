@@ -128,7 +128,7 @@ export class GlobalVariables {
     presentLoading() {
         this.loading = this.loadingCtrl.create({
             content: this.multiLanguage.getLabel("Common.LoadingLabel"),
-            duration: 3000,
+            duration: 130000,
             dismissOnPageChange: true
         });
         this.loading.present();

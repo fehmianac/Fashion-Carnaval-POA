@@ -18,13 +18,15 @@ export class CustomerListPage extends BasePage {
 
     customerList = [];
     filteredCustomerList = [];
-
+    currentPage = 0;
+    searchKey = null;
     constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public companyService: CompanyService, public basketService: BasketService) {
         super(multiLanguage, globalVariables);
 
     }
 
     ionViewWillEnter() {
+        this.currentPage = 0;
         this.doRefresh(null);
     }
 
@@ -46,6 +48,27 @@ export class CustomerListPage extends BasePage {
                     "Addresse": currentCustomer.Addresse
                 });
             }
+            let limit = 10 * this.currentPage;
+            if (event != null) {
+                let limit = 10;
+                this.currentPage = 0;
+            }
+            if (limit == 0) {
+                limit = 10;
+            }
+            let array = [];
+            for (let i = 0; i < limit; i++) {
+
+                if (this.customerList.length < i) {
+                    continue;
+                }
+                let item = this.customerList[i];
+                if (item == undefined) {
+                    continue;
+                }
+                array.push(item);
+            }
+            this.filteredCustomerList = array;
             this.globalVariables.dismissLoading();
             if (event != null) {
                 event.complete();
@@ -58,10 +81,30 @@ export class CustomerListPage extends BasePage {
                     event.complete();
                 }
             });
-        this.filteredCustomerList = this.customerList;
+
 
     }
 
+    doInfinite(event) {
+        this.currentPage++;
+        let limit = 10 * this.currentPage;
+        if (limit < 10) {
+            limit = 10;
+        }
+        let customerList = this.searchCompanyInArray(this.searchKey);;
+        for (let i = limit; i < limit + 10; i++) {
+            if (customerList.length < i) {
+                continue;
+            }
+            let item = customerList[i];
+            if (item == undefined) {
+                continue;
+            }
+            this.filteredCustomerList.push(item);
+        }
+        console.log("infinite");
+        event.complete();
+    }
     openCustomerForm(companyId) {
         this.navCtrl.push(CustomerFormPage, { customerId: companyId });
 
@@ -70,11 +113,13 @@ export class CustomerListPage extends BasePage {
     searchInCompany(event) {
 
         let searchKey = event.target.value;
+        this.searchKey = searchKey;
+        this.currentPage = 0;
         this.filteredCustomerList = this.searchCompanyInArray(searchKey);
     }
 
     private searchCompanyInArray(searchKey: string) {
-        if (searchKey == undefined) {
+        if (searchKey == undefined || searchKey == null) {
             return this.customerList;
         }
         let result = [];

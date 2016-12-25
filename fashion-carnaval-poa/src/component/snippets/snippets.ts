@@ -53,13 +53,13 @@ export class Snippets {
         this.callback.emit(this.value.toString());
     }
 
-    onFocus() {
+    onFocus(event) {
         if (this.value == 0) {
             this.value = null;
         }
     }
 
-    onBlur() {
+    onBlur(event) {
         if (this.value == null) {
             this.value = 0;
         }
