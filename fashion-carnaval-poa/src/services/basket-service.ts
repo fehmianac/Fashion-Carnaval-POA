@@ -167,8 +167,8 @@ export class BasketService {
                 "OrderId": basketData.orderKey
             });
         }
-        console.log(JSON.stringify(orderModel));
-        return this.api.post("/Basket", orderModel);
+
+        return this.api.post("/Basket", orderModel).map(res => res.json());;
     }
     clearBasket() {
         this.storage.delete("basket");

@@ -3,7 +3,7 @@
         <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-        <ion-title>{{getLabel('OrderDetail.Title')}}</ion-title>
+        <ion-title>{{getLabel('OrderDetail.Title')}} - {{orderData.OrderNo}}</ion-title>
 
         <ion-buttons end>
             <button ion-button (click)="presentActionSheet()">

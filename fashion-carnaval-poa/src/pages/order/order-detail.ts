@@ -184,7 +184,11 @@ export class OrderDetailPage extends BasePage {
         buttons.push({
             text: this.getLabel('OrderDetail.SendEmail'),
             handler: () => {
-                exportService.sendToEmail(orderData.Id);
+                exportService.sendToEmail(orderData.Id).subscribe(data => {
+                    this.globalVariables.showSuccessAlert();
+                }, error => {
+                    this.globalVariables.showErrorAlert();
+                });
                 console.log('Send Email');
             }
         });

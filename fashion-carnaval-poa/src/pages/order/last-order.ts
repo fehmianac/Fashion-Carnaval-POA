@@ -31,7 +31,7 @@ export class LastOrderPage extends BasePage {
         this.getOrderList();
     }
     getOrderList() {
-            this.orderList =[];
+        this.orderList = [];
         this.orderService.getOrderList().subscribe(data => {
             this.globalVariables.dismissLoading();
             let length = data.length;
@@ -40,7 +40,7 @@ export class LastOrderPage extends BasePage {
                 currentOrder.StatusText = this.orderStatus[currentOrder.StatuId.toString()];
                 this.orderList.push(currentOrder);
             }
-            
+
         }, err => {
             this.globalVariables.dismissLoading();
         });
@@ -54,16 +54,28 @@ export class LastOrderPage extends BasePage {
         }
 
         let tempOrderList = [];
+        let addedId = [];
         let length = this.orderList.length;
         for (let i = 0; i < length; i++) {
             let currentOrder = this.orderList[i];
+            if (addedId.indexOf(currentOrder.OrderNo)) {
+                continue;
+            }
             if (currentOrder.CustomerBasicDto.Name.toLowerCase().indexOf(searchKey.toLowerCase()) > -1) {
                 tempOrderList.push(currentOrder);
+                addedId.push(currentOrder.OrderNo);
                 continue;
             }
             let statusText = this.orderStatus[currentOrder.StatuId.toString()];
             if (statusText.toLowerCase().indexOf(searchKey.toLowerCase()) > -1) {
                 tempOrderList.push(currentOrder);
+                addedId.push(currentOrder.OrderNo);
+                continue;
+            }
+
+            if (currentOrder.OrderNo.toString().toLowerCase().indexOf(searchKey.toLowerCase()) > -1) {
+                tempOrderList.push(currentOrder);
+                addedId.push(currentOrder.OrderNo);
                 continue;
             }
 

@@ -83,13 +83,13 @@ export class BasketPage extends BasePage {
         this.globalVariables.presentLoading();
         let call = this.basketService.basketToOrder(this.basketData);
         call.subscribe(data => {
-            if (data.text() == "true") {
+            if (data.IsSuccess) {
                 let orderKey = this.basketData.orderKey;
                 this.basketService.clearBasket();
                 let navCtrl = this.navCtrl;
                 this.globalVariables.showAlert("BasketPage.BasketToOrder.Success.Title", "BasketPage.BasketToOrder.Success.Description").then(function () {
 
-                    navCtrl.setRoot(OrderCompletedPage, { orderKey: orderKey })
+                    navCtrl.setRoot(OrderCompletedPage, { orderKey: orderKey, OrderNo: data.OrderNo })
                 });
             } else {
                 this.globalVariables.showAlert("BasketPage.BasketToOrder.Error.Title", "BasketPage.BasketToOrder.Error.Description");
