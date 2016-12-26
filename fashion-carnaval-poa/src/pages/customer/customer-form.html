@@ -16,11 +16,11 @@
             </ion-item>
             <ion-item>
                 <ion-label floating>{{getLabel('CustomerForm.Item.Email')}}</ion-label>
-                <ion-input type="email" [(ngModel)]="customerModel.Email" name="Email"></ion-input>
+                <ion-input type="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" [(ngModel)]="customerModel.Email" name="Email"></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label floating>{{getLabel('CustomerForm.Item.CC')}}</ion-label>
-                <ion-input type="email" [(ngModel)]="customerModel.CC" name="CC"></ion-input>
+                <ion-input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" [(ngModel)]="customerModel.CC" name="CC"></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label floating>{{getLabel('CustomerForm.Item.Phone')}}</ion-label>

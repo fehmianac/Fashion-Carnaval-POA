@@ -66,4 +66,5 @@ export class CustomerFormPage extends BasePage {
             this.globalVariables.dismissLoading();
         });;
     }
+    
 }
