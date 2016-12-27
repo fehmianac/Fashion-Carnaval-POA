@@ -58,7 +58,7 @@ export class LastOrderPage extends BasePage {
         let length = this.orderList.length;
         for (let i = 0; i < length; i++) {
             let currentOrder = this.orderList[i];
-            if (addedId.indexOf(currentOrder.OrderNo)) {
+            if (addedId.indexOf(currentOrder.OrderNo) > -1) {
                 continue;
             }
             if (currentOrder.CustomerBasicDto.Name.toLowerCase().indexOf(searchKey.toLowerCase()) > -1) {
