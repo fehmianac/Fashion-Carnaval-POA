@@ -23,7 +23,8 @@ export class OrderDetailPage extends BasePage {
     orderData = {
         ProductList: [],
         StatuId: 0,
-        Id: ""
+        Id: "",
+        OrderNo:0
     };
     isEditable = false;
 
@@ -233,5 +234,6 @@ export class OrderDetailPage extends BasePage {
         if (currency == "$") {
             return '$ ' + price.toFixed(2);
         }
+        return "0";
     }
 }

@@ -16,17 +16,19 @@ export class ExportService {
 
     exportPdf(orderId) {
         let apiCall = this.api.get("Util/" + orderId).map(res => res.json());
+        apiCall.subscribe(data => {
+            let url = data.Url;
+            debugger;
+            location.href = url;
+        }, error => {
+
+        })
         return apiCall;
     }
 
     sendToEmail(orderId) {
         let apiCall = this.api.post("Util", { Id: orderId }).map(res => res.json());
-        apiCall.subscribe(data => {
-            let url = data.Url;
-            location.href = url;
-        }, error => {
 
-        })
         return apiCall;
     }
 
