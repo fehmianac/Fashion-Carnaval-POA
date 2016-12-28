@@ -23,8 +23,7 @@ export class LastOrderPage extends BasePage {
     }
     constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public orderService: OrderService) {
         super(multiLanguage, globalVariables);
-        this.globalVariables.presentLoading();
-        this.getOrderList();
+        
     }
 
     ionViewWillEnter() {
@@ -32,6 +31,7 @@ export class LastOrderPage extends BasePage {
     }
     getOrderList() {
         this.orderList = [];
+        this.globalVariables.presentLoading();
         this.orderService.getOrderList().subscribe(data => {
             this.globalVariables.dismissLoading();
             let length = data.length;
@@ -44,9 +44,11 @@ export class LastOrderPage extends BasePage {
         }, err => {
             this.globalVariables.dismissLoading();
         });
+        this.filteredOrderList =[];
         this.filteredOrderList = this.orderList;
     }
     searchLastOrder(event: any) {
+        this.filteredOrderList =[];
         let searchKey = event.target.value;
         if (searchKey == null) {
             this.filteredOrderList = this.orderList;

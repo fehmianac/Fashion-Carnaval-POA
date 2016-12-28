@@ -33,18 +33,6 @@ export class SettingPage extends BasePage {
         this.globalVariables.presentLoading();
         this.multiLanguage.changeSelectedLanguage(this.selectedLanguageSelectBox);
         this.globalVariables.setCurrentUserName(this.currentUserName);
-        this.userService.findUserInLocalData(this.currentUserName).subscribe(data => {
-            if (data != null) {
-                this.globalVariables.setCurrentUserName(this.currentUserName);
-                this.globalVariables.setCurrentUserId(data.Id);
-                this.globalVariables.setCurrentUserPriceTypeId(data.PriceTypeId);
-                if (this.hideMenu) {
-                    this.navCtrl.setRoot(HomePage);
-                }
-            } else {
-                this.globalVariables.showAlert(this.getLabel("Validation.UserName.NotFound.Title"), this.getLabel("Validation.UserName.NotFound.Description"));
-            }
-        });
         this.globalVariables.dismissLoading();
         this.globalVariables.showAlert(this.getLabel('Alert.SettingSaved.Title'), this.getLabel('Alert.SettingSaved.Description'));
     }

@@ -48,13 +48,13 @@ export class CustomerListPage extends BasePage {
                     "Addresse": currentCustomer.Addresse
                 });
             }
-            let limit = 10 * this.currentPage;
+            let limit = 20 * this.currentPage;
             if (event != null) {
-                let limit = 10;
+                let limit = 20;
                 this.currentPage = 0;
             }
             if (limit == 0) {
-                limit = 10;
+                limit = 20;
             }
             let array = [];
             for (let i = 0; i < limit; i++) {
@@ -87,12 +87,12 @@ export class CustomerListPage extends BasePage {
 
     doInfinite(event) {
         this.currentPage++;
-        let limit = 10 * this.currentPage;
-        if (limit < 10) {
-            limit = 10;
+        let limit = 20 * this.currentPage;
+        if (limit < 20) {
+            limit = 20;
         }
         let customerList = this.searchCompanyInArray(this.searchKey);;
-        for (let i = limit; i < limit + 10; i++) {
+        for (let i = limit; i < limit + 20; i++) {
             if (customerList.length < i) {
                 continue;
             }
