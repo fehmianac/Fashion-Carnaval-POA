@@ -17,12 +17,12 @@ import { CommonService } from '../../services/common-service'
 export class RegisterPage extends BasePage {
 
     registerModel = {
-        Id: 2,
+        Id: 0,
         LastLoginDate: "2017-01-03",
         UserName: "",
         Password: "",
         Email: "",
-        PriceTypeId: 8,
+        PriceTypeId: 1,
         IsDeleted: 0,
         ConfirmationId: ""
 
@@ -37,12 +37,26 @@ export class RegisterPage extends BasePage {
         public commonService: CommonService) {
         super(multiLanguage, globalVariables);
         this.registerModel.ConfirmationId = this.globalVariables.getGuid();
+  
     }
 
     saveUser() {
+        this.globalVariables.presentLoading();
         this.userService.register(this.registerModel).subscribe(data => {
             this.globalVariables.showAlert("Success...", "Your user was created successfully. You would login the application.");
+            this.userService.doLogin(this.registerModel.UserName, this.registerModel.Password).subscribe(data => {
+            this.globalVariables.setCurrentUserName(data.Username);
+            this.globalVariables.setCurrentUserId(data.Id);
+            this.globalVariables.setCurrentUserPriceTypeId(data.PriceTypeId);
+            this.navCtrl.setRoot(HomePage);
+
+        }, error => {
+            
+            this.globalVariables.showAlert(this.getLabel("Validation.UserName.NotFound.Title"), this.getLabel("Validation.UserName.NotFound.Description"));
+     
+        });
         }, err => {
+            this.globalVariables.dismissLoading();
             this.globalVariables.showErrorAlert();
         });
     }

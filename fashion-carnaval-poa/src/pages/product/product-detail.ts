@@ -69,6 +69,8 @@ export class ProductDetailPage extends BasePage {
         let searchKey = event.target.value;
         if (searchKey != null && searchKey.length >= 3) {
             this.globalVariables.presentLoading();
+            this.globalVariables.presentLoading();
+            
             this.productService.searchProduct(searchKey).subscribe(data => {
                 this.pet = "puppies";
                 this.isShowProductDetail = true;

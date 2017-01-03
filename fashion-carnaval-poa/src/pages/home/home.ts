@@ -37,8 +37,8 @@ export class HomePage extends BasePage {
 
         this.applicationService.getApplicationSetting().subscribe(data => {
             this.homeImage = data.HomePageImageUrl;
+            
             if (!data.IsDummyVersion) {
-                debugger;
                 try {
                     this.deploy.check().then((hasUpdate: boolean) => {
                         console.log(hasUpdate);
