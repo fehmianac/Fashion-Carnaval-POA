@@ -26,6 +26,7 @@ export class MyApp extends BasePage {
     constructor(public platform: Platform, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public applicationService: ApplicationService, public userService: UserService) {
         super(multiLanguage, globalVariables);
         this.initializeApp();
+        this.globalVariables.removeAllLocalData();
         this.multiLanguage.reloadLanguageKeys();
         this.applicationService.getColorList();
         this.applicationService.getApplicationSetting();
