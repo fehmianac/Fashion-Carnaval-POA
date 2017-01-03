@@ -35,28 +35,34 @@ export class HomePage extends BasePage {
 
         super(multiLanguage, globalVariables);
 
-        try {
-            this.deploy.check().then((hasUpdate: boolean) => {
-                console.log(hasUpdate);
-                if (hasUpdate) {
-                    this.globalVariables.showAlert("", this.getLabel("Common.ApplicationWillBeUpdate"))
-                    this.globalVariables.presentLoading();
-                    this.deploy.download().then(() => {
-                        this.deploy.extract().then(() => {
-                            this.multiLanguage.reloadLanguageKeys();
-                            this.deploy.load();
-                        });
-                    });
-                }
-            });
-        } catch (error) {
-
-        }
-
-
         this.applicationService.getApplicationSetting().subscribe(data => {
             this.homeImage = data.HomePageImageUrl;
+            if (!data.IsDummyVersion) {
+                debugger;
+                try {
+                    this.deploy.check().then((hasUpdate: boolean) => {
+                        console.log(hasUpdate);
+                        if (hasUpdate) {
+                            this.globalVariables.showAlert("", this.getLabel("Common.ApplicationWillBeUpdate"))
+                            this.globalVariables.presentLoading();
+                            this.deploy.download().then(() => {
+                                this.deploy.extract().then(() => {
+                                    this.multiLanguage.reloadLanguageKeys();
+                                    this.deploy.load();
+                                });
+                            });
+                        }
+                    });
+                } catch (error) {
+
+                }
+            }
+
         });
+
+
+
+
 
         this.selectedLanguage = multiLanguage.getSelectedLanguage();
         this.currentUserName = this.globalVariables.getCurrentUserName();

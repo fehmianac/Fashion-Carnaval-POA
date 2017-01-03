@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Storage } from './storage'
-import { AlertController} from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 import { MultiLanguage } from './multi-language'
 import { Toast } from 'ionic-native';
@@ -11,7 +11,7 @@ import { Toast } from 'ionic-native';
 export class GlobalVariables {
 
     loading = null;
-    constructor( public storage: Storage, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public multiLanguage: MultiLanguage) {
+    constructor(public storage: Storage, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public multiLanguage: MultiLanguage) {
 
     }
     setCurrentUserName(userName: string) {
@@ -159,5 +159,9 @@ export class GlobalVariables {
 
     removeAllLocalData() {
         this.storage.clear();
+    }
+
+    isDummyVersion() {
+        return this.storage.get("isDummyVersion") == "true" || this.storage.get("isDummyVersion") == "True" || this.storage.get("isDummyVersion") == null;
     }
 }

@@ -24,7 +24,13 @@
         </ion-item>
     </ion-list>
     <p padding>
+
         <button ion-button color="primary" block (click)="doLogin()" icon-left>
              <ion-icon ios="ios-log-in" md="md-log-in"></ion-icon> &nbsp; {{getLabel('LoginPage.DoLogin')}}</button>
+
+        <button ion-button icon-left clear item-right (click)="goToRegister()" [hidden]="showRegisterButton == false" style="margin:0; float:right;">
+<ion-icon ios="ios-add" md="md-add"></ion-icon> Register
+</button>
     </p>
+
 </ion-content>

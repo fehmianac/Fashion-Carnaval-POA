@@ -9,6 +9,7 @@ import { BrandServices } from '../../services/brand-service'
 import { ApplicationService } from '../../services/application-service'
 import { UserService } from '../../services/user-service'
 import { CommonService } from '../../services/common-service'
+import { RegisterPage } from '../register/register'
 
 @Component({
     selector: 'page-login',
@@ -22,6 +23,7 @@ export class LoginPage extends BasePage {
     showRoomList = [];
     userName = "";
     password = "";
+    showRegisterButton = true;
     constructor(public navCtrl: NavController,
         public multiLanguage: MultiLanguage,
         public globalVariables: GlobalVariables,
@@ -32,6 +34,7 @@ export class LoginPage extends BasePage {
         super(multiLanguage, globalVariables);
         this.applicationService.getApplicationSetting().subscribe(data => {
             this.homeImage = data.HomePageImageUrl;
+            this.showRegisterButton = data.IsDummyVersion;
         });
     }
 
@@ -48,6 +51,10 @@ export class LoginPage extends BasePage {
             this.globalVariables.showAlert(this.getLabel("Validation.UserName.NotFound.Title"), this.getLabel("Validation.UserName.NotFound.Description"));
             this.globalVariables.dismissLoading();
         });
+    }
+
+    goToRegister() {
+        this.navCtrl.push(RegisterPage);
     }
 
 }

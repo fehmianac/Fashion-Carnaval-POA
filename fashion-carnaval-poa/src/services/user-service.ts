@@ -49,4 +49,8 @@ export class UserService {
         return apiCall;
 
     }
+
+    register(userModel) {
+        return this.api.post("User", userModel).map(res => res.json());;
+    }
 }

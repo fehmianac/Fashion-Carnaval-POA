@@ -13,6 +13,7 @@ import { SettingPage } from '../pages/setting/setting'
 import { OrderDetailPage } from '../pages/order/order-detail'
 import { BasketPage } from '../pages/basket/basket'
 import { LoginPage } from '../pages/login/login'
+import { RegisterPage } from '../pages/register/register'
 
 import { UpdateProductInBasket } from '../pages/basket/update-product'
 import { OrderCompletedPage } from '../pages/order/order-completed'
@@ -41,7 +42,8 @@ const cloudSettings: CloudSettings = {
         Snippets,
         UpdateProductInBasket,
         UpdateProductInOrder,
-        LoginPage
+        LoginPage,
+        RegisterPage
     ],
     imports: [
         IonicModule.forRoot(MyApp),
@@ -62,7 +64,8 @@ const cloudSettings: CloudSettings = {
         Snippets,
         UpdateProductInBasket,
         UpdateProductInOrder,
-        LoginPage
+        LoginPage,
+        RegisterPage
     ],
     providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, Providers, Services, Snippets]
 })

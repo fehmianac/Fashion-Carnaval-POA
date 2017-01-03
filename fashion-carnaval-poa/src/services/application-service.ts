@@ -21,6 +21,7 @@ export class ApplicationService {
             result.subscribe(data => {
                 //this.storage.set("localization", data.LocalizationResourceList);
                 this.storage.set("language", data.LanguageList);
+                this.storage.set("isDummyVersion", data.IsDummyVersion);
                 data.LocalizationResourceList = null;
                 data.LanguageList = null;
 
