@@ -24,7 +24,8 @@ export class BasketService {
                 status: 0,
                 userId: this.globalService.getCurrentUserId(),
                 customerId: this.globalService.getCurrentCustomerId(),
-                brandId: this.globalService.getCurrentBrandId()
+                brandId: this.globalService.getCurrentBrandId(),
+                showId: this.globalService.getCurrentShowroomId()
             };
         } else {
             this.basketData = basketData;
@@ -146,7 +147,8 @@ export class BasketService {
             "CreatedDate": "2016.12.12",
             "LastModifiedDate": "2016.12.12",
             "Total": this.getBasketPrice(),
-            "BrandId": basketData.brandId
+            "BrandId": basketData.brandId,
+            "ShowId": basketData.ShowId
         }
         let length = basketData.productList.length;
         for (let i = 0; i < length; i++) {
