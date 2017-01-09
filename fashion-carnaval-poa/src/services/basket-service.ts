@@ -148,7 +148,7 @@ export class BasketService {
             "LastModifiedDate": "2016.12.12",
             "Total": this.getBasketPrice(),
             "BrandId": basketData.brandId,
-            "ShowId": basketData.ShowId
+            "ShowId":  this.globalService.getCurrentShowroomId()
         }
         let length = basketData.productList.length;
         for (let i = 0; i < length; i++) {
