@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Storage } from './storage'
+import { StorageService } from './storage'
 import { AlertController } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 import { MultiLanguage } from './multi-language'
@@ -11,7 +11,7 @@ import { Toast } from 'ionic-native';
 export class GlobalVariables {
 
     loading = null;
-    constructor(public storage: Storage, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public multiLanguage: MultiLanguage) {
+    constructor(public storage: StorageService, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public multiLanguage: MultiLanguage) {
 
     }
     setCurrentUserName(userName: string) {

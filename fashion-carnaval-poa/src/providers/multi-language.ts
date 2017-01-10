@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Storage } from './storage'
+import { StorageService } from './storage'
 import { CommonService } from '../services/common-service'
 /**
  * Storage is generic handler offline data.
  */
 @Injectable()
 export class MultiLanguage {
-    constructor(public storage: Storage, public commonService: CommonService) {
+    constructor(public storage: StorageService, public commonService: CommonService) {
     }
 
     getLabel(key: string) {

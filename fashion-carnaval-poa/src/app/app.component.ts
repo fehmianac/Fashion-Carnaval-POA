@@ -12,6 +12,7 @@ import { BasketPage } from '../pages/basket/basket'
 import { ApplicationService } from '../services/application-service'
 import { UserService } from '../services/user-service'
 import 'rxjs/add/operator/map';
+import { StorageService } from '../providers/storage'
 
 @Component({
     templateUrl: 'app.html'
@@ -23,10 +24,10 @@ export class MyApp extends BasePage {
 
     pages: Array<{ icon: string, title: string, component: any }>;
 
-    constructor(public platform: Platform, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public applicationService: ApplicationService, public userService: UserService) {
+    constructor(public platform: Platform, public storageService: StorageService, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public applicationService: ApplicationService, public userService: UserService) {
         super(multiLanguage, globalVariables);
+
         this.initializeApp();
-        this.globalVariables.removeAllLocalData();
         this.multiLanguage.reloadLanguageKeys();
         this.applicationService.getColorList();
         this.applicationService.getApplicationSetting();

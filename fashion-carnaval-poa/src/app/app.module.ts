@@ -20,6 +20,7 @@ import { OrderCompletedPage } from '../pages/order/order-completed'
 import { UpdateProductInOrder } from '../pages/order/update-product-in-order'
 import { Snippets } from '../component/snippets/snippets'
 import { Services } from '../services/services'
+import { Storage } from '@ionic/storage';
 
 const cloudSettings: CloudSettings = {
     'core': {
@@ -67,7 +68,7 @@ const cloudSettings: CloudSettings = {
         LoginPage,
         RegisterPage
     ],
-    providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, Providers, Services, Snippets]
+    providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, Providers, Services, Snippets, Storage]
 })
 export class AppModule {
 }

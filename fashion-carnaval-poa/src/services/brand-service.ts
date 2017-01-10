@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Api } from '../providers/api'
-import { Storage } from '../providers/storage'
+import { StorageService } from '../providers/storage'
 import { Observable } from 'rxjs/Observable';
 import { GlobalVariables } from '../providers/global-variables'
 
@@ -9,7 +9,7 @@ import { GlobalVariables } from '../providers/global-variables'
  */
 @Injectable()
 export class BrandServices {
-    constructor(public api: Api, public storage: Storage, public globalService: GlobalVariables) {
+    constructor(public api: Api, public storage: StorageService, public globalService: GlobalVariables) {
 
     }
 

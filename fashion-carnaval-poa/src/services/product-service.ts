@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Api } from '../providers/api'
-import { Storage } from '../providers/storage'
+import { StorageService } from '../providers/storage'
 import { Observable } from 'rxjs/Observable';
 import { GlobalVariables } from '../providers/global-variables'
 import { BasketService } from './basket-service'
@@ -11,7 +11,7 @@ import { BasketService } from './basket-service'
 @Injectable()
 export class ProductService {
 
-    constructor(public api: Api, public storage: Storage, public globalService: GlobalVariables, public basketService: BasketService) {
+    constructor(public api: Api, public storage: StorageService, public globalService: GlobalVariables, public basketService: BasketService) {
 
     }
 
