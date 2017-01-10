@@ -129,9 +129,14 @@ export class GlobalVariables {
         this.loading = this.loadingCtrl.create({
             content: this.multiLanguage.getLabel("Common.LoadingLabel"),
             duration: 130000,
-            dismissOnPageChange: true
+            dismissOnPageChange: true,
+
         });
-        this.loading.present();
+
+        var loading = this.loading;
+        setTimeout(function () {
+            loading.present();
+        }, 10);
     }
 
     dismissLoading() {

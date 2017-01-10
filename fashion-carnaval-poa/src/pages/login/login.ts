@@ -32,6 +32,7 @@ export class LoginPage extends BasePage {
         public userService: UserService,
         public commonService: CommonService) {
         super(multiLanguage, globalVariables);
+
         this.applicationService.getApplicationSetting().subscribe(data => {
             this.homeImage = data.HomePageImageUrl;
             this.showRegisterButton = data.IsDummyVersion;
@@ -45,8 +46,10 @@ export class LoginPage extends BasePage {
             this.globalVariables.setCurrentUserId(data.Id);
             this.globalVariables.setCurrentUserPriceTypeId(data.PriceTypeId);
             this.globalVariables.dismissLoading();
-            this.navCtrl.setRoot(HomePage);
-
+            var nav = this.navCtrl;
+            setTimeout(function() {
+               nav.setRoot(HomePage); 
+            }, 10);
         }, error => {
             this.globalVariables.showAlert(this.getLabel("Validation.UserName.NotFound.Title"), this.getLabel("Validation.UserName.NotFound.Description"));
             this.globalVariables.dismissLoading();

@@ -35,9 +35,13 @@ export class HomePage extends BasePage {
 
         super(multiLanguage, globalVariables);
 
+
+    }
+
+    ionViewWillEnter() {
         this.applicationService.getApplicationSetting().subscribe(data => {
             this.homeImage = data.HomePageImageUrl;
-            
+
             if (!data.IsDummyVersion) {
                 try {
                     this.deploy.check().then((hasUpdate: boolean) => {
@@ -49,6 +53,7 @@ export class HomePage extends BasePage {
                                 this.deploy.extract().then(() => {
                                     this.multiLanguage.reloadLanguageKeys();
                                     this.deploy.load();
+                                    this.globalVariables.dismissLoading();
                                 });
                             });
                         }
@@ -57,14 +62,9 @@ export class HomePage extends BasePage {
 
                 }
             }
-
         });
 
-
-
-
-
-        this.selectedLanguage = multiLanguage.getSelectedLanguage();
+        this.selectedLanguage = this.multiLanguage.getSelectedLanguage();
         this.currentUserName = this.globalVariables.getCurrentUserName();
 
         this.brandService.getBrandList().subscribe(data => {
