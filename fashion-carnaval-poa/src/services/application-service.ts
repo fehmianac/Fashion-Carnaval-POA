@@ -15,7 +15,6 @@ export class ApplicationService {
 
     getApplicationSetting() {
         let appsettingsFromLocal = this.storage.getAsJson("appsettings");
-        appsettingsFromLocal = null;
         if (appsettingsFromLocal == null) {
             let result = this.api.get("AppSetting").map(res => res.json());
             this.globalService.presentLoading();
