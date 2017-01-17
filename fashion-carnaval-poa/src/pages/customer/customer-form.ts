@@ -18,6 +18,7 @@ export class CustomerFormPage extends BasePage {
     customerModel = {
         Id: "",
         ConfirmationId: "",
+        Shopname:"",
         Name: "",
         Email: "",
         CC: "",

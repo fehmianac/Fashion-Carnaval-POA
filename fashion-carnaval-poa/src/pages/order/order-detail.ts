@@ -24,7 +24,7 @@ export class OrderDetailPage extends BasePage {
         ProductList: [],
         StatuId: 0,
         Id: "",
-        OrderNo:0
+        OrderNo: 0
     };
     isEditable = false;
 
@@ -108,8 +108,8 @@ export class OrderDetailPage extends BasePage {
             return result;
         }
 
-        for (let i = 1; i <= this.globalVariables.getMaxSizeCount(); i++) {
-            let size = "Size" + i;
+        for (let i = 0; i < this.globalVariables.getMaxSizeCount(); i++) {
+            let size = "Size" + (i + 1);
             let value = product[size];
             if ((value != null && value.toString() != "" && value.toString() != "0")) {
                 result += " Size " + i;

@@ -37,22 +37,13 @@ export class BasketPage extends BasePage {
         this.basketData = this.basketService.getBasketData();
         this.isBasketEmpty = this.basketData.productList.length == 0;
         let currentBrand = this.brandService.getSelectedBrand(this.basketData.brandId);
-
-        let date = new Date(currentBrand.ShipmentStartDate);
-        let year = date.getFullYear();
-        let month = date.getMonth() + 1;
-        let day = date.getDate();
-        this.today = year + '-' + month + '-' + day;
+        this.basketData.shippingDateStart = currentBrand.ShipmentStartDate;
+        this.today = this.basketData.shippingDateStart;
         if (this.basketData.shippingDateStart == "") {
-            this.basketData.shippingDateStart = this.today;
+            this.basketData.shippingDateStart = new Date();
         }
 
-        let date1 = new Date(currentBrand.ShipmentEndDate);
-        let year1 = date1.getFullYear()
-        let month1 = date1.getMonth() + 1;
-        let day1 = date1.getDate();
-        this.endDate = year1 + '-' + month1 + '-' + day1;
-
+        this.endDate = currentBrand.ShipmentEndDate;
         this.companyService.getCompanyById(this.basketData.customerId).subscribe(data => {
             this.currentCustomer = data;
         }, error => {

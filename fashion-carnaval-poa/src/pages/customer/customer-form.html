@@ -11,6 +11,10 @@
     <form (ngSubmit)="customerForm.form.valid && saveCustomer()" novalidate #customerForm="ngForm" [ngClass]="{'small-text': true, 'red': true}">
         <ion-list>
             <ion-item>
+                <ion-label floating>{{getLabel('CustomerForm.Item.Shopname')}}</ion-label>
+                <ion-input required type="text" [(ngModel)]="customerModel.Shopname" name="Shopname"></ion-input>
+            </ion-item>
+            <ion-item>
                 <ion-label floating>{{getLabel('CustomerForm.Item.Name')}}</ion-label>
                 <ion-input required type="text" [(ngModel)]="customerModel.Name" name="Name"></ion-input>
             </ion-item>

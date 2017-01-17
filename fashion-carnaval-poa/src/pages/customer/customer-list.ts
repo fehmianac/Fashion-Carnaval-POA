@@ -42,6 +42,8 @@ export class CustomerListPage extends BasePage {
                 this.customerList.push({
                     "Id": currentCustomer.Id,
                     "Name": currentCustomer.Name,
+                    "Shopname": currentCustomer.Shopname,
+                    "ZipCode": currentCustomer.ZipCode,
                     "City": currentCustomer.City,
                     "State": currentCustomer.State,
                     "Phone": currentCustomer.Phone,
@@ -126,7 +128,7 @@ export class CustomerListPage extends BasePage {
         var addedId = [];
         for (let i = 0; i < this.customerList.length; i++) {
             let customer = this.customerList[i];
-            if (customer.Name != null && customer.Name.toLowerCase().indexOf(searchKey.toLowerCase()) > -1) {
+            if (customer.Shopname != null && customer.Shopname.toLowerCase().indexOf(searchKey.toLowerCase()) > -1) {
                 result.push(customer);
                 addedId.push(customer.Id);
             }

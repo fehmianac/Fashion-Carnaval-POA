@@ -24,9 +24,8 @@
       <ion-icon ios="ios-create" md="md-create"></ion-icon> {{getLabel('Common.EditButton.Label')}}
     </button>
       <div (click)="selectCompany(company.Id)">
-        <h2>{{company.Name}}</h2>
-        <p>{{company.Addresse}}</p>
-        <p>{{company.City}} / {{company.State}}</p>
+        <h2>{{company.Shopname}}</h2>
+        <p>{{company.City}} / {{company.ZipCode}} / {{company.State}}</p>
       </div>
     </ion-item>
   </ion-card>
