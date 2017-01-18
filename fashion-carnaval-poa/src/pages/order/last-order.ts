@@ -23,7 +23,7 @@ export class LastOrderPage extends BasePage {
     }
     constructor(public navCtrl: NavController, public multiLanguage: MultiLanguage, public globalVariables: GlobalVariables, public orderService: OrderService) {
         super(multiLanguage, globalVariables);
-        
+
     }
 
     ionViewWillEnter() {
@@ -44,11 +44,11 @@ export class LastOrderPage extends BasePage {
         }, err => {
             this.globalVariables.dismissLoading();
         });
-        this.filteredOrderList =[];
+        this.filteredOrderList = [];
         this.filteredOrderList = this.orderList;
     }
     searchLastOrder(event: any) {
-        this.filteredOrderList =[];
+        this.filteredOrderList = [];
         let searchKey = event.target.value;
         if (searchKey == null) {
             this.filteredOrderList = this.orderList;
@@ -68,6 +68,14 @@ export class LastOrderPage extends BasePage {
                 addedId.push(currentOrder.OrderNo);
                 continue;
             }
+            if (currentOrder.CustomerBasicDto.Shopname != null) {
+                if (currentOrder.CustomerBasicDto.Shopname.toLowerCase().indexOf(searchKey.toLowerCase()) > -1) {
+                    tempOrderList.push(currentOrder);
+                    addedId.push(currentOrder.OrderNo);
+                    continue;
+                }
+            }
+
             let statusText = this.orderStatus[currentOrder.StatuId.toString()];
             if (statusText.toLowerCase().indexOf(searchKey.toLowerCase()) > -1) {
                 tempOrderList.push(currentOrder);
