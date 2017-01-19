@@ -1,3 +1,4 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Injectable } from '@angular/core';
 import { Api } from '../providers/api'
 import { StorageService } from '../providers/storage'
@@ -34,7 +35,7 @@ export class BasketService {
     getBasketProductCount() {
         let count = 0;
         for (let i = 0; i < this.basketData.productList.length; i++) {
-            for (let j = 1; j <= 9; j++) {
+            for (let j = 1; j <= this.globalService.getMaxSizeCount(); j++) {
                 let size = "size" + j;
                 let value = this.basketData.productList[i][size];
                 if (value != null && value != "" && value != 0) {
@@ -50,7 +51,7 @@ export class BasketService {
         let price = 0;
         let currency = "";
         for (let i = 0; i < this.basketData.productList.length; i++) {
-            for (let j = 1; j <= 9; j++) {
+            for (let j = 1; j <= this.globalService.getMaxSizeCount(); j++) {
                 let size = "size" + j;
                 let product = this.basketData.productList[i];
                 let value = product[size];
@@ -106,7 +107,6 @@ export class BasketService {
                     productInBasket.size6 += colorData.size6;
                     productInBasket.size7 += colorData.size7;
                     productInBasket.size8 += colorData.size8;
-                    productInBasket.size9 += colorData.size9;
                 } else {
                     let productModel = {
                         manufactureCode: product.ManufactureCode,
@@ -121,7 +121,6 @@ export class BasketService {
                         size6: colorData.size6,
                         size7: colorData.size7,
                         size8: colorData.size8,
-                        size9: colorData.size9,
                         price: colorData.price,
                         currency: colorData.currency
                     };
