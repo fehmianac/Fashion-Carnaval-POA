@@ -49,10 +49,10 @@ export class UpdateProductInOrder extends BasePage {
     getSizeLabel(index) {
         if (this.sizeArray.length == 4) {
             switch (index) {
-                case 1: return "Size I";
-                case 2: return "Size II";
-                case 3: return "Size III";
-                case 4: return "Size IV";
+                case 2: return "Size I";
+                case 3: return "Size II";
+                case 4: return "Size III";
+                case 5: return "Size IV";
             }
         }
         if (this.sizeArray.length == 1) {

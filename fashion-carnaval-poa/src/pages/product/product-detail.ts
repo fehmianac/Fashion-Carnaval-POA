@@ -56,7 +56,8 @@ export class ProductDetailPage extends BasePage {
             let sizeSmall = "size" + i;
             if (product[size] != null && product[size] != "") {
                 colorDataPattern[sizeSmall] = 0;
-                if (this.sizeArray.length < i) {
+                if (this.sizeArray.length < i && this.sizeArray.indexOf(i) == -1) {
+
                     this.sizeArray.push(i);
                 }
             } else {
@@ -172,10 +173,10 @@ export class ProductDetailPage extends BasePage {
     getSizeLabel(index) {
         if (this.sizeArray.length == 4) {
             switch (index) {
-                case 1: return "Size I";
-                case 2: return "Size II";
-                case 3: return "Size III";
-                case 4: return "Size IV";
+                case 2: return "Size I";
+                case 3: return "Size II";
+                case 4: return "Size III";
+                case 5: return "Size IV";
             }
         }
         if (this.sizeArray.length == 1) {

@@ -22,7 +22,8 @@ export class OrderService {
     };
 
     getOrderDetailById(orderId) {
-        let apiCall = this.api.get("Order?orderId=" + orderId).map(res => res.json());
+        let currentPriceTypeId = this.globalService.getCCurrentUserPriceTypeId();
+        let apiCall = this.api.get("Order?orderId=" + orderId + "&priceTypeId=" + currentPriceTypeId).map(res => res.json());
         return apiCall;
     };
 

@@ -91,19 +91,20 @@ export class OrderDetailPage extends BasePage {
         if (product["Size2"] == null || product["Size2"].toString() == null) {
             return "STD: " + product["Size1"];
         }
-        if (product["Size5"] == null || product["Size5"].toString() == "") {
+        if (product["Size6"] == null || product["Size6"].toString() == "") {
             let result = "";
-            if (product["Size1"] > 0)
-                result += " Size I: " + product["Size1"];
 
             if (product["Size2"] > 0)
-                result += " Size II: " + product["Size2"];
+                result += " Size I: " + product["Size2"];
 
             if (product["Size3"] > 0)
-                result += " Size III: " + product["Size3"];
+                result += " Size II: " + product["Size3"];
 
             if (product["Size4"] > 0)
-                result += " Size IV: " + product["Size4"];
+                result += " Size III: " + product["Size4"];
+
+            if (product["Size5"] > 0)
+                result += " Size IV: " + product["Size5"];
 
             return result;
         }
