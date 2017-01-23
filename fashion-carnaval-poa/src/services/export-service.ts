@@ -18,6 +18,7 @@ export class ExportService {
         let apiCall = this.api.get("Util/" + orderId).map(res => res.json());
         apiCall.subscribe(data => {
             let url = data.Url;
+            debugger;
             location.href = url;
         }, error => {
 

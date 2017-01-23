@@ -16,7 +16,7 @@
       <ion-icon ios="ios-create" md="md-create"></ion-icon> {{getLabel('Common.DetailButton.Label')}}
     </button>
       <div>
-        <h2>{{order.OrderNo}} - {{order.CustomerBasicDto.Shopname}}  <span [hidden] = "order.CustomerBasicDto.Shopname != null">{{order.CustomerBasicDto.Name}}</span></h2>
+        <h2>{{order.OrderNo}} - {{order.CustomerBasicDto.Name}}</h2>
         <p>{{getOrderDate(order)}} - {{order.StatusText}}</p>
       </div>
     </ion-item>
